@@ -978,6 +978,59 @@ Investment Horizon:
 
 </div>
 """, unsafe_allow_html=True)
+# ---------- MARKET REGIME ENGINE ----------
+
+st.write("")
+st.markdown("""
+---
+### Atlas Market Regime Engine
+""")
+
+avg_growth = df["Projected Growth"].mean()
+avg_yield = df["Rental Yield"].mean()
+
+if avg_growth >= 11 and avg_yield >= 7:
+    regime = "Bull Market"
+    regime_msg = """
+    Dubai real estate is currently showing strong growth momentum with healthy rental performance.
+    """
+
+elif avg_growth >= 8:
+    regime = "Stable Expansion"
+    regime_msg = """
+    Atlas Intelligence indicates balanced market conditions with moderate long-term growth.
+    """
+
+elif avg_growth >= 6:
+    regime = "Selective Opportunity"
+    regime_msg = """
+    Certain communities continue showing strength while broader growth remains moderate.
+    """
+
+else:
+    regime = "Correction Risk"
+    regime_msg = """
+    Atlas Intelligence detects slowing momentum and elevated investment caution signals.
+    """
+
+st.markdown(f"""
+<div class="insight">
+<h4>Current Market Regime: {regime}</h4>
+
+<p>
+{regime_msg}
+</p>
+
+<p>
+Average Growth:
+<b>{avg_growth:.1f}%</b><br>
+
+Average Rental Yield:
+<b>{avg_yield:.1f}%</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 # ---------- PDF REPORT EXPORT ----------
 
 report_text = f"""
