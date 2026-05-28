@@ -230,7 +230,10 @@ with left:
 
 with right:
 
-    st.subheader("AI Market Intelligence")
+    st.markdown("""
+---
+### AI Market Intelligence
+""")
 
     top_area = chart_data.iloc[0]["Area"]
 
