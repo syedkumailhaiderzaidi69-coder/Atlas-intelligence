@@ -138,14 +138,27 @@ for area in areas:
 
 df = pd.DataFrame(data)
 # ---------- FILTERS ----------
-uploaded_file = st.sidebar.file_uploader(
-    "Upload Real Estate CSV",
-    type=["csv"]
+# ---------- DATA SOURCE MODE ----------
+
+st.sidebar.markdown("## Data Source")
+
+data_source = st.sidebar.radio(
+    "Select Data Mode",
+    ["Demo Data", "Upload CSV", "Live API Mode Coming Soon"]
 )
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.sidebar.success("Custom dataset uploaded successfully.")
+if data_source == "Live API Mode Coming Soon":
+    st.sidebar.warning("Live API integration is planned for the next version.")
+if data_source == "Upload CSV":
+
+    uploaded_file = st.sidebar.file_uploader(
+        "Upload Real Estate CSV",
+        type=["csv"]
+    )
+
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        st.sidebar.success("Custom dataset uploaded successfully.")
     
 sample_df = pd.DataFrame({
     "Area":["Downtown Dubai","Dubai Marina"],
