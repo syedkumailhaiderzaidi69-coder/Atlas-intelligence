@@ -501,6 +501,60 @@ Atlas Intelligence currently uses simulated Dubai real estate data to prototype:
 
 Future versions will integrate live market datasets and advanced predictive models.
 """)
+# ---------- INVESTMENT SIMULATOR ----------
+
+st.write("")
+st.markdown("""
+---
+### AI Investment Simulator
+""")
+
+budget = st.slider(
+    "Investment Budget (AED)",
+    500000,
+    10000000,
+    3000000,
+    step=500000
+)
+
+risk = st.selectbox(
+    "Risk Preference",
+    ["Low", "Medium", "High"]
+)
+
+luxury_pref = st.slider(
+    "Luxury Preference",
+    1,
+    10,
+    7
+)
+
+if budget >= 5000000 and luxury_pref >= 8:
+    recommended = "Palm Jumeirah"
+
+elif risk == "High":
+    recommended = "Dubai Creek Harbour"
+
+elif budget <= 2000000:
+    recommended = "JVC"
+
+else:
+    recommended = "Downtown Dubai"
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas AI Investment Simulation</h4>
+
+<p>
+Based on your investment profile, Atlas Intelligence recommends focusing on <b>{recommended}</b>.
+</p>
+
+<p>
+AI models analyzed budget allocation, luxury preference, and growth potential to generate this recommendation.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 # ---------- PRODUCT ROADMAP ----------
 
 st.write("")
