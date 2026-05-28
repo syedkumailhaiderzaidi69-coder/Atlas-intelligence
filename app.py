@@ -156,12 +156,18 @@ df["Luxury Demand"] = np.random.randint(
     98,
     size=len(df)
 )
+df["Rental Yield"] = np.random.uniform(
+    5.0,
+    9.5,
+    size=len(df)
+).round(1)
 
 df["Investment Score"] = (
-    df["Projected Growth"] * 4 * 0.40 +
-    df["Affordability Score"] * 0.30 +
-    df["Market Confidence"] * 0.20 +
-    df["Luxury Demand"] * 0.10
+    df["Projected Growth"] * 4 * 0.35 +
+    df["Affordability Score"] * 0.25 +
+    df["Market Confidence"] * 0.15 +
+    df["Luxury Demand"] * 0.10 +
+    df["Rental Yield"] * 8 * 0.15
 ).round(1)
 # ---------- LIVE DATA FUNCTION ----------
 
