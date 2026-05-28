@@ -659,6 +659,83 @@ alerts = [
 
 for alert in alerts:
     st.warning(alert)
+    # ---------- INVESTOR PORTFOLIO ANALYZER ----------
+
+st.write("")
+st.markdown("""
+---
+### Investor Portfolio Analyzer
+""")
+
+portfolio_budget = st.slider(
+    "Portfolio Budget (AED)",
+    1000000,
+    20000000,
+    5000000,
+    step=500000,
+    key="portfolio_budget"
+)
+
+investment_goal = st.selectbox(
+    "Investment Goal",
+    [
+        "Passive Income",
+        "Balanced Growth",
+        "Luxury Appreciation",
+        "Aggressive Growth"
+    ]
+)
+
+portfolio_df = pd.DataFrame({
+    "Area":[
+        "Downtown Dubai",
+        "Dubai Marina",
+        "JVC",
+        "Palm Jumeirah"
+    ]
+})
+
+if investment_goal == "Passive Income":
+
+    portfolio_df["Allocation %"] = [20,30,40,10]
+
+elif investment_goal == "Balanced Growth":
+
+    portfolio_df["Allocation %"] = [30,30,25,15]
+
+elif investment_goal == "Luxury Appreciation":
+
+    portfolio_df["Allocation %"] = [20,20,10,50]
+
+else:
+
+    portfolio_df["Allocation %"] = [25,20,15,40]
+
+portfolio_df["Investment Amount"] = (
+    portfolio_df["Allocation %"] / 100 * portfolio_budget
+).astype(int)
+
+st.dataframe(
+    portfolio_df,
+    use_container_width=True
+)
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Portfolio Strategy</h4>
+
+<p>
+Atlas Intelligence generated a portfolio allocation strategy optimized for:
+<b>{investment_goal}</b>
+</p>
+
+<p>
+Portfolio Budget:
+<b>AED {portfolio_budget:,}</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 # ---------- API INTEGRATION ROADMAP ----------
 
 st.write("")
