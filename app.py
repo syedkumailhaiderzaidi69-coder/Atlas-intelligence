@@ -184,7 +184,8 @@ def load_live_property_data(api_source, api_key):
             "Area":["Dubai Marina","Business Bay","JVC","Palm Jumeirah"],
             "Investment Score":[89,86,80,95],
             "Average Price":[3200000,2800000,1450000,8500000],
-            "Projected Growth":[10.8,9.6,8.2,12.4]
+            "Projected Growth":[10.8,9.6,8.2,12.4],
+            "Rental Yield":[7.2,6.8,8.5,5.9],
         })
         return live_data
 
