@@ -333,6 +333,31 @@ For growth-focused strategy, <b>{growth_area['Area']}</b> shows the highest proj
 
 </div>
 """, unsafe_allow_html=True)
+# ---------- MARKET TREND ----------
+
+st.write("")
+st.subheader("Dubai Market Growth Trend")
+
+trend_df = pd.DataFrame({
+    "Year":[2021,2022,2023,2024,2025,2026],
+    "Growth":[5.2,7.8,9.4,11.3,13.1,15.0]
+})
+
+fig_trend = px.line(
+    trend_df,
+    x="Year",
+    y="Growth",
+    markers=True
+)
+
+fig_trend.update_layout(
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    height=450
+)
+
+st.plotly_chart(fig_trend, use_container_width=True)
 # ---------- MARKET SENTIMENT ----------
 
 st.write("")
