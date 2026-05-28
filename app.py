@@ -136,6 +136,34 @@ University of Wollongong Dubai
 """)
 st.sidebar.markdown("""
 ### System Status
+# ---------- AI CHAT ASSISTANT ----------
+
+st.sidebar.markdown("## Atlas AI Assistant")
+
+user_question = st.sidebar.text_input(
+    "Ask Atlas Intelligence"
+)
+
+if user_question:
+
+    question = user_question.lower()
+
+    if "best" in question or "investment" in question:
+        response = "Palm Jumeirah and Downtown Dubai currently show the strongest Atlas investment intelligence scores."
+
+    elif "growth" in question:
+        response = "Dubai Creek Harbour is showing strong projected growth momentum based on Atlas forecasting models."
+
+    elif "luxury" in question:
+        response = "Palm Jumeirah remains one of Dubai’s strongest luxury investment zones."
+
+    elif "marina" in question:
+        response = "Dubai Marina continues attracting strong rental demand and investor activity."
+
+    else:
+        response = "Atlas AI is analyzing Dubai market intelligence. More advanced AI models coming soon."
+
+    st.sidebar.success(response)
 
 🟢 AI Engine Online  
 🟢 Dubai Market Feed Active  
