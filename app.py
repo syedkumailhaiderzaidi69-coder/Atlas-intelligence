@@ -54,6 +54,11 @@ border:1px solid rgba(255,255,255,0.08);
 font-size:40px;
 margin-bottom:5px;
 }
+.card:hover{
+transform: translateY(-6px);
+transition:0.3s ease;
+box-shadow:0 0 30px rgba(148,163,184,0.18);
+}
 
 .insight{
 background:rgba(255,255,255,0.05);
@@ -148,28 +153,28 @@ c1,c2,c3,c4 = st.columns(4)
 
 c1.markdown(f"""
 <div class="card">
-<h3>{len(df)}</h3>
+<h3>↗ {len(df)}</h3>
 <p>Properties Analyzed</p>
 </div>
 """, unsafe_allow_html=True)
 
 c2.markdown(f"""
 <div class="card">
-<h3>{df['Area'].nunique()}</h3>
+<h3>◆ {df['Area'].nunique()}</h3>
 <p>Dubai Areas</p>
 </div>
 """, unsafe_allow_html=True)
 
 c3.markdown(f"""
 <div class="card">
-<h3>{df['Investment Score'].mean():.1f}</h3>
+<h3>AI {df['Investment Score'].mean():.1f}</h3>
 <p>Avg Investment Score</p>
 </div>
 """, unsafe_allow_html=True)
 
 c4.markdown(f"""
 <div class="card">
-<h3>{df['Projected Growth'].mean():.1f}%</h3>
+<h3>+{df['Projected Growth'].mean():.1f}%</h3>
 <p>Avg Market Growth</p>
 </div>
 """, unsafe_allow_html=True)
