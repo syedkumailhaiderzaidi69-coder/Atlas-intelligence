@@ -106,6 +106,16 @@ df = pd.DataFrame(data)
 # ---------- FILTERS ----------
 
 st.sidebar.title("Atlas Control Panel")
+st.sidebar.markdown("""
+---
+### Atlas Intelligence
+AI-powered Dubai real estate intelligence platform.
+
+Built by Syed  
+MSc Business Analytics  
+University of Wollongong Dubai
+---
+""")
 
 selected_area = st.sidebar.multiselect(
     "Select Dubai Areas",
