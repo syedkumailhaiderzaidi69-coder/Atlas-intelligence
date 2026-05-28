@@ -35,6 +35,9 @@ box-shadow:0 0 45px rgba(148,163,184,0.18);
 .hero h1{
 font-size:72px;
 margin-bottom:10px;
+color:white;
+text-shadow:0 0 25px rgba(148,163,184,0.35);
+letter-spacing:1px;
 }
 
 .hero h2{
