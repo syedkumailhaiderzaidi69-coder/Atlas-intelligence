@@ -202,4 +202,64 @@ with right:
     """, unsafe_allow_html=True)
 
 st.write("")
+# ---------- DUBAI MAP ----------
+
+st.subheader("Dubai Real Estate Intelligence Map")
+
+map_df = pd.DataFrame({
+    "Area":[
+        "Downtown Dubai",
+        "Dubai Marina",
+        "Business Bay",
+        "Palm Jumeirah",
+        "Dubai Hills Estate",
+        "JVC",
+        "Dubai Creek Harbour",
+        "DAMAC Hills"
+    ],
+
+    "lat":[
+        25.1972,
+        25.0800,
+        25.1850,
+        25.1124,
+        25.1000,
+        25.0520,
+        25.2065,
+        25.0272
+    ],
+
+    "lon":[
+        55.2744,
+        55.1400,
+        55.2800,
+        55.1390,
+        55.2470,
+        55.2110,
+        55.3472,
+        55.2236
+    ],
+
+    "Investment Score":[92,89,87,95,85,80,88,83]
+})
+
+fig_map = px.scatter_mapbox(
+    map_df,
+    lat="lat",
+    lon="lon",
+    size="Investment Score",
+    color="Investment Score",
+    hover_name="Area",
+    zoom=10,
+    height=650
+)
+
+fig_map.update_layout(
+    mapbox_style="carto-darkmatter",
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    margin=dict(l=0,r=0,t=0,b=0)
+)
+
+st.plotly_chart(fig_map, use_container_width=True)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
