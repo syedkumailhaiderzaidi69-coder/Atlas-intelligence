@@ -285,4 +285,30 @@ fig_map.update_layout(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
+# ---------- EXECUTIVE TABLE ----------
+
+st.write("")
+st.subheader("Executive Area Intelligence")
+
+table_df = (
+    df.groupby("Area")
+    .agg({
+        "Investment Score":"mean",
+        "Average Price":"mean",
+        "Projected Growth":"mean"
+    })
+    .reset_index()
+)
+
+table_df.columns = [
+    "Area",
+    "Investment Score",
+    "Average Property Price",
+    "Projected Growth %"
+]
+
+st.dataframe(
+    table_df,
+    use_container_width=True
+)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
