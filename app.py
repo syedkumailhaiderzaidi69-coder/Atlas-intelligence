@@ -358,6 +358,9 @@ fig_map.update_layout(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
+st.caption(
+"Bubble size represents investment strength. Darker color intensity represents stronger Atlas intelligence scoring."
+)
 # ---------- EXECUTIVE TABLE ----------
 
 st.write("")
