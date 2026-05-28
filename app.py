@@ -137,6 +137,24 @@ for area in areas:
         })
 
 df = pd.DataFrame(data)
+# ---------- LIVE DATA FUNCTION ----------
+
+def load_live_property_data(api_source, api_key):
+    """
+    Prototype live-data function.
+    Future version will connect to real APIs such as Bayut, Property Finder, or DLD.
+    """
+    
+    if api_source == "Bayut API" and api_key:
+        live_data = pd.DataFrame({
+            "Area":["Dubai Marina","Business Bay","JVC","Palm Jumeirah"],
+            "Investment Score":[89,86,80,95],
+            "Average Price":[3200000,2800000,1450000,8500000],
+            "Projected Growth":[10.8,9.6,8.2,12.4]
+        })
+        return live_data
+
+    return df
 # ---------- FILTERS ----------
 # ---------- DATA SOURCE MODE ----------
 
