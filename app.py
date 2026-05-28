@@ -694,6 +694,69 @@ g4.markdown("""
 # ---------- UNDERVALUED AREA DETECTOR ----------
 # ---------- FORECAST GROWTH ENGINE ----------
 # ---------- RENTAL YIELD INTELLIGENCE ----------
+# ---------- INVESTMENT STRATEGY CLASSIFIER ----------
+
+st.write("")
+st.markdown("""
+---
+### Investment Strategy Classification
+""")
+
+strategy_df = table_df.copy()
+
+strategy_df["Rental Yield"] = (
+    df.groupby("Area")["Rental Yield"]
+    .mean()
+    .values
+)
+
+strategies = []
+
+for _, row in strategy_df.iterrows():
+
+    if row["Rental Yield"] >= 8:
+        strategies.append("Cashflow Play")
+
+    elif row["Projected Growth %"] >= 11:
+        strategies.append("High-Growth Opportunity")
+
+    elif row["Average Property Price"] >= 5000000:
+        strategies.append("Luxury Growth Play")
+
+    else:
+        strategies.append("Balanced Investment")
+
+strategy_df["Strategy"] = strategies
+
+st.dataframe(
+    strategy_df[
+        [
+            "Area",
+            "Rental Yield",
+            "Projected Growth %",
+            "Strategy"
+        ]
+    ],
+    use_container_width=True
+)
+
+top_strategy = strategy_df.iloc[0]
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Strategy Insight</h4>
+
+<p>
+Atlas Intelligence classifies Dubai communities into different investment strategies to support investor decision-making.
+</p>
+
+<p>
+Current highlighted strategy:
+<b>{top_strategy['Area']}</b> — <b>{top_strategy['Strategy']}</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 st.write("")
 st.markdown("""
