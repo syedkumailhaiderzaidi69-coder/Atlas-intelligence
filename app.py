@@ -136,6 +136,15 @@ University of Wollongong Dubai
 """)
 st.sidebar.markdown("""
 ### System Status
+
+
+🟢 AI Engine Online  
+🟢 Dubai Market Feed Active  
+🟢 Investment Models Running  
+🟢 Forecast Engine Stable  
+
+---
+""")
 # ---------- AI CHAT ASSISTANT ----------
 
 st.sidebar.markdown("## Atlas AI Assistant")
@@ -164,14 +173,6 @@ if user_question:
         response = "Atlas AI is analyzing Dubai market intelligence. More advanced AI models coming soon."
 
     st.sidebar.success(response)
-
-🟢 AI Engine Online  
-🟢 Dubai Market Feed Active  
-🟢 Investment Models Running  
-🟢 Forecast Engine Stable  
-
----
-""")
 
 selected_area = st.sidebar.multiselect(
     "Select Dubai Areas",
