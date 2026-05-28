@@ -501,6 +501,19 @@ Atlas Intelligence currently uses simulated Dubai real estate data to prototype:
 
 Future versions will integrate live market datasets and advanced predictive models.
 """)
+# ---------- PRODUCT ROADMAP ----------
+
+st.write("")
+st.markdown("""
+---
+### Product Roadmap
+
+**V1:** Luxury Dubai real estate intelligence dashboard  
+**V2:** AI chatbot assistant and investment recommendation engine  
+**V3:** Live market data integration  
+**V4:** Predictive pricing and rental yield forecasting  
+**V5:** Investor-ready PDF intelligence reports  
+""")
 # ---------- FOOTER ----------
 
 st.write("")
