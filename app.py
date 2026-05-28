@@ -217,8 +217,10 @@ if api_source != "None":
         st.sidebar.success(f"{api_source} connected in prototype mode.")
     else:
         st.sidebar.warning("Enter API key to activate live data connection.")
-        if api_source != "None" and api_key:
-    df = load_live_property_data(api_source, api_key) 
+
+if api_source != "None" and api_key:
+    df = load_live_property_data(api_source, api_key)
+       
     
 
     
