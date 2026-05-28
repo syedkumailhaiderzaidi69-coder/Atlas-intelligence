@@ -1,9 +1,18 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.express as px
 
-st.set_page_config(page_title="Atlas Intelligence", layout="wide")
+st.set_page_config(
+    page_title="Atlas Intelligence",
+    layout="wide"
+)
+
+# ---------- STYLING ----------
 
 st.markdown("""
 <style>
+
 .stApp{
 background: linear-gradient(135deg,#06111f,#0b1628,#111827);
 color:white;
@@ -15,10 +24,11 @@ border-radius:30px;
 background:rgba(15,23,42,0.85);
 border:1px solid rgba(255,255,255,0.1);
 text-align:center;
+margin-bottom:30px;
 }
 
 .hero h1{
-font-size:70px;
+font-size:72px;
 margin-bottom:10px;
 }
 
@@ -37,9 +47,21 @@ border:1px solid rgba(255,255,255,0.08);
 
 .card h3{
 font-size:40px;
+margin-bottom:5px;
 }
+
+.insight{
+background:rgba(255,255,255,0.05);
+padding:22px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:15px;
+}
+
 </style>
 """, unsafe_allow_html=True)
+
+# ---------- HERO SECTION ----------
 
 st.markdown("""
 <div class="hero">
@@ -49,36 +71,135 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
+# ---------- DATA ----------
 
-c1,c2,c3 = st.columns(3)
+np.random.seed(42)
 
-c1.markdown("""
+areas = [
+    "Downtown Dubai",
+    "Dubai Marina",
+    "Business Bay",
+    "Palm Jumeirah",
+    "Dubai Hills Estate",
+    "JVC",
+    "Dubai Creek Harbour",
+    "DAMAC Hills"
+]
+
+data = []
+
+for area in areas:
+    for i in range(40):
+
+        investment = np.random.randint(60,98)
+        price = np.random.randint(800000,9000000)
+        growth = round(np.random.uniform(4,15),2)
+
+        data.append({
+            "Area": area,
+            "Investment Score": investment,
+            "Average Price": price,
+            "Projected Growth": growth
+        })
+
+df = pd.DataFrame(data)
+
+# ---------- KPI CARDS ----------
+
+c1,c2,c3,c4 = st.columns(4)
+
+c1.markdown(f"""
 <div class="card">
-<h3>350+</h3>
+<h3>{len(df)}</h3>
 <p>Properties Analyzed</p>
 </div>
 """, unsafe_allow_html=True)
 
-c2.markdown("""
+c2.markdown(f"""
 <div class="card">
-<h3>14</h3>
-<p>Dubai Areas Covered</p>
+<h3>{df['Area'].nunique()}</h3>
+<p>Dubai Areas</p>
 </div>
 """, unsafe_allow_html=True)
 
-c3.markdown("""
+c3.markdown(f"""
 <div class="card">
-<h3>AI</h3>
-<p>Market Intelligence Engine</p>
+<h3>{df['Investment Score'].mean():.1f}</h3>
+<p>Avg Investment Score</p>
+</div>
+""", unsafe_allow_html=True)
+
+c4.markdown(f"""
+<div class="card">
+<h3>{df['Projected Growth'].mean():.1f}%</h3>
+<p>Avg Market Growth</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.write("")
-st.subheader("Executive Vision")
+st.write("")
 
-st.write("""
-Atlas Intelligence is an AI-powered Dubai real estate intelligence platform focused on investment analytics, market intelligence, and executive-level dashboards.
-""")
+# ---------- CHART ----------
 
-st.success("Luxury prototype V1 live.")
+left,right = st.columns([1.3,1])
+
+with left:
+
+    st.subheader("Dubai Investment Intelligence")
+
+    chart_data = (
+        df.groupby("Area")["Investment Score"]
+        .mean()
+        .sort_values(ascending=False)
+        .reset_index()
+    )
+
+    fig = px.bar(
+        chart_data,
+        x="Investment Score",
+        y="Area",
+        orientation="h",
+        color="Investment Score",
+        height=500
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        margin=dict(l=0,r=0,t=30,b=0)
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+# ---------- AI INSIGHTS ----------
+
+with right:
+
+    st.subheader("AI Market Intelligence")
+
+    top_area = chart_data.iloc[0]["Area"]
+
+    st.markdown(f"""
+    <div class="insight">
+    <h4>Growth Signal</h4>
+    <p>{top_area} is showing the strongest investment momentum in Atlas Intelligence scoring models.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="insight">
+    <h4>Luxury Market Trend</h4>
+    <p>Dubai premium real estate continues showing resilience across waterfront and high-demand communities.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="insight">
+    <h4>AI Forecast</h4>
+    <p>Projected investment activity indicates increasing demand in luxury residential sectors.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.write("")
+st.success("Atlas Intelligence Luxury Prototype V2 Live")
