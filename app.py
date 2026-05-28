@@ -148,14 +148,6 @@ if uploaded_file is not None:
     st.sidebar.success("Custom dataset uploaded successfully.")
     
 
-
-
-st.sidebar.download_button(
-    label="Download CSV Template",
-    data=csv,
-    file_name='atlas_template.csv',
-    mime='text/csv'
-)
     
 
 
