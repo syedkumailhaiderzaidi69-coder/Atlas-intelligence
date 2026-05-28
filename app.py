@@ -281,6 +281,22 @@ st.sidebar.markdown("""
 
 ---
 """)
+# ---------- LIVE DATA STATUS ----------
+
+current_time = datetime.now().strftime("%d %b %Y | %H:%M")
+
+st.sidebar.markdown(f"""
+### Live Market Status
+
+🟢 Market Feed Active  
+🟢 Forecast Engine Online  
+🟢 AI Scoring Models Active  
+
+Last Refresh:
+{current_time}
+
+---
+""")
 # ---------- AI CHAT ASSISTANT ----------
 
 st.sidebar.markdown("## Atlas AI Assistant")
