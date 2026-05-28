@@ -501,6 +501,43 @@ Atlas Intelligence currently uses simulated Dubai real estate data to prototype:
 
 Future versions will integrate live market datasets and advanced predictive models.
 """)
+# ---------- AI SCORE GAUGES ----------
+
+st.write("")
+st.markdown("""
+---
+### Atlas Intelligence Indicators
+""")
+
+g1,g2,g3,g4 = st.columns(4)
+
+g1.markdown("""
+<div class="card">
+<h3>92%</h3>
+<p>Investment Strength</p>
+</div>
+""", unsafe_allow_html=True)
+
+g2.markdown("""
+<div class="card">
+<h3>88%</h3>
+<p>Market Confidence</p>
+</div>
+""", unsafe_allow_html=True)
+
+g3.markdown("""
+<div class="card">
+<h3>85%</h3>
+<p>Growth Potential</p>
+</div>
+""", unsafe_allow_html=True)
+
+g4.markdown("""
+<div class="card">
+<h3>90%</h3>
+<p>Luxury Demand</p>
+</div>
+""", unsafe_allow_html=True)
 # ---------- INVESTMENT SIMULATOR ----------
 
 st.write("")
