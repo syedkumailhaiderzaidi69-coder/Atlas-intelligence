@@ -283,6 +283,7 @@ st.sidebar.markdown("""
 """)
 # ---------- LIVE DATA STATUS ----------
 
+
 current_time = datetime.now().strftime("%d %b %Y | %H:%M")
 
 st.sidebar.markdown(f"""
@@ -297,6 +298,11 @@ Last Refresh:
 
 ---
 """)
+# ---------- MANUAL REFRESH CONTROL ----------
+
+if st.sidebar.button("Refresh Market Intelligence"):
+    st.sidebar.success("Market intelligence refreshed successfully.")
+    st.rerun()
 # ---------- AI CHAT ASSISTANT ----------
 
 st.sidebar.markdown("## Atlas AI Assistant")
