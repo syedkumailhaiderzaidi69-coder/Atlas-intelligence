@@ -19,12 +19,17 @@ color:white;
 }
 
 .hero{
-padding:80px;
-border-radius:30px;
-background:rgba(15,23,42,0.85);
-border:1px solid rgba(255,255,255,0.1);
+padding:100px;
+border-radius:34px;
+background:
+linear-gradient(rgba(6,17,31,0.70),rgba(6,17,31,0.95)),
+url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c");
+background-size:cover;
+background-position:center;
+border:1px solid rgba(255,255,255,0.12);
 text-align:center;
-margin-bottom:30px;
+margin-bottom:35px;
+box-shadow:0 0 45px rgba(148,163,184,0.18);
 }
 
 .hero h1{
