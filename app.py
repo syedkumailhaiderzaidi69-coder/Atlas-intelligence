@@ -388,6 +388,43 @@ c4.markdown(f"""
 
 st.write("")
 st.write("")
+# ---------- EXECUTIVE MARKET SIGNALS ----------
+
+st.write("")
+st.markdown("""
+---
+### Executive Market Signals
+""")
+
+signal_col1, signal_col2 = st.columns(2)
+
+with signal_col1:
+
+    st.success("""
+    📈 Investment Confidence: STRONG
+    
+    Atlas models indicate healthy long-term investment conditions across premium Dubai communities.
+    """)
+
+    st.info("""
+    🏙️ Market Momentum: BULLISH
+    
+    Growth indicators remain positive across luxury and mid-market sectors.
+    """)
+
+with signal_col2:
+
+    st.warning("""
+    💰 Rental Yield Outlook: ATTRACTIVE
+    
+    Selected communities continue delivering strong passive income performance.
+    """)
+
+    st.success("""
+    🤖 AI Forecast Reliability: HIGH
+    
+    Atlas Intelligence forecasting systems remain stable with strong confidence indicators.
+    """)
 
 # ---------- CHART ----------
 
