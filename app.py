@@ -196,7 +196,10 @@ left,right = st.columns([1.3,1])
 
 with left:
 
-    st.subheader("Dubai Investment Intelligence")
+    st.markdown("""
+---
+### Dubai Investment Intelligence
+""")
 
     chart_data = (
         df.groupby("Area")["Investment Score"]
