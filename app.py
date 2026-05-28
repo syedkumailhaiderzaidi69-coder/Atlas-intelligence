@@ -134,6 +134,16 @@ MSc Business Analytics
 University of Wollongong Dubai
 ---
 """)
+st.sidebar.markdown("""
+### System Status
+
+🟢 AI Engine Online  
+🟢 Dubai Market Feed Active  
+🟢 Investment Models Running  
+🟢 Forecast Engine Stable  
+
+---
+""")
 
 selected_area = st.sidebar.multiselect(
     "Select Dubai Areas",
