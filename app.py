@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import time
 from datetime import datetime
+from io import BytesIO
 
 st.set_page_config(
     page_title="Atlas Intelligence",
