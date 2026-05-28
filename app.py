@@ -138,6 +138,14 @@ for area in areas:
 
 df = pd.DataFrame(data)
 # ---------- FILTERS ----------
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Real Estate CSV",
+    type=["csv"]
+)
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.sidebar.success("Custom dataset uploaded successfully.")
 
 st.sidebar.title("Atlas Control Panel")
 st.sidebar.markdown("""
