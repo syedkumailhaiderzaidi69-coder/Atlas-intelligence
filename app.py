@@ -148,7 +148,7 @@ if uploaded_file is not None:
     st.sidebar.success("Custom dataset uploaded successfully.")
     
 
-csv = sample_csv.to_csv(index=False).encode('utf-8')
+
 
 st.sidebar.download_button(
     label="Download CSV Template",
