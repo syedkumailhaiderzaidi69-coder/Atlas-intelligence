@@ -14,16 +14,16 @@ Built by Syed — MSc Business Analytics student at the University of Wollongong
 ## Platform Preview
 
 ### Landing Experience
-![Landing Page](YOUR_IMAGE_LINK)
+![Landing Page](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/1st%20img.png?raw=true)
 
 ### AI Intelligence Dashboard
-![AI Dashboard](YOUR_IMAGE_LINK)
+![AI Dashboard](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/2nd%20image.png?raw=true)
 
 ### Dubai Intelligence Map
-![Map](YOUR_IMAGE_LINK)
+![Map](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/3rd%20image.png?raw=true)
 
 ### Executive Investment Recommendation
-![Recommendation](YOUR_IMAGE_LINK)
+![Recommendation](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/4th%20img.png?raw=true)
 
 ---
 
