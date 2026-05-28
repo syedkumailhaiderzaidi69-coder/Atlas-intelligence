@@ -146,6 +146,21 @@ uploaded_file = st.sidebar.file_uploader(
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     st.sidebar.success("Custom dataset uploaded successfully.")
+    sample_csv = pd.DataFrame({
+    "Area":["Downtown Dubai","Dubai Marina"],
+    "Investment Score":[92,88],
+    "Average Price":[4500000,3200000],
+    "Projected Growth":[12.5,10.8]
+})
+
+csv = sample_csv.to_csv(index=False).encode('utf-8')
+
+st.sidebar.download_button(
+    label="Download CSV Template",
+    data=csv,
+    file_name='atlas_template.csv',
+    mime='text/csv'
+)
     
 
 
