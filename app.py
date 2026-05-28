@@ -538,6 +538,96 @@ g4.markdown("""
 <p>Luxury Demand</p>
 </div>
 """, unsafe_allow_html=True)
+# ---------- AREA COMPARISON ENGINE ----------
+
+st.write("")
+st.markdown("""
+---
+### Area Comparison Engine
+""")
+
+compare_col1, compare_col2 = st.columns(2)
+
+area_1 = compare_col1.selectbox(
+    "Select First Area",
+    options=df["Area"].unique(),
+    key="area_1"
+)
+
+area_2 = compare_col2.selectbox(
+    "Select Second Area",
+    options=df["Area"].unique(),
+    key="area_2"
+)
+
+area_1_data = df[df["Area"] == area_1][["Investment Score", "Average Price", "Projected Growth"]].mean()
+area_2_data = df[df["Area"] == area_2][["Investment Score", "Average Price", "Projected Growth"]].mean()
+
+comparison_df = pd.DataFrame({
+    "Metric": ["Investment Score", "Average Price", "Projected Growth"],
+    area_1: [
+        round(area_1_data["Investment Score"], 1),
+        round(area_1_data["Average Price"], 0),
+        round(area_1_data["Projected Growth"], 1)
+    ],
+    area_2: [
+        round(area_2_data["Investment Score"], 1),
+        round(area_2_data["Average Price"], 0),
+        round(area_2_data["Projected Growth"], 1)
+    ]
+})
+
+st.dataframe(comparison_df, use_container_width=True)
+
+if area_1_data["Investment Score"] > area_2_data["Investment Score"]:
+    winner = area_1
+else:
+    winner = area_2
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Comparison Result</h4>
+
+<p>
+<b>{winner}</b> currently shows stronger overall investment intelligence based on Atlas scoring models.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+radar_df = pd.DataFrame({
+    "Metric": ["Investment Score", "Projected Growth"],
+    area_1: [
+        area_1_data["Investment Score"],
+        area_1_data["Projected Growth"] * 6
+    ],
+    area_2: [
+        area_2_data["Investment Score"],
+        area_2_data["Projected Growth"] * 6
+    ]
+})
+
+fig_radar = px.line_polar(
+    radar_df,
+    r=area_1,
+    theta="Metric",
+    line_close=True
+)
+
+fig_radar.add_scatterpolar(
+    r=radar_df[area_2],
+    theta=radar_df["Metric"],
+    fill='toself',
+    name=area_2
+)
+
+fig_radar.update_layout(
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    height=500
+)
+
+st.plotly_chart(fig_radar, use_container_width=True)
 # ---------- INVESTMENT SIMULATOR ----------
 
 st.write("")
