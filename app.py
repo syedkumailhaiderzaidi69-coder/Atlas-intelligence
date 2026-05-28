@@ -333,4 +333,27 @@ For growth-focused strategy, <b>{growth_area['Area']}</b> shows the highest proj
 
 </div>
 """, unsafe_allow_html=True)
+# ---------- MARKET SENTIMENT ----------
+
+st.write("")
+st.subheader("Dubai Market Sentiment")
+
+avg_score = df["Investment Score"].mean()
+
+if avg_score >= 85:
+    sentiment = "Bullish"
+    message = "Dubai luxury real estate market is showing strong investment momentum."
+elif avg_score >= 75:
+    sentiment = "Stable Growth"
+    message = "Dubai real estate market remains stable with healthy investment indicators."
+else:
+    sentiment = "Moderate"
+    message = "Market conditions indicate selective investment opportunities."
+
+st.markdown(f"""
+<div class="insight">
+<h4>Current Market Sentiment: {sentiment}</h4>
+<p>{message}</p>
+</div>
+""", unsafe_allow_html=True)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
