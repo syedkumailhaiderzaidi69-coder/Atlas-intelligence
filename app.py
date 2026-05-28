@@ -1417,10 +1417,15 @@ fig_radar.add_scatterpolar(
 fig_radar.update_layout(
     template="plotly_dark",
     paper_bgcolor='rgba(0,0,0,0)',
+    width=700,
     height=500
 )
 
-st.plotly_chart(fig_radar, use_container_width=True)
+st.plotly_chart(
+    fig_radar,
+    use_container_width=False,
+    config={'displayModeBar': False}
+)
 # ---------- INVESTMENT SIMULATOR ----------
 
 st.write("")
