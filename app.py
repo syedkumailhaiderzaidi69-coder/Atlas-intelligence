@@ -484,6 +484,23 @@ gauge_fig.update_layout(
 )
 
 st.plotly_chart(gauge_fig, use_container_width=True)
+# ---------- METHODOLOGY ----------
+
+st.write("")
+st.markdown("""
+---
+### Methodology
+
+Atlas Intelligence currently uses simulated Dubai real estate data to prototype:
+
+- Investment scoring
+- Market growth analysis
+- Geographic intelligence
+- AI-generated recommendations
+- Executive dashboard reporting
+
+Future versions will integrate live market datasets and advanced predictive models.
+""")
 # ---------- FOOTER ----------
 
 st.write("")
