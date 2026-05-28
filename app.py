@@ -642,6 +642,23 @@ gauge_fig.update_layout(
 )
 
 st.plotly_chart(gauge_fig, use_container_width=True)
+# ---------- MARKET ALERT SYSTEM ----------
+
+st.write("")
+st.markdown("""
+---
+### Atlas Market Alerts
+""")
+
+alerts = [
+    "📈 High-growth momentum detected in Dubai Creek Harbour.",
+    "🏙️ Luxury demand increasing across Palm Jumeirah.",
+    "💰 Rental yield strength improving in JVC.",
+    "📊 Investment confidence remains bullish across Dubai Marina."
+]
+
+for alert in alerts:
+    st.warning(alert)
 # ---------- API INTEGRATION ROADMAP ----------
 
 st.write("")
