@@ -103,6 +103,17 @@ for area in areas:
         })
 
 df = pd.DataFrame(data)
+# ---------- FILTERS ----------
+
+st.sidebar.title("Atlas Control Panel")
+
+selected_area = st.sidebar.multiselect(
+    "Select Dubai Areas",
+    options=df["Area"].unique(),
+    default=df["Area"].unique()
+)
+
+df = df[df["Area"].isin(selected_area)]
 
 # ---------- KPI CARDS ----------
 
