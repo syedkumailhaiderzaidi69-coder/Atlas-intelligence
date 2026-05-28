@@ -137,6 +137,32 @@ for area in areas:
         })
 
 df = pd.DataFrame(data)
+# ---------- INVESTMENT SCORING MODEL ----------
+
+max_price = df["Average Price"].max()
+
+df["Affordability Score"] = (
+    100 - (df["Average Price"] / max_price * 100)
+)
+
+df["Market Confidence"] = np.random.randint(
+    75,
+    96,
+    size=len(df)
+)
+
+df["Luxury Demand"] = np.random.randint(
+    70,
+    98,
+    size=len(df)
+)
+
+df["Investment Score"] = (
+    df["Projected Growth"] * 4 * 0.40 +
+    df["Affordability Score"] * 0.30 +
+    df["Market Confidence"] * 0.20 +
+    df["Luxury Demand"] * 0.10
+).round(1)
 # ---------- LIVE DATA FUNCTION ----------
 
 def load_live_property_data(api_source, api_key):
