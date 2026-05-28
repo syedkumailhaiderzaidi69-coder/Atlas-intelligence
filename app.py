@@ -319,8 +319,18 @@ st.subheader("AI Investment Recommendation")
 best_area = table_df.sort_values("Investment Score", ascending=False).iloc[0]
 growth_area = table_df.sort_values("Projected Growth %", ascending=False).iloc[0]
 
-st.info(
-    f"Atlas Intelligence recommends focusing on {best_area['Area']} based on the strongest overall investment score of {best_area['Investment Score']:.1f}. "
-    f"For growth-focused strategy, {growth_area['Area']} shows the highest projected growth at {growth_area['Projected Growth %']:.1f}%."
-)
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas AI Recommendation</h4>
+
+<p>
+Atlas Intelligence recommends focusing on <b>{best_area['Area']}</b> based on the strongest overall investment score of <b>{best_area['Investment Score']:.1f}</b>.
+</p>
+
+<p>
+For growth-focused strategy, <b>{growth_area['Area']}</b> shows the highest projected growth at <b>{growth_area['Projected Growth %']:.1f}%</b>.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
