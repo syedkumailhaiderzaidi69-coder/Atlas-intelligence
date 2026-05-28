@@ -693,6 +693,46 @@ g4.markdown("""
 """, unsafe_allow_html=True)
 # ---------- UNDERVALUED AREA DETECTOR ----------
 # ---------- FORECAST GROWTH ENGINE ----------
+# ---------- RENTAL YIELD INTELLIGENCE ----------
+
+st.write("")
+st.markdown("""
+---
+### Rental Yield Intelligence
+""")
+
+yield_df = (
+    df.groupby("Area")["Rental Yield"]
+    .mean()
+    .reset_index()
+)
+
+yield_df = yield_df.sort_values(
+    "Rental Yield",
+    ascending=False
+)
+
+top_yield = yield_df.iloc[0]
+
+st.dataframe(
+    yield_df,
+    use_container_width=True
+)
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Rental Yield Signal</h4>
+
+<p>
+<b>{top_yield['Area']}</b> currently shows the strongest rental yield potential for passive income investors.
+</p>
+
+<p>
+Estimated Rental Yield: <b>{top_yield['Rental Yield']:.1f}%</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 st.write("")
 st.markdown("""
