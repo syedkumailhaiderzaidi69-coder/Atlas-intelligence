@@ -425,6 +425,33 @@ st.markdown(f"""
 <p>{message}</p>
 </div>
 """, unsafe_allow_html=True)
+gauge_fig = px.pie(
+    values=[82,18],
+    names=["AI Confidence",""],
+    hole=0.75
+)
+
+gauge_fig.update_traces(
+    textinfo='none'
+)
+
+gauge_fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    annotations=[
+        dict(
+            text="82%<br>AI Confidence",
+            x=0.5,
+            y=0.5,
+            font_size=22,
+            showarrow=False
+        )
+    ],
+    height=350,
+    showlegend=False
+)
+
+st.plotly_chart(gauge_fig, use_container_width=True)
 # ---------- FOOTER ----------
 
 st.write("")
