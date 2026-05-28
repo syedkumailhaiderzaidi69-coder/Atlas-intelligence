@@ -175,6 +175,30 @@ st.sidebar.download_button(
     file_name='atlas_template.csv',
     mime='text/csv'
 )
+# ---------- API CONNECTION PANEL ----------
+
+st.sidebar.markdown("## API Connection")
+
+api_source = st.sidebar.selectbox(
+    "Choose API Source",
+    [
+        "None",
+        "Dubai Land Department API",
+        "Property Finder API",
+        "Bayut API"
+    ]
+)
+
+api_key = st.sidebar.text_input(
+    "API Key",
+    type="password"
+)
+
+if api_source != "None":
+    if api_key:
+        st.sidebar.success(f"{api_source} connected in prototype mode.")
+    else:
+        st.sidebar.warning("Enter API key to activate live data connection.")
     
 
     
