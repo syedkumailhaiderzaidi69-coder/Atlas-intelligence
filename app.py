@@ -659,6 +659,45 @@ g4.markdown("""
 <p>Luxury Demand</p>
 </div>
 """, unsafe_allow_html=True)
+# ---------- UNDERVALUED AREA DETECTOR ----------
+
+st.write("")
+st.markdown("""
+---
+### Undervalued Area Detector
+""")
+
+undervalued_df = table_df.copy()
+
+undervalued_df["Undervalued Score"] = (
+    undervalued_df["Investment Score"] * 0.45
+    + undervalued_df["Projected Growth %"] * 4
+    - (undervalued_df["Average Property Price"] / 1000000) * 2
+)
+
+undervalued_df = undervalued_df.sort_values("Undervalued Score", ascending=False)
+
+top_undervalued = undervalued_df.iloc[0]
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Undervalued Signal</h4>
+
+<p>
+<b>{top_undervalued['Area']}</b> appears to be the strongest undervalued opportunity based on price, growth, and investment score indicators.
+</p>
+
+<p>
+Undervalued Score: <b>{top_undervalued['Undervalued Score']:.1f}</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.dataframe(
+    undervalued_df[["Area", "Investment Score", "Average Property Price", "Projected Growth %", "Undervalued Score"]],
+    use_container_width=True
+)
 # ---------- AREA COMPARISON ENGINE ----------
 
 st.write("")
