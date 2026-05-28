@@ -79,6 +79,21 @@ margin-bottom:15px;
 
 </style>
 """, unsafe_allow_html=True)
+# ---------- LOADING SCREEN ----------
+
+loading = st.empty()
+
+loading.markdown("""
+<div class="hero">
+<h1>Initializing Atlas Intelligence...</h1>
+<h2>Loading Dubai Market Intelligence Systems</h2>
+<p>AI engines starting...</p>
+</div>
+""", unsafe_allow_html=True)
+
+time.sleep(2)
+
+loading.empty()
 
 # ---------- HERO SECTION ----------
 
