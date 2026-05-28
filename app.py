@@ -114,6 +114,18 @@ selected_area = st.sidebar.multiselect(
 )
 
 df = df[df["Area"].isin(selected_area)]
+selected_type = st.sidebar.multiselect(
+    "Select Property Type",
+    options=["Apartment", "Villa", "Townhouse", "Penthouse"],
+    default=["Apartment", "Villa", "Townhouse", "Penthouse"]
+)
+
+df["Property Type"] = np.random.choice(
+    ["Apartment", "Villa", "Townhouse", "Penthouse"],
+    size=len(df)
+)
+
+df = df[df["Property Type"].isin(selected_type)]
 
 # ---------- KPI CARDS ----------
 
