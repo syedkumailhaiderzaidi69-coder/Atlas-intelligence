@@ -541,6 +541,24 @@ gauge_fig.update_layout(
 )
 
 st.plotly_chart(gauge_fig, use_container_width=True)
+# ---------- API INTEGRATION ROADMAP ----------
+
+st.write("")
+st.markdown("""
+---
+### Live Data Integration Roadmap
+
+Atlas Intelligence is designed to evolve from demo analytics into an automated real estate intelligence platform.
+
+Planned data integrations:
+- Dubai Land Department transaction data
+- Property listing market data
+- Rental yield indicators
+- Area-level growth trends
+- Developer performance data
+
+Future live mode will allow Atlas Intelligence to automatically refresh market insights without manual CSV uploads.
+""")
 # ---------- METHODOLOGY ----------
 
 st.write("")
