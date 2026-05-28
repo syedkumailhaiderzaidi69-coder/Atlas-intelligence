@@ -11,6 +11,19 @@ Built by Syed — MSc Business Analytics student at the University of Wollongong
 ## Live Demo
 
 [Launch Atlas Intelligence](https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/)
+## Platform Preview
+
+### Landing Experience
+![Landing Page](YOUR_IMAGE_LINK)
+
+### AI Intelligence Dashboard
+![AI Dashboard](YOUR_IMAGE_LINK)
+
+### Dubai Intelligence Map
+![Map](YOUR_IMAGE_LINK)
+
+### Executive Investment Recommendation
+![Recommendation](YOUR_IMAGE_LINK)
 
 ---
 
