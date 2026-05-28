@@ -52,6 +52,11 @@ border-radius:25px;
 text-align:center;
 border:1px solid rgba(255,255,255,0.08);
 }
+.insight:hover{
+transform: translateY(-4px);
+transition:0.3s ease;
+box-shadow:0 0 28px rgba(148,163,184,0.16);
+}
 
 .card h3{
 font-size:40px;
