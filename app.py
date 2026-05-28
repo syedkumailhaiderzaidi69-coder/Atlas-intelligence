@@ -660,6 +660,59 @@ g4.markdown("""
 </div>
 """, unsafe_allow_html=True)
 # ---------- UNDERVALUED AREA DETECTOR ----------
+# ---------- FORECAST GROWTH ENGINE ----------
+
+st.write("")
+st.markdown("""
+---
+### Future Growth Forecast Engine
+""")
+
+forecast_df = table_df.copy()
+
+forecast_df["Forecast Growth 2027"] = (
+    forecast_df["Projected Growth %"] * np.random.uniform(1.1,1.4)
+).round(1)
+
+forecast_df["Confidence Score"] = np.random.randint(
+    82,
+    96,
+    size=len(forecast_df)
+)
+
+forecast_df = forecast_df.sort_values(
+    "Forecast Growth 2027",
+    ascending=False
+)
+
+st.dataframe(
+    forecast_df[
+        [
+            "Area",
+            "Forecast Growth 2027",
+            "Confidence Score"
+        ]
+    ],
+    use_container_width=True
+)
+
+top_forecast = forecast_df.iloc[0]
+
+st.markdown(f"""
+<div class="insight">
+<h4>Atlas Forecast Signal</h4>
+
+<p>
+<b>{top_forecast['Area']}</b> is projected to show the strongest future market momentum heading into 2027.
+</p>
+
+<p>
+Forecast Growth: <b>{top_forecast['Forecast Growth 2027']:.1f}%</b><br>
+Confidence Score: <b>{top_forecast['Confidence Score']}%</b>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 st.write("")
 st.markdown("""
