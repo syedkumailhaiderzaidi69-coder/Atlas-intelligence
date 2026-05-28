@@ -391,4 +391,21 @@ st.markdown(f"""
 <p>{message}</p>
 </div>
 """, unsafe_allow_html=True)
+# ---------- FOOTER ----------
+
+st.write("")
+st.markdown("""
+---
+<center>
+
+### Atlas Intelligence
+
+AI-powered Dubai real estate intelligence platform.
+
+Built with Python, Streamlit, Plotly & AI-driven analytics.
+
+© 2026 Atlas Intelligence — Prototype V2
+
+</center>
+""", unsafe_allow_html=True)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
