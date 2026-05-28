@@ -907,6 +907,77 @@ Portfolio Budget:
 
 </div>
 """, unsafe_allow_html=True)
+# ---------- AI STRATEGY ENGINE ----------
+
+st.write("")
+st.markdown("""
+---
+### Atlas AI Strategy Engine
+""")
+
+investor_type = st.selectbox(
+    "Investor Profile",
+    [
+        "Conservative",
+        "Balanced",
+        "Aggressive",
+        "Luxury Investor"
+    ]
+)
+
+investment_horizon = st.selectbox(
+    "Investment Horizon",
+    [
+        "1-2 Years",
+        "3-5 Years",
+        "5-10 Years"
+    ]
+)
+
+if investor_type == "Conservative":
+
+    ai_strategy = """
+    Atlas recommends focusing on stable rental-yield communities such as JVC and Dubai Marina with balanced cashflow opportunities.
+    """
+
+elif investor_type == "Balanced":
+
+    ai_strategy = """
+    Atlas recommends diversified allocation across Downtown Dubai, Dubai Marina, and Dubai Hills Estate for balanced growth and stability.
+    """
+
+elif investor_type == "Aggressive":
+
+    ai_strategy = """
+    Atlas recommends targeting high-growth areas such as Dubai Creek Harbour and emerging investment corridors.
+    """
+
+else:
+
+    ai_strategy = """
+    Atlas recommends premium luxury-focused allocation toward Palm Jumeirah and ultra-prime waterfront communities.
+    """
+
+st.markdown(f"""
+<div class="insight">
+<h4>AI Strategic Recommendation</h4>
+
+<p>
+Investor Profile:
+<b>{investor_type}</b>
+</p>
+
+<p>
+Investment Horizon:
+<b>{investment_horizon}</b>
+</p>
+
+<p>
+{ai_strategy}
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 # ---------- PDF REPORT EXPORT ----------
 
 report_text = f"""
