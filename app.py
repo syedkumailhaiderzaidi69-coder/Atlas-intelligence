@@ -311,4 +311,16 @@ st.dataframe(
     table_df,
     use_container_width=True
 )
+# ---------- INVESTMENT RECOMMENDATION ENGINE ----------
+
+st.write("")
+st.subheader("AI Investment Recommendation")
+
+best_area = table_df.sort_values("Investment Score", ascending=False).iloc[0]
+growth_area = table_df.sort_values("Projected Growth %", ascending=False).iloc[0]
+
+st.info(
+    f"Atlas Intelligence recommends focusing on {best_area['Area']} based on the strongest overall investment score of {best_area['Investment Score']:.1f}. "
+    f"For growth-focused strategy, {growth_area['Area']} shows the highest projected growth at {growth_area['Projected Growth %']:.1f}%."
+)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
