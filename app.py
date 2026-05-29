@@ -5,6 +5,9 @@ import plotly.express as px
 import time
 from datetime import datetime
 from io import BytesIO
+# Track data source
+if 'data_source_tracker' not in st.session_state:
+    st.session_state.data_source_tracker = "Demo Data"
 @st.cache_data(ttl=3600)
 def load_data():
     return None
