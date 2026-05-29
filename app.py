@@ -224,28 +224,34 @@ if st.sidebar.button("📊 Load Sample Dubai Data"):
     
     df = pd.DataFrame(sample_data)
     
-    # Calculate Investment Score
-   max_price = df["Average Price"].max()
+     # Calculate Investment Score
+    max_price = df["Average Price"].max()
 
-df["Affordability Score"] = 100 - (
-    df["Average Price"] / max_price * 100
-)
+    df["Affordability Score"] = 100 - (
+        df["Average Price"] / max_price * 100
+    )
 
-df["Market Confidence"] = np.random.randint(
-    75, 96, size=len(df)
-)
+    df["Market Confidence"] = np.random.randint(
+        75, 96, size=len(df)
+    )
 
-df["Luxury Demand"] = np.random.randint(
-    70, 98, size=len(df)
-)
+    df["Luxury Demand"] = np.random.randint(
+        70, 98, size=len(df)
+    )
 
-df["Investment Score"] = (
-    df["Projected Growth"] * 4 * 0.35 +
-    df["Affordability Score"] * 0.25 +
-    df["Market Confidence"] * 0.15 +
-    df["Luxury Demand"] * 0.10 +
-    df["Rental Yield"] * 8 * 0.15
-).round(1)
+    df["Investment Score"] = (
+        df["Projected Growth"] * 4 * 0.35 +
+        df["Affordability Score"] * 0.25 +
+        df["Market Confidence"] * 0.15 +
+        df["Luxury Demand"] * 0.10 +
+        df["Rental Yield"] * 8 * 0.15
+    ).round(1)
+
+    st.session_state.data_source_tracker = "Sample Dubai Data"
+    st.sidebar.success(
+        f"✅ Loaded {len(df)} properties from {df['Area'].nunique()} areas"
+    )
+    st.rerun()
     st.session_state.data_source_tracker = "Sample Dubai Data"
     st.sidebar.success(f"✅ Loaded {len(df)} properties from {df['Area'].nunique()} areas")
     st.rerun()
