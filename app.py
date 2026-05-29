@@ -279,6 +279,9 @@ University of Wollongong Dubai
 📧 syedkumailhaiderzaidi69@gmail.com
 ---
 """)
+current_time = datetime.now().strftime("%d %b %Y | %H:%M")
+current_datetime = datetime.now().strftime("%d %b %Y %H:%M")
+
 st.sidebar.markdown(f"""
 ### Live Market Status
 
@@ -287,7 +290,7 @@ st.sidebar.markdown(f"""
 🟢 AI Scoring Models Active  
 
 Last Refresh: {current_time}
-🟢 Data Updated: {datetime.now().strftime('%d %b %Y %H:%M')}
+🟢 Data Updated: {current_datetime}
 
 ---
 """)
