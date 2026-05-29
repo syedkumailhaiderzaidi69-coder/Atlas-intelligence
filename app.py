@@ -456,10 +456,12 @@ selected_area = st.sidebar.multiselect(
 )
 
 df = df[df["Area"].isin(selected_area)]
+# Get unique property types from actual data
+unique_types = df["Property Type"].unique().tolist()
 selected_type = st.sidebar.multiselect(
     "Select Property Type",
-    options=["Apartment", "Villa", "Townhouse", "Penthouse"],
-    default=["Apartment", "Villa", "Townhouse", "Penthouse"]
+    options=unique_types,
+    default=unique_types
 )
 
 df["Property Type"] = np.random.choice(
