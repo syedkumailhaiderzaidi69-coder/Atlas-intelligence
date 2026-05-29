@@ -333,6 +333,7 @@ if user_question:
         response = "Atlas AI is analyzing Dubai market intelligence. More advanced AI models coming soon."
 
     st.sidebar.success(response)
+    df["Property Type"] = np.random.choice(["Apartment", "Villa", "Townhouse", "Penthouse"], size=len(df))
 
 selected_area = st.sidebar.multiselect(
     "Select Dubai Areas",
