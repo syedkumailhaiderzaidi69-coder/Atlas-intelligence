@@ -1512,7 +1512,12 @@ st.markdown("""
 
 AI-powered Dubai real estate intelligence platform.
 
+**Created by Syed Kumail Haider Zaidi**  
+MSc Business Analytics | University of Wollongong Dubai
+
 Built with Python, Streamlit, Plotly & AI-driven analytics.
+
+📧 syedkumailhaiderzaidi69@gmail.com
 
 © 2026 Atlas Intelligence — Prototype V2
 
