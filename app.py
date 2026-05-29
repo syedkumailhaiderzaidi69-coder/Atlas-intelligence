@@ -145,6 +145,14 @@ for area in areas:
         })
 
 df = pd.DataFrame(data)
+# Try to load real data instead
+try:
+    df_real = pd.read_csv("app_8k_data.csv")
+    if len(df_real) > 0:
+        df = df_real
+        st.success(f"✅ Loaded {len(df)} real Dubai property transactions")
+except:
+    pass  # Keep using demo data if real data not found
 # ---------- INVESTMENT SCORING MODEL ----------
 
 max_price = df["Average Price"].max()
