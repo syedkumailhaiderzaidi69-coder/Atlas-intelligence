@@ -1543,39 +1543,32 @@ Built with Python, Streamlit, Plotly & AI-driven analytics.
 
 </center>
 """, unsafe_allow_html=True)
-# ========== CONTACT SECTION ==========
+# ========== CONTACT SECTION (STREAMLIT NATIVE) ==========
 st.write("")
 st.markdown("---")
 st.markdown("### 📬 Want to hire me or collaborate?")
 
-col1, col2, col3 = st.columns([1,2,1])
+st.markdown("**Syed Kumail Haider Zaidi**")  
+st.markdown("*MSc Business Analytics | University of Wollongong Dubai*")
 
-with col2:
-    st.markdown("""
-    <div style="
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        padding: 30px;
-        border-radius: 20px;
-        text-align: center;
-        border: 1px solid #334155;
-    ">
-        <h4 style="color: #f1f5f9;">Syed Kumail Haider Zaidi</h4>
-        <p style="color: #94a3b8;">MSc Business Analytics | University of Wollongong Dubai</p>
-        
-        <p style="margin-top: 20px;">
-            <a href="mailto:syedkumailhaiderzaidi69@gmail.com" style="background: #3b82f6; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">📧 Send Email</a>
-            
-            <a href="https://www.linkedin.com/in/syedkumail01" style="background: #0a66c2; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">🔗 LinkedIn</a>
-            
-            <a href="https://github.com/syedkumailhaiderzaidi69-coder" style="background: #333; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">💻 GitHub</a>
-        </p>
-        
-        <p style="color: #64748b; margin-top: 20px; font-size: 14px;">
-            Open to internships, graduate roles, and collaborations in:<br>
-            Business Analytics • Data Science • Real Estate Analytics • Consulting
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+col_a, col_b, col_c = st.columns(3)
 
-st.write("")
+with col_a:
+    if st.button("📧 Send Email", use_container_width=True):
+        st.markdown("[Click here to email](mailto:syedkumailhaiderzaidi69@gmail.com)")
+
+with col_b:
+    if st.button("🔗 LinkedIn", use_container_width=True):
+        st.markdown("[Open LinkedIn](https://www.linkedin.com/in/syedkumail01)")
+
+with col_c:
+    if st.button("💻 GitHub", use_container_width=True):
+        st.markdown("[Open GitHub](https://github.com/syedkumailhaiderzaidi69-coder)")
+
+st.markdown("""
+<p style="text-align: center; color: #64748b; margin-top: 20px; font-size: 14px;">
+Open to internships, graduate roles, and collaborations in:<br>
+Business Analytics • Data Science • Real Estate Analytics • Consulting
+</p>
+""", unsafe_allow_html=True)
 st.success("Atlas Intelligence Luxury Prototype V2 Live")
