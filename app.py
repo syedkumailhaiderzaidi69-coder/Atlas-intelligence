@@ -279,14 +279,15 @@ University of Wollongong Dubai
 📧 syedkumailhaiderzaidi69@gmail.com
 ---
 """)
-st.sidebar.markdown("""
-### System Status
+st.sidebar.markdown(f"""
+### Live Market Status
 
+🟢 Market Feed Active  
+🟢 Forecast Engine Online  
+🟢 AI Scoring Models Active  
 
-🟢 AI Engine Online  
-🟢 Dubai Market Feed Active  
-🟢 Investment Models Running  
-🟢 Forecast Engine Stable  
+Last Refresh: {current_time}
+🟢 Data Updated: {datetime.now().strftime('%d %b %Y %H:%M')}
 
 ---
 """)
