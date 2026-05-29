@@ -202,6 +202,52 @@ data_source = st.sidebar.radio(
     "Select Data Mode",
     ["Demo Data", "Upload CSV", "Live API Mode Coming Soon"]
 )
+# Sample Data Button
+if st.sidebar.button("📊 Load Sample Dubai Data"):
+    # Create sample dataset
+    sample_areas = ["Downtown Dubai", "Dubai Marina", "Palm Jumeirah", "JVC", "Business Bay"]
+    sample_data = []
+    
+    for area in sample_areas:
+        for i in range(20):
+            if area == "Palm Jumeirah":
+                price = np.random.randint(5000000, 15000000)
+                growth = np.random.uniform(8, 14)
+                yield_val = np.random.uniform(4.5, 6.5)
+            elif area == "JVC":
+                price = np.random.randint(800000, 2000000)
+                growth = np.random.uniform(5, 10)
+                yield_val = np.random.uniform(7, 9.5)
+            else:
+                price = np.random.randint(1500000, 6000000)
+                growth = np.random.uniform(7, 13)
+                yield_val = np.random.uniform(5.5, 8)
+            
+            sample_data.append({
+                "Area": area,
+                "Average Price": price,
+                "Projected Growth": round(growth, 1),
+                "Rental Yield": round(yield_val, 1)
+            })
+    
+    df = pd.DataFrame(sample_data)
+    
+    # Calculate Investment Score
+    max_price = df["Average Price"].max()
+    df["Affordability Score"] = 100 - (df["Average Price"] / max_price * 100)
+    df["Market Confidence"] = np.random.randint(75, 96, size=len(df))
+    df["Luxury Demand"] = np.random.randint(70, 98, size=len(df))
+    
+    df["Investment Score"] = (
+        df["Projected Growth"] * 4 * 0.35 +
+        df["Affordability Score"] * 0.25 +
+        df["Market Confidence"] * 0.15 +
+        df["Luxury Demand"] * 0.10 +
+        df["Rental Yield"] * 8 * 0.15
+    ).round(1)
+    
+    st.sidebar.success(f"✅ Loaded {len(df)} properties from {df['Area'].nunique()} areas")
+    st.rerun()
 
 if data_source == "Live API Mode Coming Soon":
     st.sidebar.warning("Live API integration is planned for the next version.")
