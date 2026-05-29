@@ -371,16 +371,22 @@ except FileNotFoundError:
     st.sidebar.warning("CV file not found. Please add Syeds CV.pdf to the app folder.")
 
 st.sidebar.markdown("---")
+
 current_time = datetime.now().strftime("%d %b %Y | %H:%M")
 current_datetime = datetime.now().strftime("%d %b %Y %H:%M")
 
+# Show what data is being used
+if len(df) > 1000:
+    st.sidebar.info(f"📊 Live: {len(df)} real transactions")
+else:
+    st.sidebar.info(f"📊 Demo: {len(df)} synthetic records")
+
 st.sidebar.markdown(f"""
-st.sidebar.info(f"📊 Data Source: {st.session_state.data_source_tracker}")
 ### Live Market Status
 
 🟢 Market Feed Active  
 🟢 Forecast Engine Online  
-🟢 AI Scoring Models Active  
+🢟 AI Scoring Models Active  
 
 Last Refresh: {current_time}
 🟢 Data Updated: {current_datetime}
