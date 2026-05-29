@@ -153,7 +153,7 @@ except:
     st.warning("Using demo data. File not found.")
 # ---------- INVESTMENT SCORING MODEL ----------
 
-max_price = df["Average Price"].max()
+max_price = df["Price"].max()
 
 df["Affordability Score"] = (
     100 - (df["Average Price"] / max_price * 100)
