@@ -148,7 +148,7 @@ df = pd.DataFrame(data)
 # Load real Dubai data
 try:
     df = pd.read_csv('dubai_clean_ready.csv')
-    st.write(df.columns.tolist())
+    st.write("Columns:", df.columns.tolist())
     st.success(f"✅ Loaded {len(df)} real Dubai property transactions")
 except:
     st.warning("Using demo data. File not found.")
