@@ -5,6 +5,9 @@ import plotly.express as px
 import time
 from datetime import datetime
 from io import BytesIO
+@st.cache_data(ttl=3600)
+def load_data():
+    return None
 
 st.set_page_config(
     page_title="Atlas Intelligence",
