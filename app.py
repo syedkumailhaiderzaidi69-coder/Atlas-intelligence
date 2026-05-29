@@ -5,9 +5,6 @@ import plotly.express as px
 import time
 from datetime import datetime
 from io import BytesIO
-# DEBUG: Check what data is loaded
-st.write(f"DEBUG: Data shape = {df.shape}")
-st.write(f"DEBUG: Unique areas = {df['Area'].unique()}")
 # Track data source
 if 'data_source_tracker' not in st.session_state:
     st.session_state.data_source_tracker = "Demo Data"
