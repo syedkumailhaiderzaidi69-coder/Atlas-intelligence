@@ -277,6 +277,7 @@ MSc Business Analytics
 University of Wollongong Dubai
 
 📧 syedkumailhaiderzaidi69@gmail.com
+🔗 Live Portfolio: https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/
 ---
 """)
 current_time = datetime.now().strftime("%d %b %Y | %H:%M")
