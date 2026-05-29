@@ -243,7 +243,7 @@ if st.sidebar.button("📊 Load Sample Dubai Data"):
     
     # Calculate Investment Score
     max_price = df["Average Price"].max()
-   df["Affordability Score"] = 100 - (df["Price"] / max_price * 100)
+   df["Affordability Score"] = 100-(df["Price"] / max_price * 100)
     df["Market Confidence"] = np.random.randint(75, 96, size=len(df))
     df["Luxury Demand"] = np.random.randint(70, 98, size=len(df))
     
