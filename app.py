@@ -367,6 +367,7 @@ current_time = datetime.now().strftime("%d %b %Y | %H:%M")
 current_datetime = datetime.now().strftime("%d %b %Y %H:%M")
 
 st.sidebar.markdown(f"""
+st.sidebar.info(f"📊 Data Source: {st.session_state.data_source_tracker}")
 ### Live Market Status
 
 🟢 Market Feed Active  
