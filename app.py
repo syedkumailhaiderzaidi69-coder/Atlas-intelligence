@@ -153,7 +153,7 @@ try:
 except:
     st.warning("Using demo data. File not found.")
 # ---------- INVESTMENT SCORING MODEL ----------
-
+st.write(df.head())
 max_price = df["Average Price"].max()
 df["Affordability Score"] = 100 - (df["Average Price"] / max_price * 100)
 df["Market Confidence"] = np.random.randint(75, 96, size=len(df))
