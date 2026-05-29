@@ -272,9 +272,11 @@ st.sidebar.markdown("""
 ### Atlas Intelligence
 AI-powered Dubai real estate intelligence platform.
 
-Built by Syed  
+Built by Syed Kumail Haider Zaidi  
 MSc Business Analytics  
 University of Wollongong Dubai
+
+📧 syedkumailhaiderzaidi69@gmail.com
 ---
 """)
 st.sidebar.markdown("""
