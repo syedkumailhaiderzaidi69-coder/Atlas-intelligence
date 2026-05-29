@@ -280,6 +280,19 @@ University of Wollongong Dubai
 🔗 Live Portfolio: https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/
 ---
 """)
+# CV Download Button
+try:
+    with open("Syeds CV.pdf", "rb") as file:
+        st.sidebar.download_button(
+            label="📄 Download My CV",
+            data=file,
+            file_name="Syeds CV.pdf",
+            mime="application/pdf"
+        )
+except FileNotFoundError:
+    st.sidebar.warning("CV file not found. Please add Syeds CV.pdf to the app folder.")
+
+st.sidebar.markdown("---")
 current_time = datetime.now().strftime("%d %b %Y | %H:%M")
 current_datetime = datetime.now().strftime("%d %b %Y %H:%M")
 
