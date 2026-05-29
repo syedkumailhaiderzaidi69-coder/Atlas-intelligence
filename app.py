@@ -1563,35 +1563,11 @@ with col2:
         <p style="color: #94a3b8;">MSc Business Analytics | University of Wollongong Dubai</p>
         
         <p style="margin-top: 20px;">
-            <a href="mailto:syedkumailhaiderzaidi69@gmail.com" style="
-                background: #3b82f6;
-                color: white;
-                padding: 12px 30px;
-                text-decoration: none;
-                border-radius: 30px;
-                display: inline-block;
-                margin: 5px;
-            ">📧 Send Email</a>
+            <a href="mailto:syedkumailhaiderzaidi69@gmail.com" style="background: #3b82f6; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">📧 Send Email</a>
             
-            <a href="https://www.linkedin.com/in/syedkumail01" style="
-                background: #0a66c2;
-                color: white;
-                padding: 12px 30px;
-                text-decoration: none;
-                border-radius: 30px;
-                display: inline-block;
-                margin: 5px;
-            ">🔗 LinkedIn</a>
+            <a href="https://www.linkedin.com/in/syedkumail01" style="background: #0a66c2; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">🔗 LinkedIn</a>
             
-            <a href="https://github.com/syedkumailhaiderzaidi69-coder" style="
-                background: #333;
-                color: white;
-                padding: 12px 30px;
-                text-decoration: none;
-                border-radius: 30px;
-                display: inline-block;
-                margin: 5px;
-            ">💻 GitHub</a>
+            <a href="https://github.com/syedkumailhaiderzaidi69-coder" style="background: #333; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; display: inline-block; margin: 5px;">💻 GitHub</a>
         </p>
         
         <p style="color: #64748b; margin-top: 20px; font-size: 14px;">
