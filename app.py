@@ -215,6 +215,8 @@ if data_source == "Upload CSV":
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         st.sidebar.success("Custom dataset uploaded successfully.")
+    else:
+        st.sidebar.info("Using demo data. Upload a CSV to use real data.")
     
 sample_df = pd.DataFrame({
     "Area":["Downtown Dubai","Dubai Marina"],
