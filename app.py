@@ -1255,10 +1255,12 @@ alerts = [
 
 for alert in alerts:
     st.warning(alert)
+with tab4:
+
     # ---------- INVESTOR PORTFOLIO ANALYZER ----------
 
-st.write("")
-st.markdown("""
+    st.write("")
+    st.markdown("""
 ---
 ### Investor Portfolio Analyzer
 """)
