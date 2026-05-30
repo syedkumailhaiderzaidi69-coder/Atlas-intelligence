@@ -677,28 +677,73 @@ st.write("")
 # ---------- DUBAI MAP ----------
 st.subheader("Dubai Real Estate Intelligence Map")
 
-# Get unique areas with average investment scores from real data
+# Get ALL unique areas with average investment scores from real data
 map_data = df.groupby('Area').agg({
     'Investment Score': 'mean'
 }).reset_index()
 
-# Add approximate coordinates for areas
-area_coords = {
-    'Palm Jumeirah': (25.1124, 55.1390),
-    'Downtown Dubai': (25.1972, 55.2744),
-    'Dubai Marina': (25.0800, 55.1400),
-    'Business Bay': (25.1850, 55.2800),
-    'JVC': (25.0520, 55.2110),
-    'Dubai Hills': (25.1000, 55.2470),
-    'Emirates Hills': (25.1180, 55.2000),
-    'Al Barsha': (25.1100, 55.1900),
-    'JLT': (25.0700, 55.1400),
-    'DIFC': (25.2100, 55.2800),
-}
+# Show ALL areas (no limit)
+st.info(f"📍 Showing {len(map_data)} locations on map")
 
-# Add coordinates to map data
-map_data['lat'] = map_data['Area'].apply(lambda x: area_coords.get(x, (25.2000, 55.2700))[0])
-map_data['lon'] = map_data['Area'].apply(lambda x: area_coords.get(x, (25.2000, 55.2700))[1])
+# Expanded coordinate mapping for Dubai areas
+def get_coordinates(area_name):
+    area_lower = str(area_name).lower()
+    
+    # Palm Jumeirah area
+    if 'palm' in area_lower:
+        return (25.1124, 55.1390)
+    # Downtown area
+    elif 'downtown' in area_lower or 'burj' in area_lower:
+        return (25.1972, 55.2744)
+    # Marina area
+    elif 'marina' in area_lower:
+        return (25.0800, 55.1400)
+    # Business Bay area
+    elif 'business bay' in area_lower:
+        return (25.1850, 55.2800)
+    # JVC area
+    elif 'jvc' in area_lower or 'jumeirah village' in area_lower:
+        return (25.0520, 55.2110)
+    # Dubai Hills area
+    elif 'dubai hills' in area_lower:
+        return (25.1000, 55.2470)
+    # JLT area
+    elif 'jlt' in area_lower or 'jumeirah lakes' in area_lower:
+        return (25.0700, 55.1400)
+    # DIFC area
+    elif 'difc' in area_lower:
+        return (25.2100, 55.2800)
+    # Jumeirah area
+    elif 'jumeirah' in area_lower:
+        return (25.2200, 55.2500)
+    # Al Barsha area
+    elif 'barsha' in area_lower:
+        return (25.1100, 55.1900)
+    # Emirates Hills
+    elif 'emirates hills' in area_lower:
+        return (25.1180, 55.2000)
+    # Discovery Gardens / Al Furjan / Jabal Ali
+    elif 'discovery' in area_lower or 'furjan' in area_lower or 'jabal ali' in area_lower:
+        return (25.0100, 55.1200)
+    # International City / Warsan
+    elif 'international city' in area_lower or 'warsan' in area_lower:
+        return (25.1800, 55.4100)
+    # DIP / Dubai Investment Park
+    elif 'dip' in area_lower or 'investment park' in area_lower:
+        return (25.0600, 55.1400)
+    # Motor City / Dubai Sports City
+    elif 'motor city' in area_lower or 'sports city' in area_lower or 'hebiah' in area_lower:
+        return (25.0400, 55.2000)
+    # Mirdif / Al Mizhar / Al Twar
+    elif 'mirdif' in area_lower or 'mezhar' in area_lower or 'twar' in area_lower:
+        return (25.2300, 55.4000)
+    # Default to Downtown
+    else:
+        return (25.1972, 55.2744)
+
+# Apply coordinates to all areas
+map_data['lat'] = map_data['Area'].apply(lambda x: get_coordinates(x)[0])
+map_data['lon'] = map_data['Area'].apply(lambda x: get_coordinates(x)[1])
 
 fig_map = px.scatter_mapbox(
     map_data,
@@ -719,8 +764,7 @@ fig_map.update_layout(
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
-st.caption(
-"Bubble size represents investment strength. Darker color intensity represents stronger Atlas intelligence scoring."
+st.caption(f"📍 All {len(map_data)} areas mapped. Bubble size = Investment Score")
 )
 # ---------- EXECUTIVE TABLE ----------
 
