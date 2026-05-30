@@ -55,6 +55,41 @@ font-size:clamp(18px, 4vw, 28px);
 color:#cbd5e1;
 font-weight:400;
 }
+.hero p{
+font-size:clamp(15px, 2.8vw, 20px);
+color:#e2e8f0;
+max-width:850px;
+margin:18px auto 0 auto;
+line-height:1.6;
+}
+
+.badge{
+display:inline-block;
+padding:8px 16px;
+border-radius:999px;
+background:rgba(59,130,246,0.18);
+border:1px solid rgba(147,197,253,0.35);
+color:#bfdbfe;
+font-size:14px;
+margin-bottom:18px;
+}
+
+.hero-actions{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:28px;
+}
+
+.hero-actions span{
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.12);
+color:#f8fafc;
+font-size:14px;
+}
 
 .card{
 background:rgba(255,255,255,0.05);
