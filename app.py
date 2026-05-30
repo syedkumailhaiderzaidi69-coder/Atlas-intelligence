@@ -1835,4 +1835,50 @@ LIMIT 10
 
             st.error(f"SQL Error: {e}")
 
+   with tab8:
+
+    st.markdown("""
+    ## ML Price Predictor
+
+    Predict Dubai property prices using machine learning.
+    """)
+
+    ml_df = df.copy()
+
+    required_cols = [
+        "Investment Score",
+        "Projected Growth",
+        "Rental Yield",
+        "Average Price"
+    ]
+
+    if all(col in ml_df.columns for col in required_cols):
+
+        ml_df = ml_df.dropna(subset=required_cols)
+
+        X = ml_df[[
+            "Investment Score",
+            "Projected Growth",
+            "Rental Yield"
+        ]]
+
+        y = ml_df["Average Price"]
+
+        X_train, X_test, y_train, y_test = train_test_split(
+            X,
+            y,
+            test_size=0.2,
+            random_state=42
+        )
+
+        model = LinearRegression()
+
+        model.fit(X_train, y_train)
+
+        st.success("Machine Learning model trained successfully.")
+
+    else:
+
+        st.error("Required columns missing for ML prediction.")
+
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
