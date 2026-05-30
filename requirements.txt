@@ -5,3 +5,4 @@ plotly
 rapidfuzz
 fpdf
 duckdb
+scikit-learn
