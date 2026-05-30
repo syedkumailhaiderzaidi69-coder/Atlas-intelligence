@@ -98,3 +98,18 @@ Upcoming enhancements:
 
 This project is designed as a practical analytics engineering and business intelligence portfolio focused on Dubai real estate intelligence.
 
+## Key Business Insights
+
+Atlas Intelligence analyzes Dubai property transaction data to identify investment opportunities, growth patterns, and market intelligence signals.
+
+Sample insights generated from the platform:
+
+* Areas with the highest investment scores consistently showed stronger projected appreciation trends.
+* Certain affordable communities demonstrated stronger rental-yield efficiency compared to premium luxury zones.
+* Geographic clustering revealed concentrated investment momentum across key Dubai waterfront and growth corridors.
+* Portfolio simulation tools highlighted how diversified allocation strategies can reduce concentration risk.
+* SQL-powered analytics enabled dynamic area-level comparisons and transaction intelligence queries.
+
+The platform is designed to support data-driven investment decision making using interactive analytics and business intelligence workflows.
+
+
