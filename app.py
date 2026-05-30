@@ -458,22 +458,22 @@ st.sidebar.download_button(
 )
 # ---------- API CONNECTION PANEL ----------
 
-st.sidebar.markdown("## API Connection")
+with st.sidebar.expander("🔌 API Connection", expanded=False):
 
-api_source = st.sidebar.selectbox(
-    "Choose API Source",
-    [
-        "None",
-        "Dubai Land Department API",
-        "Property Finder API",
-        "Bayut API"
-    ]
-)
+    api_source = st.selectbox(
+        "Choose API Source",
+        [
+            "None",
+            "Dubai Land Department API",
+            "Property Finder API",
+            "Bayut API"
+        ]
+    )
 
-api_key = st.sidebar.text_input(
-    "API Key",
-    type="password"
-)
+    api_key = st.text_input(
+        "API Key",
+        type="password"
+    )
 
 if api_source != "None":
     if api_key:
