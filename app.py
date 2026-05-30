@@ -971,7 +971,11 @@ heat_layer.update_layout(
     margin=dict(l=0, r=0, t=0, b=0)
 )
 
-show_heatmap = st.checkbox("Show investment heatmap layer")
+map_mode = st.radio(
+    "Map View Mode",
+    ["Bubble Map", "Heatmap", "Top 20 Investment Areas"],
+    horizontal=True
+)
 
 if show_heatmap:
     st.plotly_chart(heat_layer, use_container_width=True)
