@@ -921,8 +921,33 @@ fig_map.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
     margin=dict(l=0, r=0, t=0, b=0)
 )
+# ---------- HEATMAP LAYER ----------
 
-st.plotly_chart(fig_map, use_container_width=True)
+heat_layer = px.density_mapbox(
+    map_display_df,
+    lat="latitude",
+    lon="longitude",
+    z="Investment Score",
+    radius=35,
+    zoom=10,
+    height=700
+)
+
+heat_layer.update_layout(
+    mapbox_style="carto-darkmatter",
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    margin=dict(l=0, r=0, t=0, b=0)
+)
+
+show_heatmap = st.checkbox("Show investment heatmap layer")
+
+if show_heatmap:
+    st.plotly_chart(heat_layer, use_container_width=True)
+else:
+    st.plotly_chart(fig_map, use_container_width=True)
+
 
 st.caption(
     f"📍 {matched_count}/{total_areas} areas mapped successfully using official DLD coordinates."
