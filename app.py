@@ -791,230 +791,225 @@ with tab3:
 with tab2:
 
     # ---------- DUBAI MAP ----------
+
     import re
 
-try:
-    from rapidfuzz import process, fuzz
-    fuzzy_enabled = True
-except:
-    fuzzy_enabled = False
+    try:
+        from rapidfuzz import process, fuzz
+        fuzzy_enabled = True
+    except:
+        fuzzy_enabled = False
 
-st.write("")
-st.subheader("Dubai Real Estate Intelligence Map")
-map_search = st.text_input(
-    "Search area on map",
-    placeholder="Example: Jumeirah, Marina, Al Khabeesi"
-)
+    st.write("")
+    st.subheader("Dubai Real Estate Intelligence Map")
 
-@st.cache_data
-def load_coordinates():
-    coords_df = pd.read_csv("dubai_areas_coordinates.csv")
-    coords_df.columns = coords_df.columns.str.strip()
-
-    coords_df = coords_df.rename(columns={
-        "area": "coord_area",
-        "lat": "latitude",
-        "lon": "longitude"
-    })
-
-    return coords_df
-
-def clean_area(area):
-    if pd.isna(area):
-        return ""
-
-    area = str(area).strip().lower()
-    area = re.sub(r"[^a-z0-9\s]", "", area)
-    area = re.sub(r"\s+", " ", area)
-
-    replacements = {
-        "jumeira": "jumeirah",
-        "umm suqeim": "um suqaim",
-        "al mezhar": "al mizhar",
-    }
-
-    for old, new in replacements.items():
-        area = area.replace(old, new)
-
-    return area.strip()
-
-coords_df = load_coordinates()
-
-df["area_key"] = df["Area"].apply(clean_area)
-coords_df["area_key"] = coords_df["coord_area"].apply(clean_area)
-
-map_df = df.merge(
-    coords_df[["coord_area", "area_key", "latitude", "longitude"]],
-    on="area_key",
-    how="left"
-)
-
-if fuzzy_enabled:
-    missing_areas = map_df[map_df["latitude"].isna()]["area_key"].unique()
-    coord_keys = coords_df["area_key"].unique()
-
-    for missing_area in missing_areas:
-        if missing_area == "":
-            continue
-
-        match = process.extractOne(
-            missing_area,
-            coord_keys,
-            scorer=fuzz.token_sort_ratio
-        )
-
-        if match and match[1] >= 85:
-            matched_key = match[0]
-            matched_row = coords_df[coords_df["area_key"] == matched_key].iloc[0]
-
-            map_df.loc[map_df["area_key"] == missing_area, "latitude"] = matched_row["latitude"]
-            map_df.loc[map_df["area_key"] == missing_area, "longitude"] = matched_row["longitude"]
-
-fallback_lat = 25.1972
-fallback_lon = 55.2744
-
-map_df["match_status"] = np.where(
-    map_df["latitude"].isna(),
-    "Fallback",
-    "Matched"
-)
-
-map_df["latitude"] = map_df["latitude"].fillna(fallback_lat)
-map_df["longitude"] = map_df["longitude"].fillna(fallback_lon)
-
-map_grouped = (
-    map_df.groupby(
-        ["Area", "latitude", "longitude", "match_status"],
-        as_index=False
+    map_search = st.text_input(
+        "Search area on map",
+        placeholder="Example: Jumeirah, Marina, Al Khabeesi"
     )
-    .agg({
-        "Investment Score": "mean",
-        "Average Price": "mean",
-        "Projected Growth": "mean"
-    })
-)
 
-transaction_counts = (
-    map_df.groupby("Area")
-    .size()
-    .reset_index(name="Transactions")
-)
+    @st.cache_data
+    def load_coordinates():
 
-map_grouped = map_grouped.merge(transaction_counts, on="Area", how="left")
+        coords_df = pd.read_csv("dubai_areas_coordinates.csv")
 
-matched_count = map_grouped[map_grouped["match_status"] == "Matched"]["Area"].nunique()
-fallback_count = map_grouped[map_grouped["match_status"] == "Fallback"]["Area"].nunique()
-total_areas = map_grouped["Area"].nunique()
+        coords_df.columns = coords_df.columns.str.strip()
 
-col1, col2, col3 = st.columns(3)
-col1.metric("Total Areas", total_areas)
-col2.metric("Matched Areas", matched_count)
-col3.metric("Fallback Areas", fallback_count)
+        coords_df = coords_df.rename(columns={
+            "area": "coord_area",
+            "lat": "latitude",
+            "lon": "longitude"
+        })
 
-map_display_df = map_grouped.copy()
+        return coords_df
 
-if map_search:
-    map_display_df = map_display_df[
-        map_display_df["Area"].str.contains(
-            map_search,
-            case=False,
-            na=False
-        )
-    ]
 
-st.info(f"📍 Showing {len(map_display_df)} mapped areas")
-# ---------- MAP COLOR CATEGORY ----------
+    def clean_area(area):
 
-map_display_df["Score Category"] = pd.cut(
-    map_display_df["Investment Score"],
-    bins=[0, 60, 75, 90, 100],
-    labels=[
-        "Weak",
-        "Moderate",
-        "Strong",
-        "Elite"
-    ]
-)
-fig_map = px.scatter_mapbox(
-    map_display_df,
-    lat="latitude",
-    lon="longitude",
-    size="Investment Score",
-    color="Score Category",
-    size_max=40,
-    hover_name="Area",
-    hover_data={
-        "Transactions": True,
-        "Average Price": ":,.0f",
-        "Projected Growth": ":.1f",
-        "match_status": True
-    },
-    zoom=10,
-    height=700
-)
+        if pd.isna(area):
+            return ""
 
-fig_map.update_traces(
-    marker=dict(
-        sizemode="area",
-        opacity=0.75
+        area = str(area).strip().lower()
+
+        area = re.sub(r"[^a-z0-9\s]", "", area)
+
+        area = re.sub(r"\s+", " ", area)
+
+        replacements = {
+            "jumeira": "jumeirah",
+            "umm suqeim": "um suqaim",
+            "al mezhar": "al mizhar",
+        }
+
+        for old, new in replacements.items():
+            area = area.replace(old, new)
+
+        return area.strip()
+
+
+    coords_df = load_coordinates()
+
+    df["area_key"] = df["Area"].apply(clean_area)
+
+    coords_df["area_key"] = coords_df["coord_area"].apply(clean_area)
+
+    map_df = df.merge(
+        coords_df[
+            ["coord_area", "area_key", "latitude", "longitude"]
+        ],
+        on="area_key",
+        how="left"
     )
-)
 
-fig_map.update_layout(
-    mapbox_style="carto-darkmatter",
-    template="plotly_dark",
-    paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)",
-    margin=dict(l=0, r=0, t=0, b=0)
-)
-# ---------- HEATMAP LAYER ----------
+    if fuzzy_enabled:
 
-heat_layer = px.density_mapbox(
-    map_display_df,
-    lat="latitude",
-    lon="longitude",
-    z="Investment Score",
-    radius=35,
-    zoom=10,
-    height=700
-)
+        missing_areas = map_df[
+            map_df["latitude"].isna()
+        ]["area_key"].unique()
 
-heat_layer.update_layout(
-    mapbox_style="carto-darkmatter",
-    template="plotly_dark",
-    paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)",
-    margin=dict(l=0, r=0, t=0, b=0)
-)
+        coord_keys = coords_df["area_key"].unique()
 
-map_mode = st.radio(
-    "Map View Mode",
-    ["Bubble Map", "Heatmap", "Top 20 Investment Areas"],
-    horizontal=True
-)
+        for missing_area in missing_areas:
 
-if map_mode == "Heatmap":
-    st.plotly_chart(heat_layer, use_container_width=True)
+            if missing_area == "":
+                continue
 
-elif map_mode == "Top 20 Investment Areas":
-    top20_map = map_display_df.sort_values(
-        "Investment Score",
-        ascending=False
-    ).head(20)
+            match = process.extractOne(
+                missing_area,
+                coord_keys,
+                scorer=fuzz.token_sort_ratio
+            )
 
-    fig_top20 = px.scatter_mapbox(
-        top20_map,
+            if match and match[1] >= 85:
+
+                matched_key = match[0]
+
+                matched_row = coords_df[
+                    coords_df["area_key"] == matched_key
+                ].iloc[0]
+
+                map_df.loc[
+                    map_df["area_key"] == missing_area,
+                    "latitude"
+                ] = matched_row["latitude"]
+
+                map_df.loc[
+                    map_df["area_key"] == missing_area,
+                    "longitude"
+                ] = matched_row["longitude"]
+
+    fallback_lat = 25.1972
+    fallback_lon = 55.2744
+
+    map_df["match_status"] = np.where(
+        map_df["latitude"].isna(),
+        "Fallback",
+        "Matched"
+    )
+
+    map_df["latitude"] = map_df["latitude"].fillna(fallback_lat)
+
+    map_df["longitude"] = map_df["longitude"].fillna(fallback_lon)
+
+    map_grouped = (
+        map_df.groupby(
+            ["Area", "latitude", "longitude", "match_status"],
+            as_index=False
+        )
+        .agg({
+            "Investment Score": "mean",
+            "Average Price": "mean",
+            "Projected Growth": "mean"
+        })
+    )
+
+    transaction_counts = (
+        map_df.groupby("Area")
+        .size()
+        .reset_index(name="Transactions")
+    )
+
+    map_grouped = map_grouped.merge(
+        transaction_counts,
+        on="Area",
+        how="left"
+    )
+
+    matched_count = (
+        map_grouped[
+            map_grouped["match_status"] == "Matched"
+        ]["Area"].nunique()
+    )
+
+    fallback_count = (
+        map_grouped[
+            map_grouped["match_status"] == "Fallback"
+        ]["Area"].nunique()
+    )
+
+    total_areas = map_grouped["Area"].nunique()
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Total Areas", total_areas)
+
+    col2.metric("Matched Areas", matched_count)
+
+    col3.metric("Fallback Areas", fallback_count)
+
+    map_display_df = map_grouped.copy()
+
+    if map_search:
+
+        map_display_df = map_display_df[
+            map_display_df["Area"].str.contains(
+                map_search,
+                case=False,
+                na=False
+            )
+        ]
+
+    st.info(f"📍 Showing {len(map_display_df)} mapped areas")
+
+    # ---------- MAP COLOR CATEGORY ----------
+
+    map_display_df["Score Category"] = pd.cut(
+        map_display_df["Investment Score"],
+        bins=[0, 60, 75, 90, 100],
+        labels=[
+            "Weak",
+            "Moderate",
+            "Strong",
+            "Elite"
+        ]
+    )
+
+    fig_map = px.scatter_mapbox(
+        map_display_df,
         lat="latitude",
         lon="longitude",
         size="Investment Score",
         color="Score Category",
-        size_max=45,
+        size_max=40,
         hover_name="Area",
+        hover_data={
+            "Transactions": True,
+            "Average Price": ":,.0f",
+            "Projected Growth": ":.1f",
+            "match_status": True
+        },
         zoom=10,
         height=700
     )
 
-    fig_top20.update_layout(
+    fig_map.update_traces(
+        marker=dict(
+            sizemode="area",
+            opacity=0.75
+        )
+    )
+
+    fig_map.update_layout(
         mapbox_style="carto-darkmatter",
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -1022,24 +1017,107 @@ elif map_mode == "Top 20 Investment Areas":
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
-    st.plotly_chart(fig_top20, use_container_width=True)
+    # ---------- HEATMAP LAYER ----------
 
-else:
-    st.plotly_chart(fig_map, use_container_width=True)
+    heat_layer = px.density_mapbox(
+        map_display_df,
+        lat="latitude",
+        lon="longitude",
+        z="Investment Score",
+        radius=35,
+        zoom=10,
+        height=700
+    )
 
+    heat_layer.update_layout(
+        mapbox_style="carto-darkmatter",
+        template="plotly_dark",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
 
-st.caption(
-    f"📍 {matched_count}/{total_areas} areas mapped successfully using official DLD coordinates."
-)
+    map_mode = st.radio(
+        "Map View Mode",
+        [
+            "Bubble Map",
+            "Heatmap",
+            "Top 20 Investment Areas"
+        ],
+        horizontal=True
+    )
 
-unmatched = map_grouped[map_grouped["match_status"] == "Fallback"]["Area"].unique()
+    if map_mode == "Heatmap":
 
-with st.expander("Show unmatched areas"):
-    if len(unmatched) == 0:
-        st.success("All areas matched successfully.")
+        st.plotly_chart(
+            heat_layer,
+            use_container_width=True
+        )
+
+    elif map_mode == "Top 20 Investment Areas":
+
+        top20_map = map_display_df.sort_values(
+            "Investment Score",
+            ascending=False
+        ).head(20)
+
+        fig_top20 = px.scatter_mapbox(
+            top20_map,
+            lat="latitude",
+            lon="longitude",
+            size="Investment Score",
+            color="Score Category",
+            size_max=45,
+            hover_name="Area",
+            zoom=10,
+            height=700
+        )
+
+        fig_top20.update_layout(
+            mapbox_style="carto-darkmatter",
+            template="plotly_dark",
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=0, r=0, t=0, b=0)
+        )
+
+        st.plotly_chart(
+            fig_top20,
+            use_container_width=True
+        )
+
     else:
-        st.warning(f"{len(unmatched)} areas still using fallback coordinates.")
-        st.dataframe(pd.DataFrame({"Unmatched Areas": unmatched}))
+
+        st.plotly_chart(
+            fig_map,
+            use_container_width=True
+        )
+
+    st.caption(
+        f"📍 {matched_count}/{total_areas} areas mapped successfully using official DLD coordinates."
+    )
+
+    unmatched = map_grouped[
+        map_grouped["match_status"] == "Fallback"
+    ]["Area"].unique()
+
+    with st.expander("Show unmatched areas"):
+
+        if len(unmatched) == 0:
+
+            st.success("All areas matched successfully.")
+
+        else:
+
+            st.warning(
+                f"{len(unmatched)} areas still using fallback coordinates."
+            )
+
+            st.dataframe(
+                pd.DataFrame({
+                    "Unmatched Areas": unmatched
+                })
+            )
 # ---------- EXECUTIVE TABLE ----------
 
 st.write("")
