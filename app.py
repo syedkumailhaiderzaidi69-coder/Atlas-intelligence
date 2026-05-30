@@ -1834,7 +1834,6 @@ LIMIT 10
         except Exception as e:
 
             st.error(f"SQL Error: {e}")
-
    with tab8:
 
     st.markdown("""
