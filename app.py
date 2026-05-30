@@ -438,11 +438,21 @@ if user_question:
         response = "Atlas AI is analyzing Dubai market intelligence. More advanced AI models coming soon."
 
     st.sidebar.success(response)
-    # Use actual property type from real data
-if 'Area' in df.columns:
-    df["Property Type"] = df['Area']
+   # Use actual property type from real data
+if 'Property Type' in df.columns:
+    # Already have Property Type column
+    pass
+elif 'property_type_en' in df.columns:
+    df["Property Type"] = df['property_type_en']
 else:
-    df["Property Type"] = np.random.choice(["Apartment", "Villa", "Townhouse", "Penthouse"], size=len(df))
+    # Create Property Type based on keywords in Area name
+    df["Property Type"] = df['Area'].apply(
+        lambda x: 'Villa' if 'Villa' in str(x) or 'Jumeirah' in str(x) or 'Palm' in str(x) 
+        else 'Apartment' if 'Unit' in str(x) or 'Tower' in str(x) or 'Marina' in str(x)
+        else 'Land' if 'Land' in str(x)
+        else 'Building' if 'Building' in str(x)
+        else 'Property'
+    )
 
 selected_area = st.sidebar.multiselect(
     "Select Dubai Areas",
