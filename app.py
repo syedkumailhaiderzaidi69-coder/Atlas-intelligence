@@ -172,12 +172,34 @@ if "Rental Yield" not in df.columns:
         10 - (df["Average Price"].rank(pct=True) * 5)
     ).round(1)
 
+# ---------- ATLAS INVESTMENT SCORE ENGINE ----------
+
+growth_score = (
+    df["Projected Growth"].rank(pct=True) * 100
+)
+
+price_score = (
+    100 - (df["Average Price"].rank(pct=True) * 100)
+)
+
+yield_score = (
+    df["Rental Yield"].rank(pct=True) * 100
+)
+
+confidence_score = (
+    df["Market Confidence"].rank(pct=True) * 100
+)
+
+luxury_score = (
+    df["Luxury Demand"].rank(pct=True) * 100
+)
+
 df["Investment Score"] = (
-    df["Projected Growth"] * 4 * 0.35 +
-    df["Affordability Score"] * 0.25 +
-    df["Market Confidence"] * 0.15 +
-    df["Luxury Demand"] * 0.10 +
-    df["Rental Yield"] * 8 * 0.15
+    growth_score * 0.35 +
+    price_score * 0.20 +
+    yield_score * 0.20 +
+    confidence_score * 0.15 +
+    luxury_score * 0.10
 ).round(1)
 # ---------- LIVE DATA FUNCTION ----------
 
