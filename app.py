@@ -29,8 +29,8 @@ color:white;
 }
 
 .hero{
-padding:100px;
-border-radius:34px;
+padding:60px 25px;
+border-radius:24px;
 background:
 linear-gradient(rgba(6,17,31,0.70),rgba(6,17,31,0.95)),
 url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c");
@@ -38,12 +38,12 @@ background-size:cover;
 background-position:center;
 border:1px solid rgba(255,255,255,0.12);
 text-align:center;
-margin-bottom:35px;
+margin-bottom:25px;
 box-shadow:0 0 45px rgba(148,163,184,0.18);
 }
 
 .hero h1{
-font-size:72px;
+font-size:clamp(36px, 8vw, 72px);
 margin-bottom:10px;
 color:white;
 text-shadow:0 0 25px rgba(148,163,184,0.35);
@@ -51,6 +51,7 @@ letter-spacing:1px;
 }
 
 .hero h2{
+font-size:clamp(18px, 4vw, 28px);
 color:#cbd5e1;
 font-weight:400;
 }
