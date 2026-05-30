@@ -667,48 +667,33 @@ with right:
 
 st.write("")
 # ---------- DUBAI MAP ----------
-
 st.subheader("Dubai Real Estate Intelligence Map")
 
-map_df = pd.DataFrame({
-    "Area":[
-        "Downtown Dubai",
-        "Dubai Marina",
-        "Business Bay",
-        "Palm Jumeirah",
-        "Dubai Hills Estate",
-        "JVC",
-        "Dubai Creek Harbour",
-        "DAMAC Hills"
-    ],
+# Get unique areas with average investment scores from real data
+map_data = df.groupby('Area').agg({
+    'Investment Score': 'mean'
+}).reset_index()
 
-    "lat":[
-        25.1972,
-        25.0800,
-        25.1850,
-        25.1124,
-        25.1000,
-        25.0520,
-        25.2065,
-        25.0272
-    ],
+# Add approximate coordinates for areas
+area_coords = {
+    'Palm Jumeirah': (25.1124, 55.1390),
+    'Downtown Dubai': (25.1972, 55.2744),
+    'Dubai Marina': (25.0800, 55.1400),
+    'Business Bay': (25.1850, 55.2800),
+    'JVC': (25.0520, 55.2110),
+    'Dubai Hills': (25.1000, 55.2470),
+    'Emirates Hills': (25.1180, 55.2000),
+    'Al Barsha': (25.1100, 55.1900),
+    'JLT': (25.0700, 55.1400),
+    'DIFC': (25.2100, 55.2800),
+}
 
-    "lon":[
-        55.2744,
-        55.1400,
-        55.2800,
-        55.1390,
-        55.2470,
-        55.2110,
-        55.3472,
-        55.2236
-    ],
-
-    "Investment Score":[92,89,87,95,85,80,88,83]
-})
+# Add coordinates to map data
+map_data['lat'] = map_data['Area'].apply(lambda x: area_coords.get(x, (25.2000, 55.2700))[0])
+map_data['lon'] = map_data['Area'].apply(lambda x: area_coords.get(x, (25.2000, 55.2700))[1])
 
 fig_map = px.scatter_mapbox(
-    map_df,
+    map_data,
     lat="lat",
     lon="lon",
     size="Investment Score",
