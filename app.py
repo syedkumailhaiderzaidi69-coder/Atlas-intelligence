@@ -342,12 +342,12 @@ def load_live_property_data(api_source, api_key):
 # ---------- FILTERS ----------
 # ---------- DATA SOURCE MODE ----------
 
-st.sidebar.markdown("## Data Source")
+with st.sidebar.expander("📊 Data Source", expanded=True):
 
-data_source = st.sidebar.radio(
-    "Select Data Mode",
-    ["Demo Data", "Upload CSV", "Live API Mode Coming Soon"]
-)
+    data_source = st.radio(
+        "Select Data Mode",
+        ["Demo Data", "Upload CSV", "Live API Mode Coming Soon"]
+    )
 # Sample Data Button
 if st.sidebar.button("📊 Load Sample Dubai Data"):
     # Create sample dataset
