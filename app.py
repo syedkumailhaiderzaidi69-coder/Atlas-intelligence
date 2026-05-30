@@ -877,12 +877,25 @@ if map_search:
     ]
 
 st.info(f"📍 Showing {len(map_display_df)} mapped areas")
+# ---------- MAP COLOR CATEGORY ----------
+
+map_display_df["Score Category"] = pd.cut(
+    map_display_df["Investment Score"],
+    bins=[0, 60, 75, 90, 100],
+    labels=[
+        "Weak",
+        "Moderate",
+        "Strong",
+        "Elite"
+    ]
+)
 fig_map = px.scatter_mapbox(
     map_display_df,
     lat="latitude",
     lon="longitude",
     size="Investment Score",
-    color="Investment Score",
+    color="Score Category",
+    size_max=40,
     hover_name="Area",
     hover_data={
         "Transactions": True,
