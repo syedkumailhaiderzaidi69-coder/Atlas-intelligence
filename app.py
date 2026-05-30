@@ -977,8 +977,37 @@ map_mode = st.radio(
     horizontal=True
 )
 
-if show_heatmap:
+if map_mode == "Heatmap":
     st.plotly_chart(heat_layer, use_container_width=True)
+
+elif map_mode == "Top 20 Investment Areas":
+    top20_map = map_display_df.sort_values(
+        "Investment Score",
+        ascending=False
+    ).head(20)
+
+    fig_top20 = px.scatter_mapbox(
+        top20_map,
+        lat="latitude",
+        lon="longitude",
+        size="Investment Score",
+        color="Score Category",
+        size_max=45,
+        hover_name="Area",
+        zoom=10,
+        height=700
+    )
+
+    fig_top20.update_layout(
+        mapbox_style="carto-darkmatter",
+        template="plotly_dark",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
+
+    st.plotly_chart(fig_top20, use_container_width=True)
+
 else:
     st.plotly_chart(fig_map, use_container_width=True)
 
