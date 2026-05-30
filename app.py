@@ -719,7 +719,7 @@ with tab3:
 
     # ---------- CHART ----------
 
-left,right = st.columns([1.3,1])
+    left,right = st.columns([1.3,1])
 
 with left:
 
