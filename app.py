@@ -55,6 +55,7 @@ font-size:clamp(18px, 4vw, 28px);
 color:#cbd5e1;
 font-weight:400;
 }
+
 .hero p{
 font-size:clamp(15px, 2.8vw, 20px);
 color:#e2e8f0;
@@ -98,16 +99,12 @@ border-radius:25px;
 text-align:center;
 border:1px solid rgba(255,255,255,0.08);
 }
-.insight:hover{
-transform: translateY(-4px);
-transition:0.3s ease;
-box-shadow:0 0 28px rgba(148,163,184,0.16);
-}
 
 .card h3{
 font-size:40px;
 margin-bottom:5px;
 }
+
 .card:hover{
 transform: translateY(-6px);
 transition:0.3s ease;
@@ -120,6 +117,12 @@ padding:22px;
 border-radius:20px;
 border:1px solid rgba(255,255,255,0.08);
 margin-bottom:15px;
+}
+
+.insight:hover{
+transform: translateY(-4px);
+transition:0.3s ease;
+box-shadow:0 0 28px rgba(148,163,184,0.16);
 }
 
 </style>
