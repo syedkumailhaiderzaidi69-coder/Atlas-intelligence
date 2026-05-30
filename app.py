@@ -1796,5 +1796,21 @@ with tab6:
     Business Analytics • Data Science • Real Estate Analytics • Consulting
     </p>
     """, unsafe_allow_html=True)
+    with tab7:
+
+    st.markdown("""
+    ## SQL Intelligence Engine
+    Run SQL queries directly on Dubai property transaction data using DuckDB.
+    """)
+
+    st.code("""
+SELECT Area,
+AVG("Investment Score") AS avg_score,
+AVG("Average Price") AS avg_price
+FROM df
+GROUP BY Area
+ORDER BY avg_score DESC
+LIMIT 10
+    """, language="sql")
 
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
