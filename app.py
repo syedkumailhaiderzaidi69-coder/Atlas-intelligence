@@ -5,6 +5,7 @@ import plotly.express as px
 import time
 from datetime import datetime
 from io import BytesIO
+from fpdf import FPDF
 # Track data source
 if 'data_source_tracker' not in st.session_state:
     st.session_state.data_source_tracker = "Demo Data"
