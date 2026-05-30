@@ -452,19 +452,22 @@ selected_area = st.sidebar.multiselect(
 
 df = df[df["Area"].isin(selected_area)]
 # Get unique property types from actual data
-unique_types = df["Property Type"].unique().tolist()
+if 'Property Type' in df.columns:
+    unique_types = df["Property Type"].unique().tolist()
+else:
+    unique_types = df["Area"].unique().tolist()
+
 selected_type = st.sidebar.multiselect(
     "Select Property Type",
     options=unique_types,
     default=unique_types
 )
 
-df["Property Type"] = np.random.choice(
-    ["Apartment", "Villa", "Townhouse", "Penthouse"],
-    size=len(df)
-)
-
-df = df[df["Property Type"].isin(selected_type)]
+# Filter based on Property Type or Area
+if 'Property Type' in df.columns:
+    df = df[df["Property Type"].isin(selected_type)]
+else:
+    df = df[df["Area"].isin(selected_type)]
 
 # ---------- KPI CARDS ----------
 
