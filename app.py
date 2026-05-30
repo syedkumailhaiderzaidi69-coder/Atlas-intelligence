@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import duckdb
 import time
 from datetime import datetime
 from io import BytesIO
