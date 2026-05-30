@@ -1,29 +1,30 @@
 # Atlas Intelligence
 
-### The Future of Dubai Intelligence
+AI-powered Dubai real estate analytics platform built using Python, Streamlit, Plotly, DuckDB, and real Dubai property transaction data.
 
-Atlas Intelligence is an AI-powered Dubai real estate intelligence platform focused on investment analytics, executive dashboards, geographic intelligence, and AI-generated market insights.
+### Live Application
+https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/
 
-Built by Syed — MSc Business Analytics student at the University of Wollongong Dubai.
+### GitHub Repository
+https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 
 ---
 
-## Live Demo
+## Dashboard Preview
 
-[Launch Atlas Intelligence](https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/)
-## Platform Preview
+![Atlas Intelligence Dashboard](assets/dashboard.png)
 
-### Landing Experience
-![Landing Page](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/1st%20img.png?raw=true)
+---
 
-### AI Intelligence Dashboard
-![AI Dashboard](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/2nd%20image.png?raw=true)
+## Dubai Geo Intelligence Mapping
 
-### Dubai Intelligence Map
-![Map](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/3rd%20image.png?raw=true)
+![Dubai Intelligence Map](assets/map_intelligence.png)
 
-### Executive Investment Recommendation
-![Recommendation](https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence/blob/main/4th%20img.png?raw=true)
+---
+
+## SQL Intelligence Engine
+
+![SQL Engine](assets/sql_engine.png)
 
 ---
 
