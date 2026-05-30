@@ -151,7 +151,6 @@ try:
     # Rename 'Price' column to 'Average Price' for compatibility
     if 'Price' in df.columns:
         df = df.rename(columns={'Price': 'Average Price'})
-    st.write("Columns:", df.columns.tolist())
     st.success(f"✅ Loaded {len(df)} real Dubai property transactions")
 except:
     st.warning("Using demo data. File not found.")
