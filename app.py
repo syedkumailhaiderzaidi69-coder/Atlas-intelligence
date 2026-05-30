@@ -604,56 +604,60 @@ else:
         else 'Property'
     )
 
-selected_area = st.sidebar.multiselect(
-    "Select Dubai Areas",
-    options=df["Area"].unique(),
-    default=df["Area"].unique()
-)
+with st.sidebar.expander("🎯 Filters", expanded=True):
 
-df = df[df["Area"].isin(selected_area)]
-# Get unique property types from actual data
-if 'Property Type' in df.columns:
-    unique_types = df["Property Type"].unique().tolist()
-else:
-    unique_types = df["Area"].unique().tolist()
-
-selected_type = st.sidebar.multiselect(
-    "Select Property Type",
-    options=unique_types,
-    default=unique_types
-)
-
-# Filter based on Property Type or Area
-if 'Property Type' in df.columns:
-    df = df[df["Property Type"].isin(selected_type)]
-else:
-    df = df[df["Area"].isin(selected_type)]
-# ---------- DATE FILTER ----------
-
-if "Date" in df.columns:
-
-    df["Date"] = pd.to_datetime(
-        df["Date"],
-        errors="coerce"
+    selected_area = st.multiselect(
+        "Select Dubai Areas",
+        options=df["Area"].unique(),
+        default=df["Area"].unique()
     )
 
-    min_date = df["Date"].min()
-    max_date = df["Date"].max()
+    df = df[df["Area"].isin(selected_area)]
 
-    selected_dates = st.sidebar.date_input(
-        "Select Transaction Date Range",
-        [min_date, max_date]
+    # ---------- PROPERTY TYPE FILTER ----------
+
+    if 'Property Type' in df.columns:
+        unique_types = df["Property Type"].unique().tolist()
+    else:
+        unique_types = df["Area"].unique().tolist()
+
+    selected_type = st.multiselect(
+        "Select Property Type",
+        options=unique_types,
+        default=unique_types
     )
 
-    if len(selected_dates) == 2:
+    if 'Property Type' in df.columns:
+        df = df[df["Property Type"].isin(selected_type)]
+    else:
+        df = df[df["Area"].isin(selected_type)]
 
-        start_date = pd.to_datetime(selected_dates[0])
-        end_date = pd.to_datetime(selected_dates[1])
+    # ---------- DATE FILTER ----------
 
-        df = df[
-            (df["Date"] >= start_date) &
-            (df["Date"] <= end_date)
-        ]
+    if "Date" in df.columns:
+
+        df["Date"] = pd.to_datetime(
+            df["Date"],
+            errors="coerce"
+        )
+
+        min_date = df["Date"].min()
+        max_date = df["Date"].max()
+
+        selected_dates = st.date_input(
+            "Select Transaction Date Range",
+            [min_date, max_date]
+        )
+
+        if len(selected_dates) == 2:
+
+            start_date = pd.to_datetime(selected_dates[0])
+            end_date = pd.to_datetime(selected_dates[1])
+
+            df = df[
+                (df["Date"] >= start_date) &
+                (df["Date"] <= end_date)
+            ]
 
 if df.empty:
     st.error("No transactions found for the selected filters.")
