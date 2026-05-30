@@ -1203,8 +1203,9 @@ with tab2:
 
     else:
 
-        st.plotly_chart(
-            fig_map,
+        with st.spinner("Loading Atlas Geo Intelligence..."):
+            st.plotly_chart(
+                fig_map,
             use_container_width=True
         )
 
