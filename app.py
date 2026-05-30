@@ -113,7 +113,14 @@ st.markdown("""
 <p>AI-powered Dubai real estate intelligence platform built by Syed.</p>
 </div>
 """, unsafe_allow_html=True)
-
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "Overview",
+    "Map Intelligence",
+    "Area Rankings",
+    "Portfolio Tools",
+    "Reports",
+    "Contact"
+])
 # ---------- DATA ----------
 
 np.random.seed(42)
