@@ -865,8 +865,20 @@ col1.metric("Total Areas", total_areas)
 col2.metric("Matched Areas", matched_count)
 col3.metric("Fallback Areas", fallback_count)
 
+map_display_df = map_grouped.copy()
+
+if map_search:
+    map_display_df = map_display_df[
+        map_display_df["Area"].str.contains(
+            map_search,
+            case=False,
+            na=False
+        )
+    ]
+
+st.info(f"📍 Showing {len(map_display_df)} mapped areas")
 fig_map = px.scatter_mapbox(
-    map_grouped,
+    map_display_df,
     lat="latitude",
     lon="longitude",
     size="Investment Score",
