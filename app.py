@@ -109,9 +109,29 @@ loading.empty()
 
 st.markdown("""
 <div class="hero">
-<h1>Atlas Intelligence</h1>
-<h2>The Future of Dubai Intelligence</h2>
-<p>AI-powered Dubai real estate intelligence platform built by Syed.</p>
+
+    <div class="badge">
+        Dubai Real Estate Intelligence Platform
+    </div>
+
+    <h1>Atlas Intelligence</h1>
+
+    <h2>
+        AI-powered property analytics for Dubai investors
+    </h2>
+
+    <p>
+        Explore investment scores, DLD-based geo intelligence,
+        market trends, portfolio strategies, AI forecasting,
+        and investor-ready reports in one premium dashboard.
+    </p>
+
+    <div class="hero-actions">
+        <span>📊 2188+ Transactions</span>
+        <span>🗺️ DLD Coordinates</span>
+        <span>🤖 AI Scoring Engine</span>
+    </div>
+
 </div>
 """, unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
