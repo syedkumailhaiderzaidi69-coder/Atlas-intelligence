@@ -168,6 +168,32 @@ and investor-ready reports in one premium dashboard.
 
 </div>
 """, unsafe_allow_html=True)
+st.markdown("""
+<style>
+
+button[data-baseweb="tab"]{
+font-size:16px;
+font-weight:600;
+padding:14px 24px;
+border-radius:14px;
+background:rgba(255,255,255,0.04);
+margin-right:8px;
+transition:0.3s ease;
+}
+
+button[data-baseweb="tab"]:hover{
+background:rgba(59,130,246,0.18);
+transform:translateY(-2px);
+}
+
+button[aria-selected="true"]{
+background:linear-gradient(90deg,#2563eb,#3b82f6);
+color:white !important;
+box-shadow:0 0 18px rgba(59,130,246,0.35);
+}
+
+</style>
+""", unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Overview",
     "Map Intelligence",
