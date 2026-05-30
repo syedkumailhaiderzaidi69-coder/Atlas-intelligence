@@ -251,12 +251,7 @@ if st.sidebar.button("📊 Load Sample Dubai Data"):
         df["Rental Yield"] * 8 * 0.15
     ).round(1)
 
-    st.session_state.data_source_tracker = "Sample Dubai Data"
-    st.sidebar.success(
-        f"✅ Loaded {len(df)} properties from {df['Area'].nunique()} areas"
-    )
-    st.rerun()
-    st.session_state.data_source_tracker = "Sample Dubai Data"
+        st.session_state.data_source_tracker = "Sample Dubai Data"
     st.sidebar.success(f"✅ Loaded {len(df)} properties from {df['Area'].nunique()} areas")
     st.rerun()
 
