@@ -1799,13 +1799,7 @@ with tab6:
     
 with tab7:
 
-    st.markdown("""
-    ## SQL Intelligence Engine
-
-    Run SQL queries directly on Dubai property transaction data using DuckDB.
-    """)
-
-    st.code("""
+    default_query = """
 SELECT Area,
 AVG("Investment Score") AS avg_score,
 AVG("Average Price") AS avg_price
@@ -1813,6 +1807,29 @@ FROM df
 GROUP BY Area
 ORDER BY avg_score DESC
 LIMIT 10
-    """, language="sql")
+    """
+
+    user_query = st.text_area(
+        "Write SQL Query",
+        value=default_query,
+        height=220
+    )
+
+    if st.button("Run SQL Query"):
+
+        try:
+
+            result = duckdb.query(user_query).to_df()
+
+            st.success("Query executed successfully.")
+
+            st.dataframe(
+                result,
+                use_container_width=True
+            )
+
+        except Exception as e:
+
+            st.error(f"SQL Error: {e}")
 
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
