@@ -637,7 +637,44 @@ Atlas Intelligence forecasting systems indicate stable investment confidence acr
 </div>
 """, unsafe_allow_html=True)
 
+# ---------- MARKET ACTIVITY TIMELINE ----------
 
+st.write("")
+st.markdown("""
+---
+### Dubai Transaction Activity Timeline
+""")
+
+# Ensure Date column is datetime
+df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+
+timeline_df = (
+    df.groupby(df["Date"].dt.to_period("M"))
+    .agg({
+        "Investment Score": "mean",
+        "Average Price": "mean"
+    })
+    .reset_index()
+)
+
+timeline_df["Date"] = timeline_df["Date"].astype(str)
+
+fig_timeline = px.line(
+    timeline_df,
+    x="Date",
+    y="Investment Score",
+    markers=True,
+    title="Monthly Investment Intelligence Trend"
+)
+
+fig_timeline.update_layout(
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    height=450
+)
+
+st.plotly_chart(fig_timeline, use_container_width=True)
 # ---------- CHART ----------
 
 left,right = st.columns([1.3,1])
