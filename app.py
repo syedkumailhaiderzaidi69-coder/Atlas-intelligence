@@ -1512,7 +1512,10 @@ with tab5:
         pdf.set_font("Arial", "B", 14)
         pdf.cell(0, 8, "Top Area Recommendations", ln=True)
 
-        top_report_areas = table_df.sort_values("Investment Score", ascending=False).head(5)
+        top_report_areas = table_df.sort_values(
+            "Investment Score",
+            ascending=False
+        ).head(5)
 
         pdf.set_font("Arial", "", 10)
 
@@ -1520,7 +1523,9 @@ with tab5:
             pdf.multi_cell(
                 0,
                 7,
-                f"{row['Area']} | Score: {row['Investment Score']:.1f} | Avg Price: AED {row['Average Property Price']:,.0f} | Growth: {row['Projected Growth %']:.1f}%"
+                f"{row['Area']} | Score: {row['Investment Score']:.1f} | "
+                f"Avg Price: AED {row['Average Property Price']:,.0f} | "
+                f"Growth: {row['Projected Growth %']:.1f}%"
             )
 
         return pdf.output(dest="S").encode("latin-1")
@@ -1534,435 +1539,57 @@ with tab5:
         file_name=f"Atlas_Report_{datetime.now().strftime('%Y%m%d')}.pdf",
         mime="application/pdf"
     )
-# ---------- API INTEGRATION ROADMAP ----------
 
-st.write("")
-st.markdown("""
----
-### Live Data Integration Roadmap
+    # ---------- API INTEGRATION ROADMAP ----------
 
-Atlas Intelligence is designed to evolve from demo analytics into an automated real estate intelligence platform.
+    st.write("")
+    st.markdown("""
+    ---
+    ### Live Data Integration Roadmap
 
-Planned data integrations:
-- Dubai Land Department transaction data
-- Property listing market data
-- Rental yield indicators
-- Area-level growth trends
-- Developer performance data
+    Atlas Intelligence is designed to evolve from demo analytics into an automated real estate intelligence platform.
 
-Future live mode will allow Atlas Intelligence to automatically refresh market insights without manual CSV uploads.
-""")
-# ---------- METHODOLOGY ----------
+    Planned data integrations:
+    - Dubai Land Department transaction data
+    - Property listing market data
+    - Rental yield indicators
+    - Area-level growth trends
+    - Developer performance data
 
-st.write("")
-st.markdown("""
----
-### Methodology
+    Future live mode will allow Atlas Intelligence to automatically refresh market insights without manual CSV uploads.
+    """)
 
-Atlas Intelligence currently uses simulated Dubai real estate data to prototype:
+    # ---------- METHODOLOGY ----------
 
-- Investment scoring
-- Market growth analysis
-- Geographic intelligence
-- AI-generated recommendations
-- Executive dashboard reporting
+    st.write("")
+    st.markdown("""
+    ---
+    ### Methodology
 
-Future versions will integrate live market datasets and advanced predictive models.
-""")
-# ---------- AI SCORE GAUGES ----------
+    Atlas Intelligence uses Dubai property transaction data to prototype:
 
-st.write("")
-st.markdown("""
----
-### Atlas Intelligence Indicators
-""")
+    - Investment scoring
+    - Market growth analysis
+    - Geographic intelligence
+    - AI-style recommendations
+    - Executive dashboard reporting
 
-g1,g2,g3,g4 = st.columns(4)
+    Future versions will integrate live market datasets and advanced predictive models.
+    """)
 
-g1.markdown("""
-<div class="card">
-<h3>92%</h3>
-<p>Investment Strength</p>
-</div>
-""", unsafe_allow_html=True)
+    # ---------- PRODUCT ROADMAP ----------
 
-g2.markdown("""
-<div class="card">
-<h3>88%</h3>
-<p>Market Confidence</p>
-</div>
-""", unsafe_allow_html=True)
+    st.write("")
+    st.markdown("""
+    ---
+    ### Product Roadmap
 
-g3.markdown("""
-<div class="card">
-<h3>85%</h3>
-<p>Growth Potential</p>
-</div>
-""", unsafe_allow_html=True)
-
-g4.markdown("""
-<div class="card">
-<h3>90%</h3>
-<p>Luxury Demand</p>
-</div>
-""", unsafe_allow_html=True)
-# ---------- UNDERVALUED AREA DETECTOR ----------
-# ---------- FORECAST GROWTH ENGINE ----------
-# ---------- RENTAL YIELD INTELLIGENCE ----------
-# ---------- INVESTMENT STRATEGY CLASSIFIER ----------
-
-st.write("")
-st.markdown("""
----
-### Investment Strategy Classification
-""")
-
-strategy_df = table_df.copy()
-
-strategy_df["Rental Yield"] = (
-    df.groupby("Area")["Rental Yield"]
-    .mean()
-    .values
-)
-
-strategies = []
-
-for _, row in strategy_df.iterrows():
-
-    if row["Rental Yield"] >= 8:
-        strategies.append("Cashflow Play")
-
-    elif row["Projected Growth %"] >= 11:
-        strategies.append("High-Growth Opportunity")
-
-    elif row["Average Property Price"] >= 5000000:
-        strategies.append("Luxury Growth Play")
-
-    else:
-        strategies.append("Balanced Investment")
-
-strategy_df["Strategy"] = strategies
-
-st.dataframe(
-    strategy_df[
-        [
-            "Area",
-            "Rental Yield",
-            "Projected Growth %",
-            "Strategy"
-        ]
-    ],
-    use_container_width=True
-)
-
-top_strategy = strategy_df.iloc[0]
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Strategy Insight</h4>
-
-<p>
-Atlas Intelligence classifies Dubai communities into different investment strategies to support investor decision-making.
-</p>
-
-<p>
-Current highlighted strategy:
-<b>{top_strategy['Area']}</b> — <b>{top_strategy['Strategy']}</b>
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.write("")
-st.markdown("""
----
-### Rental Yield Intelligence
-""")
-
-yield_df = (
-    df.groupby("Area")["Rental Yield"]
-    .mean()
-    .reset_index()
-)
-
-yield_df = yield_df.sort_values(
-    "Rental Yield",
-    ascending=False
-)
-
-top_yield = yield_df.iloc[0]
-
-st.dataframe(
-    yield_df,
-    use_container_width=True
-)
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Rental Yield Signal</h4>
-
-<p>
-<b>{top_yield['Area']}</b> currently shows the strongest rental yield potential for passive income investors.
-</p>
-
-<p>
-Estimated Rental Yield: <b>{top_yield['Rental Yield']:.1f}%</b>
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.write("")
-st.markdown("""
----
-### Future Growth Forecast Engine
-""")
-
-forecast_df = table_df.copy()
-
-forecast_df["Forecast Growth 2027"] = (
-    forecast_df["Projected Growth %"] * np.random.uniform(1.1,1.4)
-).round(1)
-
-forecast_df["Confidence Score"] = np.random.randint(
-    82,
-    96,
-    size=len(forecast_df)
-)
-
-forecast_df = forecast_df.sort_values(
-    "Forecast Growth 2027",
-    ascending=False
-)
-
-st.dataframe(
-    forecast_df[
-        [
-            "Area",
-            "Forecast Growth 2027",
-            "Confidence Score"
-        ]
-    ],
-    use_container_width=True
-)
-
-top_forecast = forecast_df.iloc[0]
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Forecast Signal</h4>
-
-<p>
-<b>{top_forecast['Area']}</b> is projected to show the strongest future market momentum heading into 2027.
-</p>
-
-<p>
-Forecast Growth: <b>{top_forecast['Forecast Growth 2027']:.1f}%</b><br>
-Confidence Score: <b>{top_forecast['Confidence Score']}%</b>
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.write("")
-st.markdown("""
----
-### Undervalued Area Detector
-""")
-
-undervalued_df = table_df.copy()
-
-undervalued_df["Undervalued Score"] = (
-    undervalued_df["Investment Score"] * 0.45
-    + undervalued_df["Projected Growth %"] * 4
-    - (undervalued_df["Average Property Price"] / 1000000) * 2
-)
-
-undervalued_df = undervalued_df.sort_values("Undervalued Score", ascending=False)
-
-top_undervalued = undervalued_df.iloc[0]
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Undervalued Signal</h4>
-
-<p>
-<b>{top_undervalued['Area']}</b> appears to be the strongest undervalued opportunity based on price, growth, and investment score indicators.
-</p>
-
-<p>
-Undervalued Score: <b>{top_undervalued['Undervalued Score']:.1f}</b>
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.dataframe(
-    undervalued_df[["Area", "Investment Score", "Average Property Price", "Projected Growth %", "Undervalued Score"]],
-    use_container_width=True
-)
-# ---------- AREA COMPARISON ENGINE ----------
-
-st.write("")
-st.markdown("""
----
-### Area Comparison Engine
-""")
-
-compare_col1, compare_col2 = st.columns(2)
-
-area_1 = compare_col1.selectbox(
-    "Select First Area",
-    options=df["Area"].unique(),
-    key="area_1"
-)
-
-area_2 = compare_col2.selectbox(
-    "Select Second Area",
-    options=df["Area"].unique(),
-    key="area_2"
-)
-
-area_1_data = df[df["Area"] == area_1][["Investment Score", "Average Price", "Projected Growth"]].mean()
-area_2_data = df[df["Area"] == area_2][["Investment Score", "Average Price", "Projected Growth"]].mean()
-
-comparison_df = pd.DataFrame({
-    "Metric": ["Investment Score", "Average Price", "Projected Growth"],
-    area_1: [
-        round(area_1_data["Investment Score"], 1),
-        round(area_1_data["Average Price"], 0),
-        round(area_1_data["Projected Growth"], 1)
-    ],
-    area_2: [
-        round(area_2_data["Investment Score"], 1),
-        round(area_2_data["Average Price"], 0),
-        round(area_2_data["Projected Growth"], 1)
-    ]
-})
-
-st.dataframe(comparison_df, use_container_width=True)
-
-if area_1_data["Investment Score"] > area_2_data["Investment Score"]:
-    winner = area_1
-else:
-    winner = area_2
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Comparison Result</h4>
-
-<p>
-<b>{winner}</b> currently shows stronger overall investment intelligence based on Atlas scoring models.
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-radar_df = pd.DataFrame({
-    "Metric": ["Investment Score", "Projected Growth"],
-    area_1: [
-        area_1_data["Investment Score"],
-        area_1_data["Projected Growth"] * 6
-    ],
-    area_2: [
-        area_2_data["Investment Score"],
-        area_2_data["Projected Growth"] * 6
-    ]
-})
-
-fig_radar = px.line_polar(
-    radar_df,
-    r=area_1,
-    theta="Metric",
-    line_close=True
-)
-
-fig_radar.add_scatterpolar(
-    r=radar_df[area_2],
-    theta=radar_df["Metric"],
-    fill='toself',
-    name=area_2
-)
-
-fig_radar.update_layout(
-    template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    width=700,
-    height=500
-)
-
-st.plotly_chart(
-    fig_radar,
-    use_container_width=False,
-    config={'displayModeBar': False}
-)
-# ---------- INVESTMENT SIMULATOR ----------
-
-st.write("")
-st.markdown("""
----
-### AI Investment Simulator
-""")
-
-budget = st.slider(
-    "Investment Budget (AED)",
-    500000,
-    10000000,
-    3000000,
-    step=500000
-)
-
-risk = st.selectbox(
-    "Risk Preference",
-    ["Low", "Medium", "High"]
-)
-
-luxury_pref = st.slider(
-    "Luxury Preference",
-    1,
-    10,
-    7
-)
-
-if budget >= 5000000 and luxury_pref >= 8:
-    recommended = "Palm Jumeirah"
-
-elif risk == "High":
-    recommended = "Dubai Creek Harbour"
-
-elif budget <= 2000000:
-    recommended = "JVC"
-
-else:
-    recommended = "Downtown Dubai"
-
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas AI Investment Simulation</h4>
-
-<p>
-Based on your investment profile, Atlas Intelligence recommends focusing on <b>{recommended}</b>.
-</p>
-
-<p>
-AI models analyzed budget allocation, luxury preference, and growth potential to generate this recommendation.
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-# ---------- PRODUCT ROADMAP ----------
-
-st.write("")
-st.markdown("""
----
-### Product Roadmap
-
-**V1:** Luxury Dubai real estate intelligence dashboard  
-**V2:** AI chatbot assistant and investment recommendation engine  
-**V3:** Live market data integration  
-**V4:** Predictive pricing and rental yield forecasting  
-**V5:** Investor-ready PDF intelligence reports  
-""")
+    **V1:** Luxury Dubai real estate intelligence dashboard  
+    **V2:** AI chatbot assistant and investment recommendation engine  
+    **V3:** Live market data integration  
+    **V4:** Predictive pricing and rental yield forecasting  
+    **V5:** Investor-ready PDF intelligence reports  
+    """)
 with tab6:
 
     # ---------- FOOTER ----------
