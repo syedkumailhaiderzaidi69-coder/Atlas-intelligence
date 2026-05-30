@@ -148,6 +148,9 @@ df = pd.DataFrame(data)
 # Load real Dubai data
 try:
     df = pd.read_csv('dubai_clean_ready.csv')
+    # Rename 'Price' column to 'Average Price' for compatibility
+    if 'Price' in df.columns:
+        df = df.rename(columns={'Price': 'Average Price'})
     st.write("Columns:", df.columns.tolist())
     st.success(f"✅ Loaded {len(df)} real Dubai property transactions")
 except:
