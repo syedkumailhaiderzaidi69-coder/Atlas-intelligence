@@ -567,7 +567,7 @@ st.markdown("""
 ### Atlas AI Confidence Meter
 """)
 
-confidence_score = np.random.randint(82,96)
+confidence_score = int(df["Investment Score"].mean().clip(0, 100))
 
 confidence_color = (
     "green"
