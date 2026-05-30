@@ -1118,222 +1118,243 @@ with tab2:
                     "Unmatched Areas": unmatched
                 })
             )
-# ---------- EXECUTIVE TABLE ----------
+    # ---------- EXECUTIVE TABLE ----------
 
-st.write("")
-st.subheader("Executive Area Intelligence")
+    st.write("")
+    st.subheader("Executive Area Intelligence")
 
-table_df = (
-    df.groupby("Area")
-    .agg({
-        "Investment Score":"mean",
-        "Average Price":"mean",
-        "Projected Growth":"mean"
-    })
-    .reset_index()
-)
-
-table_df.columns = [
-    "Area",
-    "Investment Score",
-    "Average Property Price",
-    "Projected Growth %"
-]
-
-st.dataframe(
-    table_df,
-    use_container_width=True
-)
-# ---------- AI OPPORTUNITY SCANNER ----------
-
-st.write("")
-st.markdown("""
----
-### Atlas AI Opportunity Scanner
-""")
-
-best_growth = (
-    table_df.sort_values(
-        "Projected Growth %",
-        ascending=False
+    table_df = (
+        df.groupby("Area")
+        .agg({
+            "Investment Score":"mean",
+            "Average Price":"mean",
+            "Projected Growth":"mean"
+        })
+        .reset_index()
     )
-    .iloc[0]
-)
 
-best_price = (
-    table_df.sort_values(
-        "Average Property Price"
+    table_df.columns = [
+        "Area",
+        "Investment Score",
+        "Average Property Price",
+        "Projected Growth %"
+    ]
+
+    st.dataframe(
+        table_df,
+        use_container_width=True
     )
-    .iloc[0]
-)
 
-best_score = (
-    table_df.sort_values(
+    # ---------- AI OPPORTUNITY SCANNER ----------
+
+    st.write("")
+    st.markdown("""
+    ---
+    ### Atlas AI Opportunity Scanner
+    """)
+
+    best_growth = (
+        table_df.sort_values(
+            "Projected Growth %",
+            ascending=False
+        )
+        .iloc[0]
+    )
+
+    best_price = (
+        table_df.sort_values(
+            "Average Property Price"
+        )
+        .iloc[0]
+    )
+
+    best_score = (
+        table_df.sort_values(
+            "Investment Score",
+            ascending=False
+        )
+        .iloc[0]
+    )
+
+    scan_col1, scan_col2, scan_col3 = st.columns(3)
+
+    scan_col1.markdown(f"""
+    <div class="insight">
+    <h4>🚀 Growth Opportunity</h4>
+
+    <p>
+    <b>{best_growth['Area']}</b>
+    </p>
+
+    <p>
+    Projected Growth:
+    <b>{best_growth['Projected Growth %']:.1f}%</b>
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    scan_col2.markdown(f"""
+    <div class="insight">
+    <h4>💎 Premium Investment</h4>
+
+    <p>
+    <b>{best_score['Area']}</b>
+    </p>
+
+    <p>
+    Investment Score:
+    <b>{best_score['Investment Score']:.1f}</b>
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    scan_col3.markdown(f"""
+    <div class="insight">
+    <h4>💰 Affordability Signal</h4>
+
+    <p>
+    <b>{best_price['Area']}</b>
+    </p>
+
+    <p>
+    Entry Pricing Advantage Detected
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ---------- INVESTMENT RECOMMENDATION ENGINE ----------
+
+    st.write("")
+    st.subheader("AI Investment Recommendation")
+
+    best_area = table_df.sort_values(
         "Investment Score",
         ascending=False
+    ).iloc[0]
+
+    growth_area = table_df.sort_values(
+        "Projected Growth %",
+        ascending=False
+    ).iloc[0]
+
+    st.markdown(f"""
+    <div class="insight">
+    <h4>Atlas AI Recommendation</h4>
+
+    <p>
+    Atlas Intelligence recommends focusing on
+    <b>{best_area['Area']}</b>
+    based on the strongest overall investment score of
+    <b>{best_area['Investment Score']:.1f}</b>.
+    </p>
+
+    <p>
+    For growth-focused strategy,
+    <b>{growth_area['Area']}</b>
+    shows the highest projected growth at
+    <b>{growth_area['Projected Growth %']:.1f}%</b>.
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ---------- MARKET TREND ----------
+
+    st.write("")
+    st.subheader("Dubai Market Growth Trend")
+
+    trend_df = pd.DataFrame({
+        "Year":[2021,2022,2023,2024,2025,2026],
+        "Growth":[5.2,7.8,9.4,11.3,13.1,15.0]
+    })
+
+    fig_trend = px.line(
+        trend_df,
+        x="Year",
+        y="Growth",
+        markers=True
     )
-    .iloc[0]
-)
 
-scan_col1, scan_col2, scan_col3 = st.columns(3)
+    fig_trend.update_layout(
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        height=450
+    )
 
-scan_col1.markdown(f"""
-<div class="insight">
-<h4>🚀 Growth Opportunity</h4>
+    st.plotly_chart(fig_trend, use_container_width=True)
 
-<p>
-<b>{best_growth['Area']}</b>
-</p>
+    # ---------- MARKET SENTIMENT ----------
 
-<p>
-Projected Growth:
-<b>{best_growth['Projected Growth %']:.1f}%</b>
-</p>
-</div>
-""", unsafe_allow_html=True)
+    st.write("")
+    st.subheader("Dubai Market Sentiment")
 
-scan_col2.markdown(f"""
-<div class="insight">
-<h4>💎 Premium Investment</h4>
+    avg_score = df["Investment Score"].mean()
 
-<p>
-<b>{best_score['Area']}</b>
-</p>
+    if avg_score >= 85:
+        sentiment = "Bullish"
+        message = "Dubai luxury real estate market is showing strong investment momentum."
 
-<p>
-Investment Score:
-<b>{best_score['Investment Score']:.1f}</b>
-</p>
-</div>
-""", unsafe_allow_html=True)
+    elif avg_score >= 75:
+        sentiment = "Stable Growth"
+        message = "Dubai real estate market remains stable with healthy investment indicators."
 
-scan_col3.markdown(f"""
-<div class="insight">
-<h4>💰 Affordability Signal</h4>
+    else:
+        sentiment = "Moderate"
+        message = "Market conditions indicate selective investment opportunities."
 
-<p>
-<b>{best_price['Area']}</b>
-</p>
+    st.markdown(f"""
+    <div class="insight">
+    <h4>Current Market Sentiment: {sentiment}</h4>
+    <p>{message}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-<p>
-Entry Pricing Advantage Detected
-</p>
-</div>
-""", unsafe_allow_html=True)
-# ---------- INVESTMENT RECOMMENDATION ENGINE ----------
+    gauge_fig = px.pie(
+        values=[82,18],
+        names=["AI Confidence",""],
+        hole=0.75
+    )
 
-st.write("")
-st.subheader("AI Investment Recommendation")
+    gauge_fig.update_traces(
+        textinfo='none'
+    )
 
-best_area = table_df.sort_values("Investment Score", ascending=False).iloc[0]
-growth_area = table_df.sort_values("Projected Growth %", ascending=False).iloc[0]
+    gauge_fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        annotations=[
+            dict(
+                text="82%<br>AI Confidence",
+                x=0.5,
+                y=0.5,
+                font_size=22,
+                showarrow=False
+            )
+        ],
+        height=350,
+        showlegend=False
+    )
 
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas AI Recommendation</h4>
+    st.plotly_chart(gauge_fig, use_container_width=True)
 
-<p>
-Atlas Intelligence recommends focusing on <b>{best_area['Area']}</b> based on the strongest overall investment score of <b>{best_area['Investment Score']:.1f}</b>.
-</p>
+    # ---------- MARKET ALERT SYSTEM ----------
 
-<p>
-For growth-focused strategy, <b>{growth_area['Area']}</b> shows the highest projected growth at <b>{growth_area['Projected Growth %']:.1f}%</b>.
-</p>
+    st.write("")
+    st.markdown("""
+    ---
+    ### Atlas Market Alerts
+    """)
 
-</div>
-""", unsafe_allow_html=True)
-# ---------- MARKET TREND ----------
+    alerts = [
+        "📈 High-growth momentum detected in Dubai Creek Harbour.",
+        "🏙️ Luxury demand increasing across Palm Jumeirah.",
+        "💰 Rental yield strength improving in JVC.",
+        "📊 Investment confidence remains bullish across Dubai Marina."
+    ]
 
-st.write("")
-st.subheader("Dubai Market Growth Trend")
-
-trend_df = pd.DataFrame({
-    "Year":[2021,2022,2023,2024,2025,2026],
-    "Growth":[5.2,7.8,9.4,11.3,13.1,15.0]
-})
-
-fig_trend = px.line(
-    trend_df,
-    x="Year",
-    y="Growth",
-    markers=True
-)
-
-fig_trend.update_layout(
-    template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-    height=450
-)
-
-st.plotly_chart(fig_trend, use_container_width=True)
-# ---------- MARKET SENTIMENT ----------
-
-st.write("")
-st.subheader("Dubai Market Sentiment")
-
-avg_score = df["Investment Score"].mean()
-
-if avg_score >= 85:
-    sentiment = "Bullish"
-    message = "Dubai luxury real estate market is showing strong investment momentum."
-elif avg_score >= 75:
-    sentiment = "Stable Growth"
-    message = "Dubai real estate market remains stable with healthy investment indicators."
-else:
-    sentiment = "Moderate"
-    message = "Market conditions indicate selective investment opportunities."
-
-st.markdown(f"""
-<div class="insight">
-<h4>Current Market Sentiment: {sentiment}</h4>
-<p>{message}</p>
-</div>
-""", unsafe_allow_html=True)
-gauge_fig = px.pie(
-    values=[82,18],
-    names=["AI Confidence",""],
-    hole=0.75
-)
-
-gauge_fig.update_traces(
-    textinfo='none'
-)
-
-gauge_fig.update_layout(
-    template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    annotations=[
-        dict(
-            text="82%<br>AI Confidence",
-            x=0.5,
-            y=0.5,
-            font_size=22,
-            showarrow=False
-        )
-    ],
-    height=350,
-    showlegend=False
-)
-
-st.plotly_chart(gauge_fig, use_container_width=True)
-# ---------- MARKET ALERT SYSTEM ----------
-
-st.write("")
-st.markdown("""
----
-### Atlas Market Alerts
-""")
-
-alerts = [
-    "📈 High-growth momentum detected in Dubai Creek Harbour.",
-    "🏙️ Luxury demand increasing across Palm Jumeirah.",
-    "💰 Rental yield strength improving in JVC.",
-    "📊 Investment confidence remains bullish across Dubai Marina."
-]
-
-for alert in alerts:
-    st.warning(alert)
+    for alert in alerts:
+        st.warning(alert)
 with tab4:
 
     # ---------- INVESTOR PORTFOLIO ANALYZER ----------
