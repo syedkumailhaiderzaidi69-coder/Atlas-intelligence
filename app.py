@@ -755,6 +755,10 @@ except:
 
 st.write("")
 st.subheader("Dubai Real Estate Intelligence Map")
+map_search = st.text_input(
+    "Search area on map",
+    placeholder="Example: Jumeirah, Marina, Al Khabeesi"
+)
 
 @st.cache_data
 def load_coordinates():
