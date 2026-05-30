@@ -1458,14 +1458,17 @@ Average Rental Yield:
 
 </div>
 """, unsafe_allow_html=True)
-# ---------- PDF REPORT EXPORT ----------
+with tab5:
 
-def create_pdf_report():
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_auto_page_break(auto=True, margin=15)
+    # ---------- PDF REPORT EXPORT ----------
 
-    pdf.set_font("Arial", "B", 18)
+    def create_pdf_report():
+
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_auto_page_break(auto=True, margin=15)
+
+        pdf.set_font("Arial", "B", 18)
     pdf.cell(0, 10, "Atlas Intelligence Report", ln=True, align="C")
 
     pdf.ln(10)
