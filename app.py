@@ -788,7 +788,7 @@ st.write("")
 with tab2:
 
     # ---------- DUBAI MAP ----------
-import re
+    import re
 
 try:
     from rapidfuzz import process, fuzz
