@@ -784,6 +784,7 @@ with right:
     """, unsafe_allow_html=True)
 
 st.write("")
+
 with tab2:
 
     # ---------- DUBAI MAP ----------
