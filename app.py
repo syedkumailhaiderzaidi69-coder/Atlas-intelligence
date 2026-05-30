@@ -1821,7 +1821,6 @@ LIMIT 10
     if st.button("Run SQL Query"):
 
         try:
-
             result = duckdb.query(user_query).to_df()
 
             st.success("Query executed successfully.")
@@ -1832,10 +1831,10 @@ LIMIT 10
             )
 
         except Exception as e:
-
             st.error(f"SQL Error: {e}")
-            
-   with tab8:
+
+
+with tab8:
 
     st.markdown("""
     ## ML Price Predictor
@@ -1872,12 +1871,10 @@ LIMIT 10
         )
 
         model = LinearRegression()
-
         model.fit(X_train, y_train)
 
         st.success("Machine Learning model trained successfully.")
 
     else:
-
         st.error("Required columns missing for ML prediction.")
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
