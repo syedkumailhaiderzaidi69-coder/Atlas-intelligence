@@ -536,7 +536,8 @@ if "Date" in df.columns:
             (df["Date"] >= start_date) &
             (df["Date"] <= end_date)
         ]
-        if df.empty:
+
+if df.empty:
     st.error("No transactions found for the selected filters.")
     st.stop()
 # ---------- KPI CARDS ----------
