@@ -1871,9 +1871,50 @@ with tab8:
         )
 
         model = LinearRegression()
+
         model.fit(X_train, y_train)
 
         st.success("Machine Learning model trained successfully.")
+
+        st.write("")
+
+        st.subheader("Predict Property Price")
+
+        user_investment = st.slider(
+            "Investment Score",
+            0,
+            100,
+            80
+        )
+
+        user_growth = st.slider(
+            "Projected Growth (%)",
+            0.0,
+            20.0,
+            10.0
+        )
+
+        user_yield = st.slider(
+            "Rental Yield (%)",
+            0.0,
+            15.0,
+            7.0
+        )
+
+        prediction_input = pd.DataFrame({
+            "Investment Score": [user_investment],
+            "Projected Growth": [user_growth],
+            "Rental Yield": [user_yield]
+        })
+
+        predicted_price = model.predict(
+            prediction_input
+        )[0]
+
+        st.metric(
+            "Predicted Property Price",
+            f"AED {predicted_price:,.0f}"
+        )
 
     else:
         st.error("Required columns missing for ML prediction.")
