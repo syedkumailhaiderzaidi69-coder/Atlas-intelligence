@@ -715,7 +715,9 @@ fig_timeline.update_layout(
 )
 
 st.plotly_chart(fig_timeline, use_container_width=True)
-# ---------- CHART ----------
+with tab3:
+
+    # ---------- CHART ----------
 
 left,right = st.columns([1.3,1])
 
