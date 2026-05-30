@@ -675,96 +675,168 @@ with right:
 
 st.write("")
 # ---------- DUBAI MAP ----------
+import re
+
+try:
+    from rapidfuzz import process, fuzz
+    fuzzy_enabled = True
+except:
+    fuzzy_enabled = False
+
+st.write("")
 st.subheader("Dubai Real Estate Intelligence Map")
 
-# Get ALL unique areas with average investment scores from real data
-map_data = df.groupby('Area').agg({
-    'Investment Score': 'mean'
-}).reset_index()
+@st.cache_data
+def load_coordinates():
+    coords_df = pd.read_csv("dubai_areas_coordinates.csv")
+    coords_df.columns = coords_df.columns.str.strip()
 
-# Show ALL areas (no limit)
-st.info(f"📍 Showing {len(map_data)} locations on map")
+    coords_df = coords_df.rename(columns={
+        "area": "coord_area",
+        "lat": "latitude",
+        "lon": "longitude"
+    })
 
-# Expanded coordinate mapping for Dubai areas
-def get_coordinates(area_name):
-    area_lower = str(area_name).lower()
-    
-    # Palm Jumeirah area
-    if 'palm' in area_lower:
-        return (25.1124, 55.1390)
-    # Downtown area
-    elif 'downtown' in area_lower or 'burj' in area_lower:
-        return (25.1972, 55.2744)
-    # Marina area
-    elif 'marina' in area_lower:
-        return (25.0800, 55.1400)
-    # Business Bay area
-    elif 'business bay' in area_lower:
-        return (25.1850, 55.2800)
-    # JVC area
-    elif 'jvc' in area_lower or 'jumeirah village' in area_lower:
-        return (25.0520, 55.2110)
-    # Dubai Hills area
-    elif 'dubai hills' in area_lower:
-        return (25.1000, 55.2470)
-    # JLT area
-    elif 'jlt' in area_lower or 'jumeirah lakes' in area_lower:
-        return (25.0700, 55.1400)
-    # DIFC area
-    elif 'difc' in area_lower:
-        return (25.2100, 55.2800)
-    # Jumeirah area
-    elif 'jumeirah' in area_lower:
-        return (25.2200, 55.2500)
-    # Al Barsha area
-    elif 'barsha' in area_lower:
-        return (25.1100, 55.1900)
-    # Emirates Hills
-    elif 'emirates hills' in area_lower:
-        return (25.1180, 55.2000)
-    # Discovery Gardens / Al Furjan / Jabal Ali
-    elif 'discovery' in area_lower or 'furjan' in area_lower or 'jabal ali' in area_lower:
-        return (25.0100, 55.1200)
-    # International City / Warsan
-    elif 'international city' in area_lower or 'warsan' in area_lower:
-        return (25.1800, 55.4100)
-    # DIP / Dubai Investment Park
-    elif 'dip' in area_lower or 'investment park' in area_lower:
-        return (25.0600, 55.1400)
-    # Motor City / Dubai Sports City
-    elif 'motor city' in area_lower or 'sports city' in area_lower or 'hebiah' in area_lower:
-        return (25.0400, 55.2000)
-    # Mirdif / Al Mizhar / Al Twar
-    elif 'mirdif' in area_lower or 'mezhar' in area_lower or 'twar' in area_lower:
-        return (25.2300, 55.4000)
-    # Default to Downtown
-    else:
-        return (25.1972, 55.2744)
+    return coords_df
 
-# Apply coordinates to all areas
-map_data['lat'] = map_data['Area'].apply(lambda x: get_coordinates(x)[0])
-map_data['lon'] = map_data['Area'].apply(lambda x: get_coordinates(x)[1])
+def clean_area(area):
+    if pd.isna(area):
+        return ""
+
+    area = str(area).strip().lower()
+    area = re.sub(r"[^a-z0-9\s]", "", area)
+    area = re.sub(r"\s+", " ", area)
+
+    replacements = {
+        "jumeira": "jumeirah",
+        "umm suqeim": "um suqaim",
+        "al mezhar": "al mizhar",
+    }
+
+    for old, new in replacements.items():
+        area = area.replace(old, new)
+
+    return area.strip()
+
+coords_df = load_coordinates()
+
+df["area_key"] = df["Area"].apply(clean_area)
+coords_df["area_key"] = coords_df["coord_area"].apply(clean_area)
+
+map_df = df.merge(
+    coords_df[["coord_area", "area_key", "latitude", "longitude"]],
+    on="area_key",
+    how="left"
+)
+
+if fuzzy_enabled:
+    missing_areas = map_df[map_df["latitude"].isna()]["area_key"].unique()
+    coord_keys = coords_df["area_key"].unique()
+
+    for missing_area in missing_areas:
+        if missing_area == "":
+            continue
+
+        match = process.extractOne(
+            missing_area,
+            coord_keys,
+            scorer=fuzz.token_sort_ratio
+        )
+
+        if match and match[1] >= 85:
+            matched_key = match[0]
+            matched_row = coords_df[coords_df["area_key"] == matched_key].iloc[0]
+
+            map_df.loc[map_df["area_key"] == missing_area, "latitude"] = matched_row["latitude"]
+            map_df.loc[map_df["area_key"] == missing_area, "longitude"] = matched_row["longitude"]
+
+fallback_lat = 25.1972
+fallback_lon = 55.2744
+
+map_df["match_status"] = np.where(
+    map_df["latitude"].isna(),
+    "Fallback",
+    "Matched"
+)
+
+map_df["latitude"] = map_df["latitude"].fillna(fallback_lat)
+map_df["longitude"] = map_df["longitude"].fillna(fallback_lon)
+
+map_grouped = (
+    map_df.groupby(
+        ["Area", "latitude", "longitude", "match_status"],
+        as_index=False
+    )
+    .agg({
+        "Investment Score": "mean",
+        "Average Price": "mean",
+        "Projected Growth": "mean"
+    })
+)
+
+transaction_counts = (
+    map_df.groupby("Area")
+    .size()
+    .reset_index(name="Transactions")
+)
+
+map_grouped = map_grouped.merge(transaction_counts, on="Area", how="left")
+
+matched_count = map_grouped[map_grouped["match_status"] == "Matched"]["Area"].nunique()
+fallback_count = map_grouped[map_grouped["match_status"] == "Fallback"]["Area"].nunique()
+total_areas = map_grouped["Area"].nunique()
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Areas", total_areas)
+col2.metric("Matched Areas", matched_count)
+col3.metric("Fallback Areas", fallback_count)
 
 fig_map = px.scatter_mapbox(
-    map_data,
-    lat="lat",
-    lon="lon",
+    map_grouped,
+    lat="latitude",
+    lon="longitude",
     size="Investment Score",
     color="Investment Score",
     hover_name="Area",
+    hover_data={
+        "Transactions": True,
+        "Average Price": ":,.0f",
+        "Projected Growth": ":.1f",
+        "match_status": True
+    },
     zoom=10,
-    height=650
+    height=700
+)
+
+fig_map.update_traces(
+    marker=dict(
+        sizemode="area",
+        opacity=0.75
+    )
 )
 
 fig_map.update_layout(
     mapbox_style="carto-darkmatter",
     template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    margin=dict(l=0,r=0,t=0,b=0)
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    margin=dict(l=0, r=0, t=0, b=0)
 )
 
 st.plotly_chart(fig_map, use_container_width=True)
-st.caption(f"📍 All {len(map_data)} areas mapped. Bubble size = Investment Score")
+
+st.caption(
+    f"📍 {matched_count}/{total_areas} areas mapped successfully using official DLD coordinates."
+)
+
+unmatched = map_grouped[map_grouped["match_status"] == "Fallback"]["Area"].unique()
+
+with st.expander("Show unmatched areas"):
+    if len(unmatched) == 0:
+        st.success("All areas matched successfully.")
+    else:
+        st.warning(f"{len(unmatched)} areas still using fallback coordinates.")
+        st.dataframe(pd.DataFrame({"Unmatched Areas": unmatched}))
 # ---------- EXECUTIVE TABLE ----------
 
 st.write("")
