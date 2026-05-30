@@ -225,13 +225,14 @@ box-shadow:0 0 18px rgba(59,130,246,0.35);
 
 </style>
 """, unsafe_allow_html=True)
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "Overview",
     "Map Intelligence",
     "Area Rankings",
     "Portfolio Tools",
     "Reports",
-    "Contact"
+    "Contact",
+    "SQL Intelligence"
 ])
 # ---------- DATA ----------
 
