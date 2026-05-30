@@ -1796,10 +1796,12 @@ with tab6:
     Business Analytics • Data Science • Real Estate Analytics • Consulting
     </p>
     """, unsafe_allow_html=True)
-    with tab7:
+    
+with tab7:
 
     st.markdown("""
     ## SQL Intelligence Engine
+
     Run SQL queries directly on Dubai property transaction data using DuckDB.
     """)
 
