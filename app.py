@@ -157,9 +157,20 @@ except:
 # ---------- INVESTMENT SCORING MODEL ----------
 max_price = df["Average Price"].max()
 df["Affordability Score"] = 100 - (df["Average Price"] / max_price * 100)
-df["Market Confidence"] = np.random.randint(75, 96, size=len(df))
-df["Luxury Demand"] = np.random.randint(70, 98, size=len(df))
-df["Rental Yield"] = np.random.uniform(5.0, 9.5, size=len(df)).round(1)
+# ---------- REALISTIC SCORING INPUTS ----------
+
+df["Market Confidence"] = (
+    df["Projected Growth"].rank(pct=True) * 100
+).round(1)
+
+df["Luxury Demand"] = (
+    df["Average Price"].rank(pct=True) * 100
+).round(1)
+
+if "Rental Yield" not in df.columns:
+    df["Rental Yield"] = (
+        10 - (df["Average Price"].rank(pct=True) * 5)
+    ).round(1)
 
 df["Investment Score"] = (
     df["Projected Growth"] * 4 * 0.35 +
