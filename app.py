@@ -1340,203 +1340,144 @@ with tab4:
 
     st.write("")
     st.markdown("""
----
-### Investor Portfolio Analyzer
-""")
+    ---
+    ### Investor Portfolio Analyzer
+    """)
 
-portfolio_budget = st.slider(
-    "Portfolio Budget (AED)",
-    1000000,
-    20000000,
-    5000000,
-    step=500000,
-    key="portfolio_budget"
-)
+    portfolio_budget = st.slider(
+        "Portfolio Budget (AED)",
+        1000000,
+        20000000,
+        5000000,
+        step=500000,
+        key="portfolio_budget"
+    )
 
-investment_goal = st.selectbox(
-    "Investment Goal",
-    [
-        "Passive Income",
-        "Balanced Growth",
-        "Luxury Appreciation",
-        "Aggressive Growth"
-    ]
-)
+    investment_goal = st.selectbox(
+        "Investment Goal",
+        [
+            "Passive Income",
+            "Balanced Growth",
+            "Luxury Appreciation",
+            "Aggressive Growth"
+        ],
+        key="investment_goal"
+    )
 
-portfolio_df = pd.DataFrame({
-    "Area":[
-        "Downtown Dubai",
-        "Dubai Marina",
-        "JVC",
-        "Palm Jumeirah"
-    ]
-})
+    portfolio_df = pd.DataFrame({
+        "Area": [
+            "Downtown Dubai",
+            "Dubai Marina",
+            "JVC",
+            "Palm Jumeirah"
+        ]
+    })
 
-if investment_goal == "Passive Income":
+    if investment_goal == "Passive Income":
+        portfolio_df["Allocation %"] = [20, 30, 40, 10]
+    elif investment_goal == "Balanced Growth":
+        portfolio_df["Allocation %"] = [30, 30, 25, 15]
+    elif investment_goal == "Luxury Appreciation":
+        portfolio_df["Allocation %"] = [20, 20, 10, 50]
+    else:
+        portfolio_df["Allocation %"] = [25, 20, 15, 40]
 
-    portfolio_df["Allocation %"] = [20,30,40,10]
+    portfolio_df["Investment Amount"] = (
+        portfolio_df["Allocation %"] / 100 * portfolio_budget
+    ).astype(int)
 
-elif investment_goal == "Balanced Growth":
+    st.dataframe(portfolio_df, use_container_width=True)
 
-    portfolio_df["Allocation %"] = [30,30,25,15]
+    st.markdown(f"""
+    <div class="insight">
+    <h4>Atlas Portfolio Strategy</h4>
+    <p>Atlas Intelligence generated a portfolio allocation strategy optimized for:
+    <b>{investment_goal}</b></p>
+    <p>Portfolio Budget: <b>AED {portfolio_budget:,}</b></p>
+    </div>
+    """, unsafe_allow_html=True)
 
-elif investment_goal == "Luxury Appreciation":
+    # ---------- AI STRATEGY ENGINE ----------
 
-    portfolio_df["Allocation %"] = [20,20,10,50]
+    st.write("")
+    st.markdown("""
+    ---
+    ### Atlas AI Strategy Engine
+    """)
 
-else:
+    investor_type = st.selectbox(
+        "Investor Profile",
+        [
+            "Conservative",
+            "Balanced",
+            "Aggressive",
+            "Luxury Investor"
+        ],
+        key="investor_type"
+    )
 
-    portfolio_df["Allocation %"] = [25,20,15,40]
+    investment_horizon = st.selectbox(
+        "Investment Horizon",
+        [
+            "1-2 Years",
+            "3-5 Years",
+            "5-10 Years"
+        ],
+        key="investment_horizon"
+    )
 
-portfolio_df["Investment Amount"] = (
-    portfolio_df["Allocation %"] / 100 * portfolio_budget
-).astype(int)
+    if investor_type == "Conservative":
+        ai_strategy = "Atlas recommends focusing on stable rental-yield communities such as JVC and Dubai Marina with balanced cashflow opportunities."
+    elif investor_type == "Balanced":
+        ai_strategy = "Atlas recommends diversified allocation across Downtown Dubai, Dubai Marina, and Dubai Hills Estate for balanced growth and stability."
+    elif investor_type == "Aggressive":
+        ai_strategy = "Atlas recommends targeting high-growth areas such as Dubai Creek Harbour and emerging investment corridors."
+    else:
+        ai_strategy = "Atlas recommends premium luxury-focused allocation toward Palm Jumeirah and ultra-prime waterfront communities."
 
-st.dataframe(
-    portfolio_df,
-    use_container_width=True
-)
+    st.markdown(f"""
+    <div class="insight">
+    <h4>AI Strategic Recommendation</h4>
+    <p>Investor Profile: <b>{investor_type}</b></p>
+    <p>Investment Horizon: <b>{investment_horizon}</b></p>
+    <p>{ai_strategy}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="insight">
-<h4>Atlas Portfolio Strategy</h4>
+    # ---------- MARKET REGIME ENGINE ----------
 
-<p>
-Atlas Intelligence generated a portfolio allocation strategy optimized for:
-<b>{investment_goal}</b>
-</p>
+    st.write("")
+    st.markdown("""
+    ---
+    ### Atlas Market Regime Engine
+    """)
 
-<p>
-Portfolio Budget:
-<b>AED {portfolio_budget:,}</b>
-</p>
+    avg_growth = df["Projected Growth"].mean()
+    avg_yield = df["Rental Yield"].mean()
 
-</div>
-""", unsafe_allow_html=True)
-# ---------- AI STRATEGY ENGINE ----------
+    if avg_growth >= 11 and avg_yield >= 7:
+        regime = "Bull Market"
+        regime_msg = "Dubai real estate is currently showing strong growth momentum with healthy rental performance."
+    elif avg_growth >= 8:
+        regime = "Stable Expansion"
+        regime_msg = "Atlas Intelligence indicates balanced market conditions with moderate long-term growth."
+    elif avg_growth >= 6:
+        regime = "Selective Opportunity"
+        regime_msg = "Certain communities continue showing strength while broader growth remains moderate."
+    else:
+        regime = "Correction Risk"
+        regime_msg = "Atlas Intelligence detects slowing momentum and elevated investment caution signals."
 
-st.write("")
-st.markdown("""
----
-### Atlas AI Strategy Engine
-""")
-
-investor_type = st.selectbox(
-    "Investor Profile",
-    [
-        "Conservative",
-        "Balanced",
-        "Aggressive",
-        "Luxury Investor"
-    ]
-)
-
-investment_horizon = st.selectbox(
-    "Investment Horizon",
-    [
-        "1-2 Years",
-        "3-5 Years",
-        "5-10 Years"
-    ]
-)
-
-if investor_type == "Conservative":
-
-    ai_strategy = """
-    Atlas recommends focusing on stable rental-yield communities such as JVC and Dubai Marina with balanced cashflow opportunities.
-    """
-
-elif investor_type == "Balanced":
-
-    ai_strategy = """
-    Atlas recommends diversified allocation across Downtown Dubai, Dubai Marina, and Dubai Hills Estate for balanced growth and stability.
-    """
-
-elif investor_type == "Aggressive":
-
-    ai_strategy = """
-    Atlas recommends targeting high-growth areas such as Dubai Creek Harbour and emerging investment corridors.
-    """
-
-else:
-
-    ai_strategy = """
-    Atlas recommends premium luxury-focused allocation toward Palm Jumeirah and ultra-prime waterfront communities.
-    """
-
-st.markdown(f"""
-<div class="insight">
-<h4>AI Strategic Recommendation</h4>
-
-<p>
-Investor Profile:
-<b>{investor_type}</b>
-</p>
-
-<p>
-Investment Horizon:
-<b>{investment_horizon}</b>
-</p>
-
-<p>
-{ai_strategy}
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-# ---------- MARKET REGIME ENGINE ----------
-
-st.write("")
-st.markdown("""
----
-### Atlas Market Regime Engine
-""")
-
-avg_growth = df["Projected Growth"].mean()
-avg_yield = df["Rental Yield"].mean()
-
-if avg_growth >= 11 and avg_yield >= 7:
-    regime = "Bull Market"
-    regime_msg = """
-    Dubai real estate is currently showing strong growth momentum with healthy rental performance.
-    """
-
-elif avg_growth >= 8:
-    regime = "Stable Expansion"
-    regime_msg = """
-    Atlas Intelligence indicates balanced market conditions with moderate long-term growth.
-    """
-
-elif avg_growth >= 6:
-    regime = "Selective Opportunity"
-    regime_msg = """
-    Certain communities continue showing strength while broader growth remains moderate.
-    """
-
-else:
-    regime = "Correction Risk"
-    regime_msg = """
-    Atlas Intelligence detects slowing momentum and elevated investment caution signals.
-    """
-
-st.markdown(f"""
-<div class="insight">
-<h4>Current Market Regime: {regime}</h4>
-
-<p>
-{regime_msg}
-</p>
-
-<p>
-Average Growth:
-<b>{avg_growth:.1f}%</b><br>
-
-Average Rental Yield:
-<b>{avg_yield:.1f}%</b>
-</p>
-
-</div>
-""", unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class="insight">
+    <h4>Current Market Regime: {regime}</h4>
+    <p>{regime_msg}</p>
+    <p>
+    Average Growth: <b>{avg_growth:.1f}%</b><br>
+    Average Rental Yield: <b>{avg_yield:.1f}%</b>
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
 with tab5:
 
     # ---------- PDF REPORT EXPORT ----------
