@@ -75,6 +75,26 @@ University of Wollongong Dubai
 
 ---
 
-## Disclaimer
+## Project Status
 
-Current prototype uses simulated datasets for demonstration and product development purposes.
+Atlas Intelligence is an actively evolving Dubai real estate analytics platform built using Python, Streamlit, Plotly, DuckDB, and real Dubai property transaction datasets.
+
+Current platform capabilities include:
+
+* Interactive investment intelligence dashboard
+* Dubai geo-intelligence mapping
+* SQL-powered analytics querying using DuckDB
+* Portfolio analysis tools
+* AI-style investment scoring
+* PDF report generation
+* Responsive mobile-friendly UI
+
+Upcoming enhancements:
+
+* Machine learning price prediction
+* Live API integrations
+* Advanced forecasting models
+* Automated data pipelines
+
+This project is designed as a practical analytics engineering and business intelligence portfolio focused on Dubai real estate intelligence.
+
