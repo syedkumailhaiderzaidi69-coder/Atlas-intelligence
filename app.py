@@ -510,7 +510,32 @@ if 'Property Type' in df.columns:
     df = df[df["Property Type"].isin(selected_type)]
 else:
     df = df[df["Area"].isin(selected_type)]
+# ---------- DATE FILTER ----------
 
+if "Date" in df.columns:
+
+    df["Date"] = pd.to_datetime(
+        df["Date"],
+        errors="coerce"
+    )
+
+    min_date = df["Date"].min()
+    max_date = df["Date"].max()
+
+    selected_dates = st.sidebar.date_input(
+        "Select Transaction Date Range",
+        [min_date, max_date]
+    )
+
+    if len(selected_dates) == 2:
+
+        start_date = pd.to_datetime(selected_dates[0])
+        end_date = pd.to_datetime(selected_dates[1])
+
+        df = df[
+            (df["Date"] >= start_date) &
+            (df["Date"] <= end_date)
+        ]
 # ---------- KPI CARDS ----------
 
 c1,c2,c3,c4 = st.columns(4)
