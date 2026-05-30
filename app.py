@@ -554,167 +554,168 @@ with tab1:
 
     c1,c2,c3,c4 = st.columns(4)
 
-c1.markdown(f"""
-<div class="card">
-<h3>↗ {len(df)}</h3>
-<p>Properties Analyzed</p>
-</div>
-""", unsafe_allow_html=True)
+    c1.markdown(f"""
+    <div class="card">
+    <h3>↗ {len(df)}</h3>
+    <p>Properties Analyzed</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-c2.markdown(f"""
-<div class="card">
-<h3>◆ {df['Area'].nunique()}</h3>
-<p>Dubai Areas</p>
-</div>
-""", unsafe_allow_html=True)
+    c2.markdown(f"""
+    <div class="card">
+    <h3>◆ {df['Area'].nunique()}</h3>
+    <p>Dubai Areas</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-c3.markdown(f"""
-<div class="card">
-<h3>AI {df['Investment Score'].mean():.1f}</h3>
-<p>Avg Investment Score</p>
-</div>
-""", unsafe_allow_html=True)
+    c3.markdown(f"""
+    <div class="card">
+    <h3>AI {df['Investment Score'].mean():.1f}</h3>
+    <p>Avg Investment Score</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-c4.markdown(f"""
-<div class="card">
-<h3>+{df['Projected Growth'].mean():.1f}%</h3>
-<p>Avg Market Growth</p>
-</div>
-""", unsafe_allow_html=True)
+    c4.markdown(f"""
+    <div class="card">
+    <h3>+{df['Projected Growth'].mean():.1f}%</h3>
+    <p>Avg Market Growth</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.write("")
-st.write("")
-# ---------- EXECUTIVE MARKET SIGNALS ----------
+    st.write("")
+    st.write("")
 
-st.write("")
-st.markdown("""
----
-### Executive Market Signals
-""")
+    # ---------- EXECUTIVE MARKET SIGNALS ----------
 
-signal_col1, signal_col2 = st.columns(2)
-
-with signal_col1:
-
-    st.success("""
-    📈 Investment Confidence: STRONG
-    
-    Atlas models indicate healthy long-term investment conditions across premium Dubai communities.
+    st.write("")
+    st.markdown("""
+    ---
+    ### Executive Market Signals
     """)
 
-    st.info("""
-    🏙️ Market Momentum: BULLISH
-    
-    Growth indicators remain positive across luxury and mid-market sectors.
-    """)
+    signal_col1, signal_col2 = st.columns(2)
 
-with signal_col2:
+    with signal_col1:
 
-    st.warning("""
-    💰 Rental Yield Outlook: ATTRACTIVE
-    
-    Selected communities continue delivering strong passive income performance.
-    """)
+        st.success("""
+        📈 Investment Confidence: STRONG
 
-    st.success("""
-    🤖 AI Forecast Reliability: HIGH
-    
-    Atlas Intelligence forecasting systems remain stable with strong confidence indicators.
-    """)
+        Atlas models indicate healthy long-term investment conditions across premium Dubai communities.
+        """)
+
+        st.info("""
+        🏙️ Market Momentum: BULLISH
+
+        Growth indicators remain positive across luxury and mid-market sectors.
+        """)
+
+    with signal_col2:
+
+        st.warning("""
+        💰 Rental Yield Outlook: ATTRACTIVE
+
+        Selected communities continue delivering strong passive income performance.
+        """)
+
+        st.success("""
+        🤖 AI Forecast Reliability: HIGH
+
+        Atlas Intelligence forecasting systems remain stable with strong confidence indicators.
+        """)
+
     # ---------- AI CONFIDENCE HEAT METER ----------
 
-st.write("")
-st.markdown("""
----
-### Atlas AI Confidence Meter
-""")
+    st.write("")
+    st.markdown("""
+    ---
+    ### Atlas AI Confidence Meter
+    """)
 
-confidence_score = int(df["Investment Score"].mean().clip(0, 100))
+    confidence_score = int(df["Investment Score"].mean().clip(0, 100))
 
-confidence_color = (
-    "green"
-    if confidence_score >= 90
-    else "orange"
-)
+    confidence_color = (
+        "green"
+        if confidence_score >= 90
+        else "orange"
+    )
 
-st.markdown(f"""
-<div style="
-padding:25px;
-border-radius:20px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-">
+    st.markdown(f"""
+    <div style="
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    ">
 
-<h3>AI Market Confidence</h3>
+    <h3>AI Market Confidence</h3>
 
-<div style="
-width:100%;
-background:#1c1c1c;
-border-radius:20px;
-overflow:hidden;
-height:35px;
-margin-top:15px;
-">
+    <div style="
+    width:100%;
+    background:#1c1c1c;
+    border-radius:20px;
+    overflow:hidden;
+    height:35px;
+    margin-top:15px;
+    ">
 
-<div style="
-width:{confidence_score}%;
-background:{confidence_color};
-height:35px;
-text-align:center;
-line-height:35px;
-font-weight:bold;
-color:white;
-">
-{confidence_score}%
-</div>
+    <div style="
+    width:{confidence_score}%;
+    background:{confidence_color};
+    height:35px;
+    text-align:center;
+    line-height:35px;
+    font-weight:bold;
+    color:white;
+    ">
+    {confidence_score}%
+    </div>
 
-</div>
+    </div>
 
-<p style="margin-top:15px;">
-Atlas Intelligence forecasting systems indicate stable investment confidence across Dubai real estate sectors.
-</p>
+    <p style="margin-top:15px;">
+    Atlas Intelligence forecasting systems indicate stable investment confidence across Dubai real estate sectors.
+    </p>
 
-</div>
-""", unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-# ---------- MARKET ACTIVITY TIMELINE ----------
+    # ---------- MARKET ACTIVITY TIMELINE ----------
 
-st.write("")
-st.markdown("""
----
-### Dubai Transaction Activity Timeline
-""")
+    st.write("")
+    st.markdown("""
+    ---
+    ### Dubai Transaction Activity Timeline
+    """)
 
-# Ensure Date column is datetime
-df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 
-timeline_df = (
-    df.groupby(df["Date"].dt.to_period("M"))
-    .agg({
-        "Investment Score": "mean",
-        "Average Price": "mean"
-    })
-    .reset_index()
-)
+    timeline_df = (
+        df.groupby(df["Date"].dt.to_period("M"))
+        .agg({
+            "Investment Score": "mean",
+            "Average Price": "mean"
+        })
+        .reset_index()
+    )
 
-timeline_df["Date"] = timeline_df["Date"].astype(str)
+    timeline_df["Date"] = timeline_df["Date"].astype(str)
 
-fig_timeline = px.line(
-    timeline_df,
-    x="Date",
-    y="Investment Score",
-    markers=True,
-    title="Monthly Investment Intelligence Trend"
-)
+    fig_timeline = px.line(
+        timeline_df,
+        x="Date",
+        y="Investment Score",
+        markers=True,
+        title="Monthly Investment Intelligence Trend"
+    )
 
-fig_timeline.update_layout(
-    template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-    height=450
-)
+    fig_timeline.update_layout(
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        height=450
+    )
 
-st.plotly_chart(fig_timeline, use_container_width=True)
+    st.plotly_chart(fig_timeline, use_container_width=True)
 with tab3:
 
     # ---------- CHART ----------
