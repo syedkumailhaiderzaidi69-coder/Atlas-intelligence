@@ -1834,6 +1834,7 @@ LIMIT 10
         except Exception as e:
 
             st.error(f"SQL Error: {e}")
+            
    with tab8:
 
     st.markdown("""
@@ -1879,5 +1880,4 @@ LIMIT 10
     else:
 
         st.error("Required columns missing for ML prediction.")
-
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
