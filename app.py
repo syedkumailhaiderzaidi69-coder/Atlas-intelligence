@@ -722,71 +722,71 @@ with tab3:
 
     left,right = st.columns([1.3,1])
 
-with left:
+    with left:
 
-    st.markdown("""
----
-### Dubai Investment Intelligence
-""")
+        st.markdown("""
+        ---
+        ### Dubai Investment Intelligence
+        """)
 
-    chart_data = (
-        df.groupby("Area")["Investment Score"]
-        .mean()
-        .sort_values(ascending=False)
-        .reset_index()
-    )
+        chart_data = (
+            df.groupby("Area")["Investment Score"]
+            .mean()
+            .sort_values(ascending=False)
+            .reset_index()
+        )
 
-    fig = px.bar(
-        chart_data,
-        x="Investment Score",
-        y="Area",
-        orientation="h",
-        color="Investment Score",
-        height=500
-    )
+        fig = px.bar(
+            chart_data,
+            x="Investment Score",
+            y="Area",
+            orientation="h",
+            color="Investment Score",
+            height=500
+        )
 
-    fig.update_layout(
-        template="plotly_dark",
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        margin=dict(l=0,r=0,t=30,b=0)
-    )
+        fig.update_layout(
+            template="plotly_dark",
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            margin=dict(l=0,r=0,t=30,b=0)
+        )
 
-    st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
-# ---------- AI INSIGHTS ----------
+    # ---------- AI INSIGHTS ----------
 
-with right:
+    with right:
 
-    st.markdown("""
----
-### AI Market Intelligence
-""")
+        st.markdown("""
+        ---
+        ### AI Market Intelligence
+        """)
 
-    top_area = chart_data.iloc[0]["Area"]
+        top_area = chart_data.iloc[0]["Area"]
 
-    st.markdown(f"""
-    <div class="insight">
-    <h4>Growth Signal</h4>
-    <p>{top_area} is showing the strongest investment momentum in Atlas Intelligence scoring models.</p>
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="insight">
+        <h4>Growth Signal</h4>
+        <p>{top_area} is showing the strongest investment momentum in Atlas Intelligence scoring models.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="insight">
-    <h4>Luxury Market Trend</h4>
-    <p>Dubai premium real estate continues showing resilience across waterfront and high-demand communities.</p>
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="insight">
+        <h4>Luxury Market Trend</h4>
+        <p>Dubai premium real estate continues showing resilience across waterfront and high-demand communities.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="insight">
-    <h4>AI Forecast</h4>
-    <p>Projected investment activity indicates increasing demand in luxury residential sectors.</p>
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="insight">
+        <h4>AI Forecast</h4>
+        <p>Projected investment activity indicates increasing demand in luxury residential sectors.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-st.write("")
+    st.write("")
 
 with tab2:
 
