@@ -124,6 +124,36 @@ transform: translateY(-4px);
 transition:0.3s ease;
 box-shadow:0 0 28px rgba(148,163,184,0.16);
 }
+@media (max-width: 768px){
+
+.hero{
+padding:38px 18px;
+border-radius:18px;
+}
+
+.hero-actions span{
+font-size:12px;
+padding:8px 10px;
+}
+
+.card{
+padding:18px;
+margin-bottom:12px;
+}
+
+.card h3{
+font-size:28px;
+}
+
+.stTabs [data-baseweb="tab-list"]{
+overflow-x:auto;
+white-space:nowrap;
+}
+
+button[data-baseweb="tab"]{
+font-size:13px;
+padding:10px 14px;
+}
 
 </style>
 """, unsafe_allow_html=True)
