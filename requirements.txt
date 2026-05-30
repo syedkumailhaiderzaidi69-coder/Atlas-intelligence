@@ -4,3 +4,4 @@ numpy
 plotly
 rapidfuzz
 fpdf
+duckdb
