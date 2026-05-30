@@ -1943,54 +1943,72 @@ st.markdown("""
 **V4:** Predictive pricing and rental yield forecasting  
 **V5:** Investor-ready PDF intelligence reports  
 """)
-# ---------- FOOTER ----------
+with tab6:
 
-st.write("")
-st.markdown("""
----
-<center>
+    # ---------- FOOTER ----------
 
-### Atlas Intelligence
+    st.write("")
 
-AI-powered Dubai real estate intelligence platform.
+    st.markdown("""
+    ---
+    <center>
 
-**Created by Syed Kumail Haider Zaidi**  
-MSc Business Analytics | University of Wollongong Dubai
+    ### Atlas Intelligence
 
-Built with Python, Streamlit, Plotly & AI-driven analytics.
+    AI-powered Dubai real estate intelligence platform.
 
-📧 syedkumailhaiderzaidi69@gmail.com
+    **Created by Syed Kumail Haider Zaidi**  
+    MSc Business Analytics | University of Wollongong Dubai
 
-© 2026 Atlas Intelligence — Prototype V2
+    Built with Python, Streamlit, Plotly & AI-driven analytics.
 
-</center>
-""", unsafe_allow_html=True)
-# ========== CONTACT SECTION (STREAMLIT NATIVE) ==========
-st.write("")
-st.markdown("---")
-st.markdown("### 📬 Want to hire me or collaborate?")
+    📧 syedkumailhaiderzaidi69@gmail.com
 
-st.markdown("**Syed Kumail Haider Zaidi**")  
-st.markdown("*MSc Business Analytics | University of Wollongong Dubai*")
+    © 2026 Atlas Intelligence — Prototype V2
 
-col_a, col_b, col_c = st.columns(3)
+    </center>
+    """, unsafe_allow_html=True)
 
-with col_a:
-    if st.button("📧 Send Email", use_container_width=True):
-        st.markdown("[Click here to email](mailto:syedkumailhaiderzaidi69@gmail.com)")
 
-with col_b:
-    if st.button("🔗 LinkedIn", use_container_width=True):
-        st.markdown("[Open LinkedIn](https://www.linkedin.com/in/syedkumail01)")
+    # ========== CONTACT SECTION ==========
 
-with col_c:
-    if st.button("💻 GitHub", use_container_width=True):
-        st.markdown("[Open GitHub](https://github.com/syedkumailhaiderzaidi69-coder)")
+    st.write("")
+    st.markdown("---")
+    st.markdown("### 📬 Want to hire me or collaborate?")
 
-st.markdown("""
-<p style="text-align: center; color: #64748b; margin-top: 20px; font-size: 14px;">
-Open to internships, graduate roles, and collaborations in:<br>
-Business Analytics • Data Science • Real Estate Analytics • Consulting
-</p>
-""", unsafe_allow_html=True)
-st.success("Atlas Intelligence Luxury Prototype V2 Live")
+    st.markdown("**Syed Kumail Haider Zaidi**")
+    st.markdown("*MSc Business Analytics | University of Wollongong Dubai*")
+
+    col_a, col_b, col_c = st.columns(3)
+
+    with col_a:
+        if st.button("📧 Send Email", use_container_width=True):
+            st.markdown(
+                "[Click here to email](mailto:syedkumailhaiderzaidi69@gmail.com)"
+            )
+
+    with col_b:
+        if st.button("🔗 LinkedIn", use_container_width=True):
+            st.markdown(
+                "[Open LinkedIn](https://www.linkedin.com/in/syedkumail01)"
+            )
+
+    with col_c:
+        if st.button("💻 GitHub", use_container_width=True):
+            st.markdown(
+                "[Open GitHub](https://github.com/syedkumailhaiderzaidi69-coder)"
+            )
+
+    st.markdown("""
+    <p style="
+    text-align:center;
+    color:#64748b;
+    margin-top:20px;
+    font-size:14px;
+    ">
+    Open to internships, graduate roles, and collaborations in:<br>
+    Business Analytics • Data Science • Real Estate Analytics • Consulting
+    </p>
+    """, unsafe_allow_html=True)
+
+    st.success("Atlas Intelligence Luxury Prototype V2 Live")
