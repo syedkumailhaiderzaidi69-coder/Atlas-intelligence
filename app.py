@@ -765,7 +765,6 @@ fig_map.update_layout(
 
 st.plotly_chart(fig_map, use_container_width=True)
 st.caption(f"📍 All {len(map_data)} areas mapped. Bubble size = Investment Score")
-)
 # ---------- EXECUTIVE TABLE ----------
 
 st.write("")
