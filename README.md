@@ -1,6 +1,6 @@
 # Atlas Intelligence
 
-AI-powered Dubai real estate analytics platform built using Python, Streamlit, Plotly, DuckDB, and real Dubai property transaction data.
+Data-driven Dubai real estate analytics platform evolving toward AI-powered investment intelligence, built using Python, Streamlit, PostgreSQL, DuckDB, machine learning models, and real Dubai property transaction data.
 
 ### Live Application
 https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/
