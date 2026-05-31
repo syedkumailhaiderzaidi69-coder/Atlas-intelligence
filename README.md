@@ -59,20 +59,22 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 
 ---
 
-## Backend Architecture Update
+## Backend Architecture
 
-Atlas Intelligence now uses a cloud PostgreSQL database powered by Supabase.
+Atlas Intelligence now uses a cloud PostgreSQL backend powered by Supabase for scalable real estate analytics and production-style data management.
 
-Current architecture:
+### Current Architecture
 
-- Streamlit frontend
-- Supabase PostgreSQL backend
-- DuckDB SQL analytics layer
+- Streamlit frontend application
+- PostgreSQL cloud database (Supabase)
+- DuckDB SQL analytics engine
 - scikit-learn machine learning models
-- Plotly visualization engine
-- GitHub + Streamlit Cloud deployment
+- Plotly interactive visualizations
+- Automated ETL pipeline
+- GitHub version control
+- Streamlit Cloud deployment
 
-The platform loads Dubai property transaction data directly from PostgreSQL, with CSV fallback support for reliability.
+The platform dynamically loads Dubai property transaction data directly from PostgreSQL with CSV fallback support for reliability and deployment stability.
 
 ---
 
@@ -107,10 +109,13 @@ Current platform capabilities include:
 * Interactive investment intelligence dashboard
 * Dubai geo-intelligence mapping
 * SQL-powered analytics querying using DuckDB
+* PostgreSQL cloud database integration
+* Automated ETL data pipeline
 * Portfolio analysis tools
 * AI-style investment scoring
 * PDF report generation
 * Responsive mobile-friendly UI
+
 
 Upcoming enhancements:
 
