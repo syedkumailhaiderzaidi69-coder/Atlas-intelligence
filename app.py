@@ -926,8 +926,7 @@ with tab1:
         risk_level = (
             "Stable / Lower Risk"
         )
-    st.markdown(f"""
-    <div class="insight">
+
 
     st.markdown(f"""
     <div class="insight">
