@@ -18,7 +18,21 @@ if 'data_source_tracker' not in st.session_state:
     st.session_state.data_source_tracker = "Demo Data"
 @st.cache_data(ttl=3600)
 def load_data():
-    return None
+
+    try:
+        database_url = st.secrets["DATABASE_URL"]
+
+        engine = create_engine(database_url)
+
+        query = 'SELECT * FROM dubai_properties'
+
+        db_df = pd.read_sql(query, engine)
+
+        return db_df
+
+    except Exception as e:
+        st.warning(f"Database connection failed. Using CSV fallback. Error: {e}")
+        return None
 
 st.set_page_config(
     page_title="Atlas Intelligence",
