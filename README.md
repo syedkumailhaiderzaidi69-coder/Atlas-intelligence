@@ -49,6 +49,11 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 - Plotly
 - Pandas
 - NumPy
+- DuckDB
+- PostgreSQL
+- Supabase
+- scikit-learn
+- SQLAlchemy
 - GitHub
 - Streamlit Cloud
 
