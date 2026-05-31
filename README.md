@@ -28,6 +28,20 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 
 ---
 
+---
+
+## PostgreSQL Integration
+
+![PostgreSQL Integration](assets/postgresql_integration.png)
+
+---
+
+## Investor Intelligence Layer
+
+![Investor Intelligence Layer](assets/investor_intelligence_layer.png)
+
+---
+
 ## Features
 
 - Luxury executive dashboard UI
