@@ -947,6 +947,77 @@ with tab1:
     </div>
     """, unsafe_allow_html=True)
     
+        # ---------- AI INVESTMENT STRATEGY ENGINE ----------
+
+    st.write("")
+
+    st.markdown("""
+    ---
+    ### Atlas AI Investment Strategy
+    """)
+
+    strategy = ""
+
+    strategy_reason = ""
+
+    if (
+        avg_growth >= 10
+        and best_yield_value >= 7
+    ):
+
+        strategy = (
+            "Balanced Growth + Rental Income"
+        )
+
+        strategy_reason = (
+            "Atlas Intelligence detects strong appreciation potential combined with attractive rental yield performance."
+        )
+
+    elif avg_growth >= 10:
+
+        strategy = (
+            "Long-Term Capital Appreciation"
+        )
+
+        strategy_reason = (
+            "Growth indicators suggest strong long-term value appreciation opportunities across selected Dubai communities."
+        )
+
+    elif best_yield_value >= 7:
+
+        strategy = (
+            "High Rental Yield Acquisition"
+        )
+
+        strategy_reason = (
+            "Atlas Intelligence detects strong passive income potential from rental-focused investment opportunities."
+        )
+
+    else:
+
+        strategy = (
+            "Stable Defensive Investment"
+        )
+
+        strategy_reason = (
+            "Current market conditions indicate balanced and lower-risk investment positioning."
+        )
+
+    st.markdown(f"""
+    <div class="insight">
+
+    <h4>Recommended Strategy</h4>
+
+    <p>
+    <b>{strategy}</b>
+    </p>
+
+    <p>
+    {strategy_reason}
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
     # ---------- AI CONFIDENCE HEAT METER ----------
 
     st.write("")
