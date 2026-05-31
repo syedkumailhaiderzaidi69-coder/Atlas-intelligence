@@ -947,6 +947,7 @@ with tab1:
 
     </div>
     """, unsafe_allow_html=True)
+    
     # ---------- AI CONFIDENCE HEAT METER ----------
 
     st.write("")
