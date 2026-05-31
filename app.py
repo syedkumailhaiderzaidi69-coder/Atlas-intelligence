@@ -1873,43 +1873,54 @@ with tab8:
         )
 
         linear_model = LinearRegression()
-
         linear_model.fit(X_train, y_train)
-
         linear_pred = linear_model.predict(X_test)
 
         forest_model = RandomForestRegressor(
             n_estimators=100,
             random_state=42
         )
-
         forest_model.fit(X_train, y_train)
-
         forest_pred = forest_model.predict(X_test)
 
-        r2 = r2_score(
-            y_test,
-            y_pred
+        linear_r2 = r2_score(y_test, linear_pred)
+        linear_mae = mean_absolute_error(y_test, linear_pred)
+
+        forest_r2 = r2_score(y_test, forest_pred)
+        forest_mae = mean_absolute_error(y_test, forest_pred)
+
+        st.success("Machine Learning models trained successfully.")
+
+        model_results = pd.DataFrame({
+            "Model": [
+                "Linear Regression",
+                "Random Forest"
+            ],
+            "R² Score": [
+                round(linear_r2, 2),
+                round(forest_r2, 2)
+            ],
+            "Mean Absolute Error": [
+                f"AED {linear_mae:,.0f}",
+                f"AED {forest_mae:,.0f}"
+            ]
+        })
+
+        st.subheader("Model Performance Comparison")
+
+        st.dataframe(
+            model_results,
+            use_container_width=True
         )
 
-        mae = mean_absolute_error(
-            y_test,
-            y_pred
-        )
+        if forest_r2 >= linear_r2:
+            best_model = forest_model
+            best_model_name = "Random Forest"
+        else:
+            best_model = linear_model
+            best_model_name = "Linear Regression"
 
-        st.success("Machine Learning model trained successfully.")
-
-        col_ml1, col_ml2 = st.columns(2)
-
-        col_ml1.metric(
-            "Model R² Score",
-            f"{r2:.2f}"
-        )
-
-        col_ml2.metric(
-            "Mean Absolute Error",
-            f"AED {mae:,.0f}"
-        )
+        st.info(f"Best performing model: {best_model_name}")
 
         st.write("")
 
@@ -1917,12 +1928,12 @@ with tab8:
 
         importance_df = pd.DataFrame({
             "Feature": X.columns,
-            "Impact": model.coef_
+            "Impact": forest_model.feature_importances_
         })
 
         importance_df["Impact"] = (
             importance_df["Impact"]
-            .round(2)
+            .round(3)
         )
 
         st.dataframe(
@@ -1961,7 +1972,7 @@ with tab8:
             "Rental Yield": [user_yield]
         })
 
-        predicted_price = model.predict(
+        predicted_price = best_model.predict(
             prediction_input
         )[0]
 
@@ -1971,5 +1982,6 @@ with tab8:
         )
 
     else:
+
         st.error("Required columns missing for ML prediction.")
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
