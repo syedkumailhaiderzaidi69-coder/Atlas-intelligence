@@ -1872,11 +1872,20 @@ with tab8:
             random_state=42
         )
 
-        model = LinearRegression()
+        linear_model = LinearRegression()
 
-        model.fit(X_train, y_train)
+        linear_model.fit(X_train, y_train)
 
-        y_pred = model.predict(X_test)
+        linear_pred = linear_model.predict(X_test)
+
+        forest_model = RandomForestRegressor(
+            n_estimators=100,
+            random_state=42
+        )
+
+        forest_model.fit(X_train, y_train)
+
+        forest_pred = forest_model.predict(X_test)
 
         r2 = r2_score(
             y_test,
