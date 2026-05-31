@@ -790,13 +790,13 @@ with tab1:
         Atlas Intelligence forecasting systems remain stable with strong confidence indicators.
         """)
 
-        # ---------- AUTOMATED INSIGHT ENGINE ----------
+    # ---------- INVESTOR OPPORTUNITY CARDS ----------
 
     st.write("")
 
     st.markdown("""
     ---
-    ### Atlas Automated Insights
+    ### Atlas Investor Opportunity Scanner
     """)
 
     top_growth_area = (
@@ -806,11 +806,25 @@ with tab1:
         .idxmax()
     )
 
+    top_growth_value = (
+        df.groupby("Area")["Projected Growth"]
+        .mean()
+        .sort_values(ascending=False)
+        .max()
+    )
+
     top_score_area = (
         df.groupby("Area")["Investment Score"]
         .mean()
         .sort_values(ascending=False)
         .idxmax()
+    )
+
+    top_score_value = (
+        df.groupby("Area")["Investment Score"]
+        .mean()
+        .sort_values(ascending=False)
+        .max()
     )
 
     best_yield_area = (
@@ -820,36 +834,87 @@ with tab1:
         .idxmax()
     )
 
-    avg_growth = df["Projected Growth"].mean()
-
-    st.success(
-        f"📈 {top_growth_area} currently shows the strongest projected growth momentum in Atlas Intelligence models."
+    best_yield_value = (
+        df.groupby("Area")["Rental Yield"]
+        .mean()
+        .sort_values(ascending=False)
+        .max()
     )
 
-    st.info(
-        f"🏆 {top_score_area} ranks as the highest overall investment opportunity based on Atlas scoring systems."
-    )
+    insight_col1, insight_col2, insight_col3 = st.columns(3)
 
-    st.warning(
-        f"💰 {best_yield_area} currently demonstrates the strongest rental yield performance."
-    )
+    with insight_col1:
 
-    st.markdown(
-        f"""
+        st.markdown(f"""
         <div class="insight">
 
-        <h4>Market Intelligence Summary</h4>
+        <h4>🚀 Growth Leader</h4>
 
         <p>
-        Dubai's average projected market growth currently stands at
-        <b>{avg_growth:.1f}%</b>,
-        indicating continued investment activity across major communities.
+        <b>{top_growth_area}</b>
+        </p>
+
+        <p>
+        Projected Growth:
+        <b>{top_growth_value:.1f}%</b>
         </p>
 
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
+
+    with insight_col2:
+
+        st.markdown(f"""
+        <div class="insight">
+
+        <h4>🏆 Best Investment Score</h4>
+
+        <p>
+        <b>{top_score_area}</b>
+        </p>
+
+        <p>
+        Atlas Score:
+        <b>{top_score_value:.1f}</b>
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with insight_col3:
+
+        st.markdown(f"""
+        <div class="insight">
+
+        <h4>💰 Rental Yield Leader</h4>
+
+        <p>
+        <b>{best_yield_area}</b>
+        </p>
+
+        <p>
+        Rental Yield:
+        <b>{best_yield_value:.1f}%</b>
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    avg_growth = df["Projected Growth"].mean()
+
+    st.markdown(f"""
+    <div class="insight">
+
+    <h4>Market Intelligence Summary</h4>
+
+    <p>
+    Dubai's average projected market growth currently stands at
+    <b>{avg_growth:.1f}%</b>,
+    indicating continued investment activity across major communities.
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
     # ---------- AI CONFIDENCE HEAT METER ----------
 
     st.write("")
