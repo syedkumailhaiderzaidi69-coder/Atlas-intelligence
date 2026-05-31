@@ -5,6 +5,7 @@ import plotly.express as px
 import duckdb
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score, mean_absolute_error
 import time
 from datetime import datetime
 from io import BytesIO
