@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import duckdb
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_absolute_error
 import time
