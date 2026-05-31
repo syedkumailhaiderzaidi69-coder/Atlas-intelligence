@@ -1875,7 +1875,31 @@ with tab8:
 
         model.fit(X_train, y_train)
 
+        y_pred = model.predict(X_test)
+
+        r2 = r2_score(
+            y_test,
+            y_pred
+        )
+
+        mae = mean_absolute_error(
+            y_test,
+            y_pred
+        )
+
         st.success("Machine Learning model trained successfully.")
+
+        col_ml1, col_ml2 = st.columns(2)
+
+        col_ml1.metric(
+            "Model R² Score",
+            f"{r2:.2f}"
+        )
+
+        col_ml2.metric(
+            "Mean Absolute Error",
+            f"AED {mae:,.0f}"
+        )
 
         st.write("")
 
