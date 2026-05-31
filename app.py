@@ -20,9 +20,8 @@ if 'data_source_tracker' not in st.session_state:
 def load_data():
 
     try:
-        database_url = st.secrets["DATABASE_URL"]
 
-        engine = create_engine(database_url)
+        engine = get_database_connection()
 
         query = 'SELECT * FROM dubai_properties'
 
