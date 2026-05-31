@@ -286,16 +286,45 @@ for area in areas:
             "Projected Growth": growth
         })
 
-df = pd.DataFrame(data)
-# Load real Dubai data
-try:
-    df = pd.read_csv('dubai_clean_ready.csv')
-    # Rename 'Price' column to 'Average Price' for compatibility
+# ---------- LOAD DATABASE DATA ----------
+
+db_data = load_data()
+
+if db_data is not None and not db_data.empty:
+
+    df = db_data.copy()
+
     if 'Price' in df.columns:
-        df = df.rename(columns={'Price': 'Average Price'})
-    st.success(f"✅ Loaded {len(df)} real Dubai property transactions")
-except:
-    st.warning("Using demo data. File not found.")
+        df = df.rename(columns={
+            'Price': 'Average Price'
+        })
+
+    st.success(
+        f"✅ Loaded {len(df)} properties from PostgreSQL database"
+    )
+
+else:
+
+    try:
+
+        df = pd.read_csv(
+            'dubai_clean_ready.csv'
+        )
+
+        if 'Price' in df.columns:
+            df = df.rename(columns={
+                'Price': 'Average Price'
+            })
+
+        st.success(
+            f"✅ Loaded {len(df)} real Dubai property transactions"
+        )
+
+    except:
+
+        st.warning(
+            "Using demo data. Database and CSV unavailable."
+        )
 # ---------- INVESTMENT SCORING MODEL ----------
 max_price = df["Average Price"].max()
 df["Affordability Score"] = 100 - (df["Average Price"] / max_price * 100)
