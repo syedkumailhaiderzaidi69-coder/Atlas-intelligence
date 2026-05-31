@@ -790,6 +790,66 @@ with tab1:
         Atlas Intelligence forecasting systems remain stable with strong confidence indicators.
         """)
 
+        # ---------- AUTOMATED INSIGHT ENGINE ----------
+
+    st.write("")
+
+    st.markdown("""
+    ---
+    ### Atlas Automated Insights
+    """)
+
+    top_growth_area = (
+        df.groupby("Area")["Projected Growth"]
+        .mean()
+        .sort_values(ascending=False)
+        .idxmax()
+    )
+
+    top_score_area = (
+        df.groupby("Area")["Investment Score"]
+        .mean()
+        .sort_values(ascending=False)
+        .idxmax()
+    )
+
+    best_yield_area = (
+        df.groupby("Area")["Rental Yield"]
+        .mean()
+        .sort_values(ascending=False)
+        .idxmax()
+    )
+
+    avg_growth = df["Projected Growth"].mean()
+
+    st.success(
+        f"📈 {top_growth_area} currently shows the strongest projected growth momentum in Atlas Intelligence models."
+    )
+
+    st.info(
+        f"🏆 {top_score_area} ranks as the highest overall investment opportunity based on Atlas scoring systems."
+    )
+
+    st.warning(
+        f"💰 {best_yield_area} currently demonstrates the strongest rental yield performance."
+    )
+
+    st.markdown(
+        f"""
+        <div class="insight">
+
+        <h4>Market Intelligence Summary</h4>
+
+        <p>
+        Dubai's average projected market growth currently stands at
+        <b>{avg_growth:.1f}%</b>,
+        indicating continued investment activity across major communities.
+        </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     # ---------- AI CONFIDENCE HEAT METER ----------
 
     st.write("")
