@@ -6,3 +6,5 @@ rapidfuzz
 fpdf
 duckdb
 scikit-learn
+sqlalchemy
+psycopg2-binary
