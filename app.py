@@ -902,6 +902,30 @@ with tab1:
 
     avg_growth = df["Projected Growth"].mean()
 
+    growth_std = (
+        df["Projected Growth"]
+        .std()
+    )
+
+    risk_level = ""
+
+    if growth_std >= 6:
+
+        risk_level = (
+            "High Volatility / High Risk"
+        )
+
+    elif growth_std >= 3:
+
+        risk_level = (
+            "Moderate Risk"
+        )
+
+    else:
+
+        risk_level = (
+            "Stable / Lower Risk"
+        )
     st.markdown(f"""
     <div class="insight">
 
