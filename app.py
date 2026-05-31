@@ -929,12 +929,20 @@ with tab1:
     st.markdown(f"""
     <div class="insight">
 
+    st.markdown(f"""
+    <div class="insight">
+
     <h4>Market Intelligence Summary</h4>
 
     <p>
     Dubai's average projected market growth currently stands at
     <b>{avg_growth:.1f}%</b>,
     indicating continued investment activity across major communities.
+    </p>
+
+    <p>
+    Current Atlas market risk classification:
+    <b>{risk_level}</b>
     </p>
 
     </div>
