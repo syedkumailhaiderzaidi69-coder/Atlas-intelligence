@@ -1903,6 +1903,25 @@ with tab8:
 
         st.write("")
 
+        st.subheader("Feature Influence Analysis")
+
+        importance_df = pd.DataFrame({
+            "Feature": X.columns,
+            "Impact": model.coef_
+        })
+
+        importance_df["Impact"] = (
+            importance_df["Impact"]
+            .round(2)
+        )
+
+        st.dataframe(
+            importance_df,
+            use_container_width=True
+        )
+
+        st.write("")
+
         st.subheader("Predict Property Price")
 
         user_investment = st.slider(
