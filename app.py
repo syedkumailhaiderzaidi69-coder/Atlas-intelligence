@@ -2044,9 +2044,21 @@ with tab6:
     
 with tab7:
 
-    st.markdown("""
-    ### Atlas AI SQL Assistant
-    """)
+    suggested_question = st.selectbox(
+        "Suggested Questions",
+        [
+            "",
+            "best rental yield",
+            "highest investment score",
+            "highest growth"
+        ]
+    )
+
+    if suggested_question:
+
+        user_question = (
+            suggested_question
+        )
 
     user_question = st.text_input(
         "Ask Atlas Intelligence",
