@@ -554,7 +554,7 @@ Built by Syed Kumail Haider Zaidi
 MSc Business Analytics  
 University of Wollongong Dubai
 
-📧 syedkumailhaiderzaidi69@gmail.com
+📧 syedkumail.analytics@gmail.com
 🔗 Live Portfolio: https://atlas-intelligence-nqhavg9mkp7j5pxztwbtty.streamlit.app/
 ---
 """)
@@ -1993,7 +1993,7 @@ with tab6:
 
     Built with Python, Streamlit, Plotly & AI-driven analytics.
 
-    📧 syedkumailhaiderzaidi69@gmail.com
+    📧 syedkumail.analytics@gmail.com
 
     © 2026 Atlas Intelligence — Prototype V2
 
@@ -2015,7 +2015,7 @@ with tab6:
     with col_a:
         if st.button("📧 Send Email", use_container_width=True):
             st.markdown(
-                "[Click here to email](mailto:syedkumailhaiderzaidi69@gmail.com)"
+                "[Click here to email](mailto:syedkumail.analytics@gmail.com)"
             )
 
     with col_b:
