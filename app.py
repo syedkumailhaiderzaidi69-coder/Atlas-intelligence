@@ -5,6 +5,7 @@ import plotly.express as px
 import duckdb
 import os
 from database.db_connection import get_database_connection
+from analytics.investor_logic import generate_investment_strategy
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
