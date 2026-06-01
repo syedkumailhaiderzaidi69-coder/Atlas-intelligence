@@ -79,6 +79,7 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 ## Backend Architecture
 
 Atlas Intelligence now uses a cloud PostgreSQL backend powered by Supabase for scalable real estate analytics and production-style data management.
+- AI SQL assistant for natural language analytics querying
 
 ### Current Architecture
 
@@ -109,6 +110,20 @@ Future roadmap includes:
 
 ---
 
+## AI Analytics Layer
+
+Atlas Intelligence includes an AI-assisted SQL query engine that converts natural language business questions into SQL query templates.
+
+Example supported queries:
+
+- Best rental yield areas
+- Highest investment score areas
+- Highest projected growth areas
+
+This provides the foundation for a future AI analytics copilot capable of transforming natural language investment questions into database-powered insights and executive intelligence.
+
+---
+
 ## Author 
 
 Syed Kumail Haider Zaidi
@@ -132,6 +147,12 @@ Current platform capabilities include:
 * AI-style investment scoring
 * PDF report generation
 * Responsive mobile-friendly UI
+* Natural language to SQL assistant
+* AI-assisted analytics query generation
+* Modular analytics engine
+* Modular machine learning engine
+* PostgreSQL database integration
+* Reusable database connection architecture
 
 
 Upcoming enhancements:
