@@ -28,8 +28,6 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 
 ---
 
----
-
 ## PostgreSQL Integration
 
 ![PostgreSQL Integration](assets/postgresql_integration.png)
@@ -53,6 +51,11 @@ https://github.com/syedkumailhaiderzaidi69-coder/Atlas-intelligence
 - Market growth trend analysis
 - Interactive AI assistant
 - Product roadmap & methodology sections
+- Natural language to SQL assistant
+- AI-assisted analytics query generation
+- Modular analytics engine
+- Modular machine learning engine
+- Reusable PostgreSQL database connection layer
 
 ---
 
