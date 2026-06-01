@@ -956,52 +956,16 @@ with tab1:
     ### Atlas AI Investment Strategy
     """)
 
-    strategy = ""
+    strategy, strategy_reason = (
 
-    strategy_reason = ""
+        generate_investment_strategy(
 
-    if (
-        avg_growth >= 10
-        and best_yield_value >= 7
-    ):
+            avg_growth,
+            best_yield_value
 
-        strategy = (
-            "Balanced Growth + Rental Income"
         )
 
-        strategy_reason = (
-            "Atlas Intelligence detects strong appreciation potential combined with attractive rental yield performance."
-        )
-
-    elif avg_growth >= 10:
-
-        strategy = (
-            "Long-Term Capital Appreciation"
-        )
-
-        strategy_reason = (
-            "Growth indicators suggest strong long-term value appreciation opportunities across selected Dubai communities."
-        )
-
-    elif best_yield_value >= 7:
-
-        strategy = (
-            "High Rental Yield Acquisition"
-        )
-
-        strategy_reason = (
-            "Atlas Intelligence detects strong passive income potential from rental-focused investment opportunities."
-        )
-
-    else:
-
-        strategy = (
-            "Stable Defensive Investment"
-        )
-
-        strategy_reason = (
-            "Current market conditions indicate balanced and lower-risk investment positioning."
-        )
+    )
 
     st.markdown(f"""
     <div class="insight">
