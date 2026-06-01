@@ -2043,7 +2043,24 @@ with tab6:
     
 with tab7:
 
-    default_query = """
+    st.markdown("""
+    ### Atlas AI SQL Assistant
+    """)
+
+    user_question = st.text_input(
+        "Ask Atlas Intelligence",
+        placeholder="Example: best rental yield areas"
+    )
+
+    if user_question:
+
+        default_query = generate_sql_from_question(
+            user_question
+        )
+
+    else:
+
+        default_query = """
 SELECT Area,
 AVG("Investment Score") AS avg_score,
 AVG("Average Price") AS avg_price
@@ -2051,7 +2068,7 @@ FROM df
 GROUP BY Area
 ORDER BY avg_score DESC
 LIMIT 10
-    """
+        """
 
     user_query = st.text_area(
         "Write SQL Query",
