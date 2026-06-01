@@ -2080,13 +2080,28 @@ LIMIT 10
     if st.button("Run SQL Query"):
 
         try:
-            result = duckdb.query(user_query).to_df()
+            result = duckdb.query(
+                user_query
+            ).to_df()
 
-            st.success("Query executed successfully.")
+            executive_summary = (
+                generate_executive_summary(
+                    user_question,
+                    result
+                )
+            )
+
+            st.success(
+                "Query executed successfully."
+            )
 
             st.dataframe(
                 result,
                 use_container_width=True
+            )
+
+            st.info(
+                executive_summary
             )
 
         except Exception as e:
