@@ -144,7 +144,7 @@ Current platform capabilities include:
 * PostgreSQL cloud database integration
 * Automated ETL data pipeline
 * Portfolio analysis tools
-* AI-style investment scoring
+* AI-assisted investment strategy engine
 * PDF report generation
 * Responsive mobile-friendly UI
 * Natural language to SQL assistant
