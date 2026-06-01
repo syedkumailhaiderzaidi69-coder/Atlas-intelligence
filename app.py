@@ -560,7 +560,7 @@ University of Wollongong Dubai
 """)
 # CV Download Button
 try:
-    with open("Syeds CV.pdf", "rb") as file:
+    with open("docs/Syeds_CV.pdf", "rb") as file:
         st.sidebar.download_button(
             label="📄 Download My CV",
             data=file,
