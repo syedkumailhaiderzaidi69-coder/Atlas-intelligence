@@ -2202,5 +2202,127 @@ with tab8:
     else:
 
         st.error("Required columns missing for ML prediction.")
+        
+with tab9:
+
+    st.markdown("""
+    ---
+    ## Area Comparison Engine
+    """)
+
+    area_options = df["Area"].unique()
+
+    area1 = st.selectbox(
+        "Select First Area",
+        options=area_options,
+        key="area_1"
+    )
+
+    area2 = st.selectbox(
+        "Select Second Area",
+        options=area_options,
+        key="area_2"
+    )
+
+    area1_df = df[
+        df["Area"] == area1
+    ]
+
+    area2_df = df[
+        df["Area"] == area2
+    ]
+
+    def summarize_area(df_area):
+
+        return {
+            "Investment Score":
+            df_area["Investment Score"].mean(),
+
+            "Projected Growth":
+            df_area["Projected Growth"].mean(),
+
+            "Rental Yield":
+            df_area["Rental Yield"].mean(),
+
+            "Average Price":
+            df_area["Average Price"].mean()
+        }
+
+    summary1 = summarize_area(
+        area1_df
+    )
+
+    summary2 = summarize_area(
+        area2_df
+    )
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.subheader(area1)
+
+        st.metric(
+            "Investment Score",
+            f"{summary1['Investment Score']:.1f}"
+        )
+
+        st.metric(
+            "Projected Growth",
+            f"{summary1['Projected Growth']:.1f}%"
+        )
+
+        st.metric(
+            "Rental Yield",
+            f"{summary1['Rental Yield']:.1f}%"
+        )
+
+        st.metric(
+            "Average Price",
+            f"AED {summary1['Average Price']:,.0f}"
+        )
+
+    with col2:
+
+        st.subheader(area2)
+
+        st.metric(
+            "Investment Score",
+            f"{summary2['Investment Score']:.1f}"
+        )
+
+        st.metric(
+            "Projected Growth",
+            f"{summary2['Projected Growth']:.1f}%"
+        )
+
+        st.metric(
+            "Rental Yield",
+            f"{summary2['Rental Yield']:.1f}%"
+        )
+
+        st.metric(
+            "Average Price",
+            f"AED {summary2['Average Price']:,.0f}"
+        )
+
+    st.write("")
+
+    if (
+        summary1["Investment Score"]
+        >
+        summary2["Investment Score"]
+    ):
+
+        st.success(
+            f"{area1} currently shows stronger investment potential."
+        )
+
+    else:
+
+        st.success(
+            f"{area2} currently shows stronger investment potential."
+        )
+
 
     st.success("Atlas Intelligence Luxury Prototype V2 Live")
