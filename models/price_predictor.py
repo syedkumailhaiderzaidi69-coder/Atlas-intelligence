@@ -17,7 +17,6 @@ def train_master_price_model(df):
     ]
 
     if not all(col in df.columns for col in required_columns):
-
         return None
 
     model_df = df[
@@ -90,7 +89,9 @@ def train_master_price_model(df):
         "mae": mae,
         "feature_columns": X.columns
     }
-    def predict_price(
+
+
+def predict_price(
     area,
     property_type,
     rooms
