@@ -7,6 +7,7 @@ import os
 from database.db_connection import get_database_connection
 from analytics.investor_logic import generate_investment_strategy
 from models.price_model import train_price_models
+from models.price_predictor import train_master_price_model
 from ai_engine.ai_sql_engine import generate_sql_from_question
 from ai_engine.executive_summary import generate_executive_summary
 from models.price_predictor import predict_price
