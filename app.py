@@ -9,6 +9,7 @@ from analytics.investor_logic import generate_investment_strategy
 from models.price_model import train_price_models
 from ai_engine.ai_sql_engine import generate_sql_from_question
 from ai_engine.executive_summary import generate_executive_summary
+from models.price_predictor import predict_price
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
