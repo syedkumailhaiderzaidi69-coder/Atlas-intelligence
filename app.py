@@ -26,17 +26,6 @@ import duckdb
 import pandas as pd
 import streamlit as st
 
-@st.cache_data(ttl=3600)
-def load_data():
-    # Connect to in-memory DuckDB
-    con = duckdb.connect(database=':memory:')
-
-    # Load CSV directly from ZIP
-    df = con.execute(
-        "SELECT * FROM read_csv_auto('archive.zip', COMPRESSION='zip')"
-    ).df()
-
-    return df
 
 st.set_page_config(
     page_title="Atlas Intelligence",
