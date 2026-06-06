@@ -251,6 +251,20 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
     "Area Comparison"
 ])
 # ---------- DATA ----------
+# ---------------- Load small 2k dataset -----------------
+try:
+    # Load small CSV dataset
+    df = pd.read_csv("dubai_clean_ready.csv")
+    
+    # Rename Price column if needed
+    if 'Price' in df.columns:
+        df = df.rename(columns={'Price': 'Average Price'})
+    
+    st.success(f"✅ Loaded {len(df):,} properties from local CSV")
+
+except Exception as e:
+    st.warning(f"Failed to load local CSV. Error: {e}")
+    df = None
 
 np.random.seed(42)
 
