@@ -5,23 +5,6 @@ import numpy as np
 import plotly.express as px
 import duckdb
 import os
-import pandas as pd
-import streamlit as st
-
-# ---------------- Load small 2k dataset -----------------
-try:
-    # Load small CSV dataset
-    df = pd.read_csv("dubai_clean_ready.csv")
-    
-    # Rename Price column if needed
-    if 'Price' in df.columns:
-        df = df.rename(columns={'Price': 'Average Price'})
-    
-    st.success(f"✅ Loaded {len(df):,} properties from local CSV")
-
-except Exception as e:
-    st.warning(f"Failed to load local CSV. Error: {e}")
-    df = None
 from database.db_connection import get_database_connection
 from analytics.investor_logic import generate_investment_strategy
 from models.price_model import train_price_models
