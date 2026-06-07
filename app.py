@@ -5,7 +5,6 @@ import numpy as np
 import plotly.express as px
 import duckdb
 import os
-from database.db_connection import get_database_connection
 from analytics.investor_logic import generate_investment_strategy
 from models.price_model import train_price_models
 from models.price_predictor import train_master_price_model
