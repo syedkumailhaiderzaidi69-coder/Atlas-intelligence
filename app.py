@@ -299,41 +299,6 @@ for area in areas:
 
 # ---------- LOAD DATABASE DATA ----------
 
-# ---------- LOAD DATABASE DATA FROM SUPABASE ----------
-
-from sqlalchemy import create_engine
-import pandas as pd
-import streamlit as st
-
-# Supabase connection string (replace <YOUR_PASSWORD> with your actual password)
-DATABASE_URL = "postgresql://postgres.wzfyczdilwsiicaihcgh:Nvidia67890---@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres"
-
-# Create SQLAlchemy engine
-engine = create_engine(DATABASE_URL)
-
-try:
-    # Load the full transactions table from Supabase
-    df = pd.read_sql("SELECT * FROM dubai_transactions_master", engine)
-
-    # Rename column if needed
-    if 'Price' in df.columns:
-        df = df.rename(columns={'Price': 'Average Price'})
-
-    st.success(f"✅ Loaded {len(df):,} properties from Supabase database")
-
-except Exception as e:
-    st.warning(f"Database connection failed. Error: {e}")
-    st.warning("Using demo CSV instead.")
-
-    # Fallback to local CSV
-    try:
-        df = pd.read_csv('dubai_clean_ready.csv')
-        if 'Price' in df.columns:
-            df = df.rename(columns={'Price': 'Average Price'})
-        st.success(f"✅ Loaded {len(df):,} properties from local CSV")
-    except:
-        st.warning("Demo data will be used instead.")
-
     if 'Price' in df.columns:
         df = df.rename(columns={
             'Price': 'Average Price'
